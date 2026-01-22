@@ -1,0 +1,33 @@
+{
+  "name": "jtapsbarandgrill.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amwaltamath/jtapsbarandgrill.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/amwaltamath/jtapsbarandgrill.com/issues"
+  },
+  "homepage": "https://github.com/amwaltamath/jtapsbarandgrill.com#readme",
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@supabase/supabase-js": "^2.90.1",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.16.9",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

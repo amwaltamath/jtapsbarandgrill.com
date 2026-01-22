@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import MenuHighlight from '../components/MenuHighlight.astro';
+import About from '../components/About.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Visit from '../components/Visit.astro';
+---
+
+<Layout 
+  title="JTAPS Bar and Grill - Best Wings, Sports Bar & Gyros in Cincinnati"
+  description="Cincinnati's premier sports bar since 2006. Famous Pete's Sauce wings, hand-carved gyros, 50+ TVs for watching the game. Best wings in Cincinnati on Glenway Ave."
+  keywords="best wings cincinnati, best sports bar cincinnati, best place to watch the game cincinnati, gyros cincinnati, burgers cincinnati, glenway ave sports bar, cincinnati wings, sports bar near me"
+>
+  <Hero />
+  
+  <section class="menu-highlights">
+    <MenuHighlight 
+      title="Amazing Gyros"
+      subtitle="BEST GYROS IN CINCINNATI"
+      description="At JTAPS Bar & Grill on Glenway Ave, our hand-carved gyros bring authentic Greek street-food flavor to your sports bar table."
+      image="/images/Cincinnati Gyro.jpg"
+    />
+    
+    <MenuHighlight 
+      title="Juicy Burgers"
+      subtitle="CINCY SPORTS BAR BURGERS"
+      description="Looking for the juiciest burgers in Cincinnati? You just found them. At JTAPS Bar & Grill on Glenway Ave"
+      image="/images/Cincinnati Burger.jpg"
+      reverse={true}
+    />
+    
+    <MenuHighlight 
+      title="Best Wings"
+      subtitle="FAMOUS PETE'S SAUCE"
+      description="Our famous chicken wings are the crowd-pleasing star of every sports watch party."
+      image="/images/Cincinnati Wings.jpg"
+    />
+    
+    <MenuHighlight 
+      title="Sandwiches"
+      subtitle="MASSIVE SANDWICHES CINCINNATI"
+      description="Warning: These aren't sandwiches. They're handheld monuments. At JTAPS Bar & Grill on Glenway Ave"
+      image="/images/Cincinnati Sandwich.jpg"
+      reverse={true}
+    />
+    
+    <MenuHighlight 
+      title="Salads"
+      subtitle="OUR MASSIVE, FLAVOR-PACKED SALADS"
+      description="Think salads are boring? Not at JTAPS Bar & Grill on Glenway Ave. Our massive, flavor-packed salads are built like entrees—crisp greens, premium proteins, house-made dressings, and toppings that actually matter."
+      image="/images/Cincinnati Salad.jpg"
+    />
+    
+    <MenuHighlight 
+      title="Sides And More"
+      subtitle="BEST CHIPS IN CINCY SPORTS BAR"
+      description="At JTAPS Bar & Grill on Glenway Ave, we honor that bold origin with our house-fried Saratoga chips"
+      image="/images/Sides.jpg"
+      reverse={true}
+    />
+  </section>
+
+  <About />
+  <Testimonials />
+  <Visit />
+</Layout>

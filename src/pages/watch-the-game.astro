@@ -1,0 +1,328 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Watch the Game at JTAPS - Best Sports Bar in Cincinnati"
+  description="Best place to watch the game in Cincinnati! 50+ HD TVs, live sports betting, cold beer, and famous wings. Your ultimate Cincinnati sports bar experience."
+  keywords="best place to watch the game cincinnati, best sports bar cincinnati, cincinnati sports bar, watch sports cincinnati, 50 tvs sports bar, live sports betting cincinnati, glenway sports bar"
+>
+  <div class="watch-page">
+    <section class="watch-hero">
+      <div class="hero-content">
+        <h1 style="color: #fff;">Best Place to Watch the Game</h1>
+        <p class="tagline">CINCINNATI'S ULTIMATE SPORTS BAR EXPERIENCE</p>
+        <div class="hero-features">
+          <div class="feature">
+            <span class="feature-icon">📺</span>
+            <h3>50+ HD TVs</h3>
+            <p>Never miss a play</p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🎰</span>
+            <h3>Keno</h3>
+            <p>Play and win</p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🍺</span>
+            <h3>Cold Beer</h3>
+            <p>Seasonal taps</p>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🍗</span>
+            <h3>Famous Wings</h3>
+            <p>Best in Cincinnati</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-jtaps">
+      <div class="container">
+        <h2>Why JTAPS is Cincinnati's Best Sports Bar</h2>
+        <div class="reasons">
+          <div class="reason">
+            <h3>🏆 Over 50 HD TVs</h3>
+            <p>
+              Wall-to-wall screens ensure you have the best seat in the house for every game. From NFL to NCAA, NBA to NHL, we've got every angle covered.
+            </p>
+          </div>
+          <div class="reason">
+            <h3>🎯 Keno</h3>
+            <p>
+              Play Keno right here at the bar! Enjoy the excitement and win big while you watch the game.
+            </p>
+          </div>
+          <div class="reason">
+            <h3>🍻 Craft & Seasonal Beers</h3>
+            <p>
+              Rotating seasonal taps and premium bourbon selections. Your favorite game deserves your favorite drink.
+            </p>
+          </div>
+          <div class="reason">
+            <h3>🍗 Best Game Day Food</h3>
+            <p>
+              Famous Pete's Sauce wings, hand-carved gyros, and juicy burgers. Real food for real fans.
+            </p>
+          </div>
+          <div class="reason">
+            <h3>👨‍👩‍👧‍👦 Family Friendly</h3>
+            <p>
+              Bring the whole family! We're a sports bar that welcomes fans of all ages to enjoy the game together.
+            </p>
+          </div>
+          <div class="reason">
+            <h3>🌳 Outdoor Seating</h3>
+            <p>
+              Watch the game outside when the weather's nice. Our outdoor patio is perfect for sunny game days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sports-schedule">
+      <div class="container">
+        <h2>What's On Today</h2>
+        <p class="schedule-subtitle">We show ALL the games - NFL, NBA, MLB, NHL, NCAA, Soccer & more!</p>
+        <div class="sports-grid">
+          <div class="sport-card">
+            <h3>🏈 NFL</h3>
+            <p>Every Sunday, Monday & Thursday</p>
+          </div>
+          <div class="sport-card">
+            <h3>🏀 NBA</h3>
+            <p>Catch all the action</p>
+          </div>
+          <div class="sport-card">
+            <h3>⚾ MLB</h3>
+            <p>Go Reds!</p>
+          </div>
+          <div class="sport-card">
+            <h3>🏒 NHL</h3>
+            <p>Hockey night done right</p>
+          </div>
+          <div class="sport-card">
+            <h3>🏈 NCAA</h3>
+            <p>College football & basketball</p>
+          </div>
+          <div class="sport-card">
+            <h3>⚽ Soccer</h3>
+            <p>Premier League & more</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-cta">
+      <h2>Game Day Starts Here</h2>
+      <p>Visit Cincinnati's best sports bar and experience game day like never before</p>
+      <div class="cta-buttons">
+        <a href="/menu" class="cta-button">View Menu</a>
+        <a href="#" class="cta-button secondary">Get Directions</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .watch-page {
+    background: var(--bg-light);
+  }
+
+  .watch-hero {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('/images/6441-Glenway-inside.jpg') center/cover;
+    color: var(--text-light);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .watch-hero h1 {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    color: var(--text-light);
+  }
+
+  .hero-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+  }
+
+  .why-jtaps {
+    padding: 6rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .why-jtaps h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+  }
+
+  .reasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .reason {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary-color);
+  }
+
+  .reason h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+  .reason p {
+    line-height: 1.8;
+    color: var(--text-dark);
+  }
+
+  .sports-schedule {
+    padding: 6rem 2rem;
+    background: var(--primary-color);
+    color: var(--text-light);
+  }
+
+  .sports-schedule h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+  }
+
+  .schedule-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .sports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .sport-card {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .sport-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .sport-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+  }
+
+  .visit-cta {
+    background: var(--bg-light);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .visit-cta h2 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .visit-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 1.2rem 3rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .cta-button.secondary {
+    background: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .watch-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reasons {
+      grid-template-columns: 1fr;
+    }
+
+    .why-jtaps h2,
+    .sports-schedule h2,
+    .visit-cta h2 {
+      font-size: 2rem;
+    }
+  }
+</style>

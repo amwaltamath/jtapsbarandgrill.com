@@ -1,0 +1,359 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Contact & Location - JTAPS Bar and Grill Cincinnati"
+  description="Visit JTAPS Bar and Grill at 6441 Glenway Ave, Cincinnati. Best sports bar with outdoor dining. Call us or order online today!"
+  keywords="jtaps location, jtaps cincinnati, glenway ave restaurant, cincinnati sports bar location, jtaps hours, jtaps contact"
+>
+  <div class="contact-page">
+    <section class="contact-hero">
+      <h1>Visit Us</h1>
+      <p class="subtitle">CINCINNATI'S FAVORITE SPORTS BAR SINCE 2006</p>
+    </section>
+
+    <section class="contact-info">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-card">
+            <h2>📍 Location</h2>
+            <p>
+              <strong>JTAPS Bar and Grill</strong><br>
+              6441 Glenway Ave<br>
+              Cincinnati, OH 45211
+            </p>
+            <a href="https://www.google.com/maps/search/?api=1&query=6441+Glenway+Ave+Cincinnati+OH" 
+               target="_blank" 
+               class="map-button">Get Directions</a>
+          </div>
+
+          <div class="info-card">
+            <h2>📞 Contact</h2>
+            <p>
+              <strong>Phone:</strong> <a href="tel:">Call Us</a><br>
+              <strong>Email:</strong> info@jtapsbarandgrill.com
+            </p>
+            <div class="social-links">
+              <a href="https://facebook.com" target="_blank">Facebook</a>
+              <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h2>🕒 Hours</h2>
+            <p>
+              <strong>Monday - Thursday:</strong> 11am - 11pm<br>
+              <strong>Friday - Saturday:</strong> 11am - 1am<br>
+              <strong>Sunday:</strong> 11am - 10pm
+            </p>
+            <p class="hours-note">*Hours may vary on holidays and game days</p>
+          </div>
+
+          <div class="info-card highlight">
+            <h2>🍺 Happy Hour</h2>
+            <p>
+              <strong>Monday - Friday</strong><br>
+              3pm - 6pm
+            </p>
+            <p>Special pricing on select beers and appetizers!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <div class="container">
+        <h2>Find Us on the Map</h2>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.8!2d-84.6!3d39.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s6441+Glenway+Ave%2C+Cincinnati%2C+OH+45211!5e0!3m2!1sen!2sus!4v1"
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <h2>What Makes JTAPS Special</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="icon">🌳</span>
+            <h3>Outdoor Dining</h3>
+            <p>Enjoy your meal on our spacious outdoor patio</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">📺</span>
+            <h3>50+ TVs</h3>
+            <p>Never miss a moment of the game</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">🎰</span>
+            <h3>Sports Betting</h3>
+            <p>Live sports betting available</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">👨‍👩‍👧‍👦</span>
+            <h3>Family Friendly</h3>
+            <p>Great atmosphere for the whole family</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">🍺</span>
+            <h3>Craft Beer</h3>
+            <p>Rotating seasonal taps</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">🎵</span>
+            <h3>Live Music</h3>
+            <p>Check our schedule for events</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Visit?</h2>
+      <p>Come experience the best sports bar in Cincinnati</p>
+      <div class="cta-buttons">
+        <a href="/menu" class="cta-button">View Menu</a>
+        <a href="https://togoorder.com/web/3136#/" target="_blank" class="cta-button secondary">Order Online</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .contact-page {
+    background: var(--bg-light);
+  }
+
+  .contact-hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/restaurant-exterior.jpg') center/cover;
+    color: var(--text-light);
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .contact-hero h1 {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  .contact-info {
+    padding: 6rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .info-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    border-top: 4px solid var(--secondary-color);
+  }
+
+  .info-card.highlight {
+    background: var(--primary-color);
+    color: var(--text-light);
+  }
+
+  .info-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+  .info-card.highlight h2 {
+    color: var(--secondary-color);
+  }
+
+  .info-card p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .info-card a {
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+
+  .info-card a:hover {
+    text-decoration: underline;
+  }
+
+  .map-button {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white !important;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: transform 0.3s;
+  }
+
+  .map-button:hover {
+    transform: translateY(-2px);
+    text-decoration: none !important;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .social-links a {
+    background: var(--primary-color);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+
+  .hours-note {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #666;
+  }
+
+  .map-section {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .map-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+  }
+
+  .map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .features-section {
+    padding: 6rem 2rem;
+    background: var(--bg-light);
+  }
+
+  .features-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .cta-section {
+    background: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .cta-section h2 {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 1.2rem 3rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .cta-button.secondary {
+    background: rgba(255,255,255,0.1);
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .features-section h2,
+    .map-section h2,
+    .cta-section h2 {
+      font-size: 2rem;
+    }
+  }
+</style>

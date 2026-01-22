@@ -1,0 +1,121 @@
+---
+// Testimonials carousel component
+---
+
+<section class="testimonials">
+  <div class="container">
+    <h2>What Our Customers Say</h2>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Best wings in Cincinnati, hands down. Pete's Sauce is absolutely legendary. Been coming here for years and they never disappoint."</p>
+        <p class="testimonial-author">- Marcus T.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The perfect spot to watch the game with friends. 50+ TVs, amazing food, cold beer, and the vibe is unmatched. This is OUR sports bar."</p>
+        <p class="testimonial-author">- Jennifer L.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Hand-carved gyros that taste like street food from Greece. The quality is incredible. Worth the trip to Glenway Ave every single time."</p>
+        <p class="testimonial-author">- Tony D.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"My go-to place for game day. The outdoor patio is gorgeous when the weather's nice, and the staff treats you like family. Highly recommend!"</p>
+        <p class="testimonial-author">- Sarah K.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Been a regular for 10+ years. The food, the atmosphere, the people—JTAPS is Cincinnati's best sports bar. Period. Don't sleep on this place."</p>
+        <p class="testimonial-author">- Robert M.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Ordered food for a work event and it was incredible. The wings were gone in minutes. Definitely using them for our next team gathering!"</p>
+        <p class="testimonial-author">- Amanda C.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--bg-light);
+    padding: 4rem 1rem;
+  }
+
+  .testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .stars {
+    color: #ffc107;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-card {
+      padding: 1.5rem;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

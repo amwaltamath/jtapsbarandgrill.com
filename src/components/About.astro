@@ -1,0 +1,146 @@
+---
+// About section
+---
+
+<section class="about">
+  <div class="about-content">
+    <div class="rating">
+      <span class="stars">★★★★★</span>
+      <span class="score">10/10</span>
+    </div>
+    
+    <h2>Family Owned, Since 2006</h2>
+    <p class="subtitle">FAMILY, FRIENDS & BEER</p>
+    
+    <div class="about-text">
+      <p>
+        With over 50 TV's, live sports betting, music and family fun, JTAPS is a great place to watch the game with the family.
+      </p>
+      <p>
+        JTAPS opened in 2006, and since then, we've remodeled our local bar from front to back. We even built a new outside seating area. Come in today and try one our season beers on tap.
+      </p>
+      <p class="signature">– JTAPS</p>
+    </div>
+    
+    <p class="tagline">GREAT LOCAL BAR AND GRILL</p>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--bg-light);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stars {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+  }
+
+  .score {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+  .subtitle {
+    color: var(--secondary-color);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    margin: 2rem 0;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .signature {
+    font-style: italic;
+    margin-top: 2rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-top: 3rem;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .about {
+      padding: 4rem 2rem;
+    }
+
+    .about h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: 3rem 1rem;
+    }
+
+    .about h2 {
+      font-size: 1.8rem;
+    }
+
+    .stars {
+      font-size: 1.3rem;
+    }
+
+    .score {
+      font-size: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about {
+      padding: 2rem 1rem;
+    }
+
+    .about h2 {
+      font-size: 1.5rem;
+    }
+
+    .rating {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+</style>
