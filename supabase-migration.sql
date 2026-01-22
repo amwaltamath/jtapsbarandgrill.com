@@ -13,12 +13,15 @@ CREATE INDEX IF NOT EXISTS idx_newsletter_email ON newsletter_subscribers(email)
 
 ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public inserts" ON newsletter_subscribers;
 CREATE POLICY "Allow public inserts" ON newsletter_subscribers
   FOR INSERT TO anon WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Allow authenticated reads" ON newsletter_subscribers;
 CREATE POLICY "Allow authenticated reads" ON newsletter_subscribers
   FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS "Allow authenticated deletes" ON newsletter_subscribers;
 CREATE POLICY "Allow authenticated deletes" ON newsletter_subscribers
   FOR DELETE TO authenticated USING (true);
 
@@ -35,6 +38,7 @@ CREATE TABLE IF NOT EXISTS email_campaigns (
 
 ALTER TABLE email_campaigns ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON email_campaigns;
 CREATE POLICY "Allow authenticated full access" ON email_campaigns
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -43,12 +47,12 @@ CREATE POLICY "Allow authenticated full access" ON email_campaigns
 -- Game Calendar
 CREATE TABLE IF NOT EXISTS game_calendar (
   id BIGSERIAL PRIMARY KEY,
-  sport TEXT NOT NULL, -- 'NFL', 'NBA', 'NCAA', 'MLB', 'NHL', etc
+  sport TEXT NOT NULL,
   league TEXT NOT NULL,
-  matchup TEXT NOT NULL, -- e.g., "Bengals vs Ravens"
+  matchup TEXT NOT NULL,
   game_date TIMESTAMP WITH TIME ZONE NOT NULL,
   tv_channel TEXT,
-  importance INT DEFAULT 3, -- 1=regular season, 2=playoffs, 3=championship
+  importance INT DEFAULT 3,
   notes TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   created_by UUID REFERENCES auth.users(id)
@@ -58,6 +62,7 @@ CREATE INDEX IF NOT EXISTS idx_game_date ON game_calendar(game_date);
 
 ALTER TABLE game_calendar ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON game_calendar;
 CREATE POLICY "Allow authenticated full access" ON game_calendar
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -66,11 +71,11 @@ CREATE TABLE IF NOT EXISTS specials (
   id BIGSERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT NOT NULL,
-  discount_type TEXT, -- 'percentage', 'fixed', 'deal'
+  discount_type TEXT,
   discount_amount DECIMAL(10,2),
   start_time TIME,
   end_time TIME,
-  days_of_week TEXT[], -- ['Monday', 'Tuesday', etc]
+  days_of_week TEXT[],
   active BOOLEAN DEFAULT true,
   linked_game_id BIGINT REFERENCES game_calendar(id),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -79,6 +84,7 @@ CREATE TABLE IF NOT EXISTS specials (
 
 ALTER TABLE specials ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON specials;
 CREATE POLICY "Allow authenticated full access" ON specials
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -86,7 +92,7 @@ CREATE POLICY "Allow authenticated full access" ON specials
 CREATE TABLE IF NOT EXISTS tv_setup (
   id BIGSERIAL PRIMARY KEY,
   tv_number INT NOT NULL,
-  location TEXT, -- 'Main Bar', 'Back Room', 'Patio', etc
+  location TEXT,
   currently_showing TEXT,
   active BOOLEAN DEFAULT true,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -94,6 +100,7 @@ CREATE TABLE IF NOT EXISTS tv_setup (
 
 ALTER TABLE tv_setup ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON tv_setup;
 CREATE POLICY "Allow authenticated full access" ON tv_setup
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -104,7 +111,7 @@ CREATE TABLE IF NOT EXISTS menu_items (
   id BIGSERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT,
-  category TEXT NOT NULL, -- 'Wings', 'Gyros', 'Burgers', 'Sides', etc
+  category TEXT NOT NULL,
   price DECIMAL(10,2) NOT NULL,
   image_url TEXT,
   available BOOLEAN DEFAULT true,
@@ -117,6 +124,7 @@ CREATE INDEX IF NOT EXISTS idx_menu_category ON menu_items(category);
 
 ALTER TABLE menu_items ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON menu_items;
 CREATE POLICY "Allow authenticated full access" ON menu_items
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -124,7 +132,7 @@ CREATE POLICY "Allow authenticated full access" ON menu_items
 CREATE TABLE IF NOT EXISTS staff_shifts (
   id BIGSERIAL PRIMARY KEY,
   staff_name TEXT NOT NULL,
-  position TEXT, -- 'Manager', 'Bartender', 'Server', 'Host', 'Kitchen'
+  position TEXT,
   shift_date DATE NOT NULL,
   start_time TIME NOT NULL,
   end_time TIME NOT NULL,
@@ -136,6 +144,7 @@ CREATE INDEX IF NOT EXISTS idx_staff_date ON staff_shifts(shift_date);
 
 ALTER TABLE staff_shifts ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON staff_shifts;
 CREATE POLICY "Allow authenticated full access" ON staff_shifts
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
@@ -148,7 +157,7 @@ CREATE TABLE IF NOT EXISTS loyalty_members (
   name TEXT,
   phone TEXT,
   points INT DEFAULT 0,
-  tier TEXT DEFAULT 'bronze', -- 'bronze', 'silver', 'gold'
+  tier TEXT DEFAULT 'bronze',
   joined_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   last_visit TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -158,6 +167,7 @@ CREATE INDEX IF NOT EXISTS idx_loyalty_email ON loyalty_members(email);
 
 ALTER TABLE loyalty_members ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated reads" ON loyalty_members;
 CREATE POLICY "Allow authenticated reads" ON loyalty_members
   FOR SELECT TO authenticated USING (true);
 
@@ -165,7 +175,7 @@ CREATE POLICY "Allow authenticated reads" ON loyalty_members
 CREATE TABLE IF NOT EXISTS promo_codes (
   id BIGSERIAL PRIMARY KEY,
   code TEXT UNIQUE NOT NULL,
-  discount_type TEXT, -- 'percentage', 'fixed'
+  discount_type TEXT,
   discount_amount DECIMAL(10,2) NOT NULL,
   valid_from TIMESTAMP WITH TIME ZONE NOT NULL,
   valid_until TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -181,13 +191,14 @@ CREATE INDEX IF NOT EXISTS idx_promo_code ON promo_codes(code);
 
 ALTER TABLE promo_codes ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow authenticated full access" ON promo_codes;
 CREATE POLICY "Allow authenticated full access" ON promo_codes
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
 -- Analytics Events
 CREATE TABLE IF NOT EXISTS analytics_events (
   id BIGSERIAL PRIMARY KEY,
-  event_type TEXT NOT NULL, -- 'page_view', 'newsletter_signup', 'order', 'promo_used'
+  event_type TEXT NOT NULL,
   event_data JSONB,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -197,8 +208,11 @@ CREATE INDEX IF NOT EXISTS idx_analytics_date ON analytics_events(created_at);
 
 ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public inserts" ON analytics_events;
 CREATE POLICY "Allow public inserts" ON analytics_events
   FOR INSERT TO anon WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Allow authenticated reads" ON analytics_events;
 CREATE POLICY "Allow authenticated reads" ON analytics_events
   FOR SELECT TO authenticated USING (true);
+
