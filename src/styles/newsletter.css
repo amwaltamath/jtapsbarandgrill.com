@@ -1,0 +1,121 @@
+.newsletter-signup {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: white;
+  padding: 60px 20px;
+  border-top: 4px solid #E13622;
+  margin: 80px 0;
+}
+
+.newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.newsletter-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #d0d0d0;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  padding: 14px 16px;
+  border: 2px solid #E13622;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #ff6b4a;
+  box-shadow: 0 0 10px rgba(225, 54, 34, 0.3);
+}
+
+.form-button {
+  padding: 14px 24px;
+  background: #E13622;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-button:hover:not(:disabled) {
+  background: #ff6b4a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(225, 54, 34, 0.3);
+}
+
+.form-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+.message-success {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+
+.message-error {
+  background: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+  border: 1px solid #F44336;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .newsletter-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-content p {
+    font-size: 1rem;
+  }
+
+  .newsletter-form {
+    gap: 12px;
+  }
+
+  .form-input,
+  .form-button {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+}
