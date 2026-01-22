@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdminDashboard from '../../components/AdminDashboard';
+---
+
+<Layout 
+  title="Admin Dashboard - JTAPS Bar and Grill"
+  description="Admin dashboard for JTAPS Bar and Grill"
+>
+  <AdminDashboard client:only="react" />
+</Layout>

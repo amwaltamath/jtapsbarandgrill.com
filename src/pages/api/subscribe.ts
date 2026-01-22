@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { resend } from '../../lib/resend';
+import { supabase } from '../../lib/supabase';
 
 interface SubscribeRequest {
   email: string;
@@ -19,7 +20,35 @@ export const POST: APIRoute = async (context) => {
       );
     }
 
-    // Add subscriber to Resend audience (or send welcome email)
+    // Save subscriber to Supabase
+    const { data: subscriber, error: dbError } = await supabase
+      .from('newsletter_subscribers')
+      .insert([
+        { 
+          email, 
+          name: name || null,
+          subscribed_at: new Date().toISOString()
+        }
+      ])
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error('Supabase error:', dbError);
+      // If duplicate email, return friendly message
+      if (dbError.code === '23505') {
+        return new Response(
+          JSON.stringify({ error: 'This email is already subscribed!' }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      return new Response(
+        JSON.stringify({ error: 'Failed to save subscription' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Send welcome email via Resend
     const response = await resend.emails.send({
       from: 'JTAPS Bar and Grill <noreply@jtapsbarandgrill.com>',
       to: email,
