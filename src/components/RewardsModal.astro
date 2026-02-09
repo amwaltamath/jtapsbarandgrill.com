@@ -41,13 +41,13 @@
 
   const openModal = () => {
     if (!modal) return;
-    modal.hidden = false;
+    (modal as HTMLElement).hidden = false;
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     if (!modal) return;
-    modal.hidden = true;
+    (modal as HTMLElement).hidden = true;
     document.body.style.overflow = '';
   };
 
