@@ -1,45 +1,40 @@
 # Copilot Instructions for JTaps Bar and Grill
 
-Project snapshot
-- Frontend: Astro 5 + React islands
-- Data/Auth: Supabase (`@supabase/supabase-js` v2)
-- Styling: component CSS under `src/styles/` + global in `Layout.astro`
-- Deployment: Vercel/Netlify (Astro-native)
+## Project snapshot
+- Astro 5 static site with React islands (see astro.config.mjs; output is `static`).
+- Supabase (`@supabase/supabase-js` v2) for data and auth; admin UI uses client-side auth.
+- API routes under src/pages/api integrate Resend (email) and Twilio (SMS).
+- Styles: component CSS in src/styles, global styles in Layout.astro.
 
-Architecture & rendering
-- Astro drives static pages under `src/pages/` (e.g., `index.astro`, `menu.astro`, `contact.astro`, `watch-the-game.astro`).
-- React is used for interactive islands; see [src/components/Navigation.tsx](src/components/Navigation.tsx) mounted in [src/layouts/Layout.astro](src/layouts/Layout.astro#L58) via `client:load`.
-- Global SEO/meta and footer live in [src/layouts/Layout.astro](src/layouts/Layout.astro).
-- Keep customer-facing pages lean; prefer Astro components ([src/components/About.astro](src/components/About.astro), [src/components/Hero.astro](src/components/Hero.astro), [src/components/MenuHighlight.astro](src/components/MenuHighlight.astro), [src/components/Visit.astro](src/components/Visit.astro)) for content.
+## Architecture & data flow
+- Public pages are Astro files in src/pages and wrap Layout.astro for SEO/meta/footer.
+- React islands live in src/components and are mounted from Astro via client:* directives (e.g., Navigation in Layout.astro, AdminDashboard in src/pages/admin/index.astro with client:only="react").
+- Admin dashboard uses Supabase client auth and CRUDs tables like menu_items, specials, game_calendar, newsletter_subscribers via components in src/components/admin.
+- API routes:
+  - subscribe.ts saves newsletter_subscribers and sends welcome email via Resend.
+  - send-promotional-email.ts batch-sends Resend email campaigns.
+  - send-sms-campaign.ts sends Twilio SMS and records sms_campaigns.
 
-Supabase integration
-- Client init in [src/lib/supabase.ts](src/lib/supabase.ts): uses `PUBLIC_SUPABASE_URL` and `PUBLIC_SUPABASE_ANON_KEY`.
-- `supabaseAdmin` uses `SUPABASE_SERVICE_ROLE_KEY` and must be server-only. Do not import it in React/Astro client code.
-- Add environment variables to `.env` and configure host secrets accordingly.
+## Conventions & patterns
+- Prefer Astro components for static content (src/components/*.astro); use React only for interactive admin/features.
+- Assets live under public/images and are referenced as /images/...
+- Supabase clients are proxied in src/lib/supabase.ts; `supabaseAdmin` must stay server-only.
+- API routes expect JSON and return JSON responses with status codes.
 
-Patterns & conventions
-- React islands: import TSX in Astro and opt-in with `client:*` directives; prefer `client:visible` or `client:idle` unless functionality requires `client:load`.
-- Styles: component-specific CSS in `src/styles/` (e.g., [src/styles/navigation.css](src/styles/navigation.css)), global styles in [src/layouts/Layout.astro](src/layouts/Layout.astro#L113).
-- Routing: file-based under `src/pages/`; use semantic URLs (`/menu`, `/watch-the-game`, `/contact`).
-- Assets: place images under `public/images/`; reference with `/images/...`.
+## Environment & integrations
+- Supabase: PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY; SUPABASE_SERVICE_ROLE_KEY for server-only usage.
+- Resend: RESEND_API_KEY (see src/lib/resend.ts).
+- Twilio: TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER (see src/lib/twilio.ts).
 
-Developer workflows
-- Dev: `npm run dev` (Astro dev server).
-- Build: `npm run build` (includes `astro check` then `astro build`).
-- Preview: `npm run preview`.
-- TypeScript ambient types in [src/env.d.ts](src/env.d.ts); keep imports typed.
+## Developer workflows
+- Dev server: npm run dev
+- Build: npm run build (runs astro check then astro build)
+- Preview: npm run preview
+- Types: ambient types live in src/env.d.ts
 
-Implementation examples
-- Mount a React island: import `Navigation` in `Layout.astro` and render `<Navigation client:load />`.
-- Use Supabase on client: `import { supabase } from '../lib/supabase';` then `await supabase.from('menu_items').select('*')` respecting RLS policies.
+## Examples
+- Mount a React island: Layout.astro renders <Navigation client:load />.
+- Use Supabase in UI components: MenuManager.tsx reads/writes menu_items with supabase.from(...).
 
-Security & data
-- Enable RLS on tables with employee/privileged data; public tables (e.g., menu) can be read-only for anon.
-- Never expose `SUPABASE_SERVICE_ROLE_KEY` to client; use only in server contexts (future API routes).
-
-Adding features
-- New static page: add `.astro` under `src/pages/` and wrap with `Layout.astro` props (`title`, `description`, `ogImage`).
-- Interactive component: place TSX under `src/components/`, style under `src/styles/`, mount with an appropriate `client:*` directive.
-
-Feedback
-- If any of the above feels incomplete (e.g., admin API endpoints), say which features to prioritize and we’ll extend these instructions accordingly.
+## Feedback
+- If any workflows or integrations are missing, say which ones to add.

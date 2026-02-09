@@ -32,6 +32,7 @@ export default function Navigation() {
           <li><a href="/" onClick={closeMenu}>Home</a></li>
           <li><a href="/menu" onClick={closeMenu}>Menu</a></li>
           <li><a href="/watch-the-game" onClick={closeMenu}>Watch the Game</a></li>
+          <li><a href="/blog" onClick={closeMenu}>Blog</a></li>
           <li><a href="/contact" onClick={closeMenu}>Contact</a></li>
           <li><a href="https://facebook.com" target="_blank" onClick={closeMenu}>Facebook</a></li>
           <li><a href="https://instagram.com" target="_blank" onClick={closeMenu}>Instagram</a></li>

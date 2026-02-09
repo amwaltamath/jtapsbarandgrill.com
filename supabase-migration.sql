@@ -3,13 +3,20 @@
 -- Newsletter Subscribers
 CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   id BIGSERIAL PRIMARY KEY,
-  email TEXT UNIQUE NOT NULL,
+  email TEXT UNIQUE,
+  phone TEXT UNIQUE,
   name TEXT,
+  sms_opt_in BOOLEAN DEFAULT false,
+  email_opt_in BOOLEAN DEFAULT true,
   subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  CONSTRAINT email_or_phone_required CHECK (
+    (email IS NOT NULL) OR (phone IS NOT NULL)
+  )
 );
 
 CREATE INDEX IF NOT EXISTS idx_newsletter_email ON newsletter_subscribers(email);
+CREATE INDEX IF NOT EXISTS idx_newsletter_phone ON newsletter_subscribers(phone);
 
 ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 
@@ -40,6 +47,22 @@ ALTER TABLE email_campaigns ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Allow authenticated full access" ON email_campaigns;
 CREATE POLICY "Allow authenticated full access" ON email_campaigns
+  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- SMS Campaigns
+CREATE TABLE IF NOT EXISTS sms_campaigns (
+  id BIGSERIAL PRIMARY KEY,
+  message TEXT NOT NULL,
+  sent_count INT DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  sent_at TIMESTAMP WITH TIME ZONE,
+  created_by UUID REFERENCES auth.users(id)
+);
+
+ALTER TABLE sms_campaigns ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow authenticated full access" ON sms_campaigns;
+CREATE POLICY "Allow authenticated full access" ON sms_campaigns
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
 -- ========== PHASE 2: SPORTS BAR OPERATIONS ==========

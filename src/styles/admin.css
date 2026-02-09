@@ -593,3 +593,72 @@ select:focus {
     margin-bottom: 10px;
   }
 }
+
+/* Campaign Tabs */
+.campaign-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background: #f8f8f8;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+  background: #f0f0f0;
+}
+
+.tab-button.active {
+  background: white;
+  border-bottom-color: #E13622;
+  color: #E13622;
+}
+
+/* Subscriber Stats */
+.subscriber-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.subscriber-stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Opt-in Badges */
+.opt-in-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 1px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.opt-in-badge:nth-child(2) {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Character Count */
+.character-count {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px;
+}
