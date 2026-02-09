@@ -8,7 +8,17 @@
     <p class="hero-tagline">
       Whether You're Here For The Big Game, A Casual Night Out, Or To Dig Into The Best Gyros And Wings In Town With A Cold Beer In Hand, Jtaps Bar And Grill Has You Covered. Swing By And Experience The Ultimate Sports Bar Vibe—Where Great Food, Epic Games, And Good Times Collide!
     </p>
-    <a href="https://togoorder.com/web/3136#/" target="_blank" class="cta-button">ORDER NOW</a>
+    <div class="cta-group">
+      <a href="https://togoorder.com/web/3136#/" target="_blank" class="cta-button">ORDER NOW</a>
+      <a
+        href="https://loyalty.focuspos.com/addmember/?C=2786"
+        target="_blank"
+        rel="noopener"
+        class="cta-button cta-secondary"
+      >
+        SIGN UP FOR REWARDS
+      </a>
+    </div>
   </div>
 </section>
 
@@ -64,6 +74,19 @@
     font-weight: bold;
     border-radius: 5px;
     transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .cta-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
   }
 
   .cta-button:hover {

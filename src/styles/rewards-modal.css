@@ -1,0 +1,127 @@
+:root {
+  --rewards-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.rewards-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.rewards-modal[hidden] {
+  display: none;
+}
+
+.rewards-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.rewards-modal__panel {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  width: min(520px, 100%);
+  background: linear-gradient(140deg, #ffffff 0%, #fff2ee 100%);
+  padding: 28px 28px 32px;
+  border-radius: 20px;
+  box-shadow: var(--rewards-shadow);
+  text-align: left;
+  animation: rewardsModalRise 0.35s ease;
+}
+
+.rewards-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #222222;
+}
+
+.rewards-modal__eyebrow {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: #E13622;
+  margin-bottom: 12px;
+}
+
+.rewards-modal__panel h2 {
+  font-size: 1.9rem;
+  color: #111111;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.rewards-modal__copy {
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 24px;
+}
+
+.rewards-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rewards-modal__actions a {
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 12px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rewards-modal__primary {
+  background: #E13622;
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(225, 54, 34, 0.25);
+}
+
+.rewards-modal__secondary {
+  background: #ffffff;
+  color: #E13622;
+  border: 2px solid #E13622;
+}
+
+.rewards-modal__actions a:hover,
+.rewards-modal__actions a:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes rewardsModalRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .rewards-modal__panel {
+    padding: 24px 20px 28px;
+  }
+
+  .rewards-modal__panel h2 {
+    font-size: 1.55rem;
+  }
+}

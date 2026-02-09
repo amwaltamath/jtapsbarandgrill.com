@@ -34,6 +34,17 @@ export default function Navigation() {
           <li><a href="/watch-the-game" onClick={closeMenu}>Watch the Game</a></li>
           <li><a href="/blog" onClick={closeMenu}>Blog</a></li>
           <li><a href="/contact" onClick={closeMenu}>Contact</a></li>
+          <li>
+            <a
+              href="https://loyalty.focuspos.com/addmember/?C=2786"
+              target="_blank"
+              rel="noopener"
+              onClick={closeMenu}
+              className="nav-cta"
+            >
+              Rewards
+            </a>
+          </li>
           <li><a href="https://facebook.com" target="_blank" onClick={closeMenu}>Facebook</a></li>
           <li><a href="https://instagram.com" target="_blank" onClick={closeMenu}>Instagram</a></li>
         </ul>

@@ -1,0 +1,71 @@
+---
+---
+
+<div class="rewards-modal" data-rewards-modal hidden>
+  <div class="rewards-modal__backdrop" data-rewards-close></div>
+  <div class="rewards-modal__panel" role="dialog" aria-modal="true" aria-labelledby="rewards-modal-title">
+    <button class="rewards-modal__close" type="button" aria-label="Close" data-rewards-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="rewards-modal__eyebrow">JTAPS Rewards</p>
+    <h2 id="rewards-modal-title">Get rewarded for every visit</h2>
+    <p class="rewards-modal__copy">
+      For every $150 you spend, you get $10 in rewards, plus birthday bonus, sign up bonus,
+      and more.
+    </p>
+    <div class="rewards-modal__actions">
+      <a
+        class="rewards-modal__primary"
+        href="https://loyalty.focuspos.com/addmember/?C=2786"
+        target="_blank"
+        rel="noopener"
+      >
+        Sign Up Now
+      </a>
+      <a
+        class="rewards-modal__secondary"
+        href="https://loyalty.focuspos.com/base/?C=2786"
+        target="_blank"
+        rel="noopener"
+      >
+        Check Your Points
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.querySelector('[data-rewards-modal]');
+  const closeButtons = document.querySelectorAll('[data-rewards-close]');
+  const modalKey = 'jtaps-rewards-modal-seen';
+
+  const openModal = () => {
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  const wasShown = sessionStorage.getItem(modalKey);
+  if (!wasShown) {
+    window.setTimeout(() => {
+      openModal();
+      sessionStorage.setItem(modalKey, 'true');
+    }, 800);
+  }
+
+  closeButtons.forEach((button) => {
+    button.addEventListener('click', closeModal);
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>

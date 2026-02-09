@@ -623,20 +623,6 @@ select:focus {
   color: #E13622;
 }
 
-/* Subscriber Stats */
-.subscriber-stats {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.subscriber-stats span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
 
 /* Opt-in Badges */
 .opt-in-badge {

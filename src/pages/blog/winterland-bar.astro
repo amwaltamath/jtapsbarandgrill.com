@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="JTAPS Winterland Bar - Seasonal Decor, Favorites, and Rewards"
+  description="Step into JTAPS Winterland Bar for seasonal decor, your favorite menu items, and a cozy sports bar vibe in Cincinnati."
+  keywords="winterland bar cincinnati, seasonal bar decor, sports bar winter theme, jtaps bar and grill, cincinnati winter bar"
+  ogImage="/images/Winterland.jpg"
+>
+  <article class="blog-post">
+    <header class="post-header">
+      <h1>JTAPS Winterland Bar: Step Into the Season</h1>
+      <div class="post-meta">
+        <span class="post-date">February 9, 2026</span>
+        <span class="post-author">JTAPS Team</span>
+        <span class="post-category">Seasonal</span>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <img src="/images/Winterland.jpg" alt="JTAPS Winterland Bar theme" class="featured-image" />
+
+      <section>
+        <h2>Your Winterland Bar in Cincinnati</h2>
+        <p>
+          This season, JTAPS Bar and Grill transforms into a Winterland Bar with warm lighting, festive decor,
+          and the same game day energy you love. If you are looking for a cozy spot to catch the game, meet
+          friends, or unwind after work, our Winterland theme makes every visit feel like a night out.
+        </p>
+      </section>
+
+      <section>
+        <h2>Stop In Today for Your Favorites</h2>
+        <p>
+          Winter vibes pair perfectly with our JTAPS favorites. Order famous Pete's Sauce wings, hand-carved
+          gyros, juicy burgers, and ice-cold drinks while you watch the action on 50+ TVs. Whether you come
+          for lunch, dinner, or a big game, the Winterland atmosphere makes it even better.
+        </p>
+        <ul>
+          <li><strong>Wings:</strong> Classic, crispy, and sauced just right</li>
+          <li><strong>Gyros:</strong> Hand-carved and loaded with flavor</li>
+          <li><strong>Burgers:</strong> Juicy, stacked, and made to order</li>
+          <li><strong>Drinks:</strong> Cold beers, bourbon, and seasonal pours</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Make Every Visit Count with Rewards</h2>
+        <p>
+          JTAPS Rewards makes every visit more rewarding. For every $150 you spend, you get $10 in rewards,
+          plus birthday and sign up bonuses. Join today and start earning right away.
+        </p>
+        <div class="rewards-cta">
+          <a
+            class="rewards-primary"
+            href="https://loyalty.focuspos.com/addmember/?C=2786"
+            target="_blank"
+            rel="noopener"
+          >
+            Sign Up for Rewards
+          </a>
+          <a
+            class="rewards-secondary"
+            href="https://loyalty.focuspos.com/base/?C=2786"
+            target="_blank"
+            rel="noopener"
+          >
+            Check Your Points
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2>See the Winterland Theme for Yourself</h2>
+        <p>
+          The Winterland Bar is here for a limited time. Come experience the decor, grab your favorite menu
+          items, and enjoy the full JTAPS sports bar vibe. We will save you a seat.
+        </p>
+      </section>
+
+      <div class="post-footer">
+        <p><strong>JTAPS Bar and Grill</strong> | 6441 Glenway Ave, Cincinnati, OH 45211 | (513) 574-9777</p>
+        <p>Winterland Bar Theme • 50+ HD TVs • Famous Wings • Great Drinks</p>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .post-header {
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 2px solid #E13622;
+    padding-bottom: 30px;
+  }
+
+  .post-header h1 {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    flex-wrap: wrap;
+  }
+
+  .post-content {
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .featured-image {
+    width: 100%;
+    border-radius: 12px;
+    margin: 0 0 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .post-content h2 {
+    color: #1a1a1a;
+    font-size: 1.6rem;
+    margin: 30px 0 15px;
+  }
+
+  .post-content ul {
+    margin: 15px 0 20px 20px;
+  }
+
+  .rewards-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .rewards-cta a {
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 12px 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .rewards-primary {
+    background: #E13622;
+    color: #ffffff;
+    box-shadow: 0 10px 18px rgba(225, 54, 34, 0.25);
+  }
+
+  .rewards-secondary {
+    background: transparent;
+    color: #E13622;
+    border: 2px solid #E13622;
+  }
+
+  .rewards-cta a:hover,
+  .rewards-cta a:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+  }
+
+  .post-footer {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .post-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .post-content h2 {
+      font-size: 1.4rem;
+    }
+  }
+</style>
