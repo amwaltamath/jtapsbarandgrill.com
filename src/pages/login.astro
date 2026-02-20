@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CustomerLogin from '../components/CustomerLogin';
+---
+
+<Layout 
+  title="Login - JTAPS Bar and Grill"
+  description="Login to your JTAPS account to view upcoming games and specials"
+  ogImage="/images/6441-Glenway.jpg"
+>
+  <CustomerLogin client:only="react" />
+</Layout>

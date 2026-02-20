@@ -9,6 +9,8 @@ import MenuManager from './admin/MenuManager';
 import AnalyticsDashboard from './admin/AnalyticsDashboard';
 import LoyaltyProgram from './admin/LoyaltyProgram';
 import PromoCodeManager from './admin/PromoCodeManager';
+import EmailCampaignManager from './admin/EmailCampaignManager';
+import SMSCampaignManager from './admin/SMSCampaignManager';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,7 +23,9 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({
     games: 0,
     specials: 0,
-    menuItems: 0
+    menuItems: 0,
+    emailSubscribers: 0,
+    smsSubscribers: 0
   });
 
   useEffect(() => {
@@ -38,16 +42,20 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const [gameRes, specRes, menuRes] = await Promise.all([
-        supabase.from('game_calendar').select('id', { count: 'exact' }),
-        supabase.from('specials').select('id', { count: 'exact' }),
-        supabase.from('menu_items').select('id', { count: 'exact' })
+      const [gameRes, specRes, menuRes, emailSubRes, smsSubRes] = await Promise.all([
+        supabase.from('game_calendar').select('id', { count: 'exact', head: true }),
+        supabase.from('specials').select('id', { count: 'exact', head: true }),
+        supabase.from('menu_items').select('id', { count: 'exact', head: true }),
+        supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).eq('email_opt_in', true),
+        supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).eq('sms_opt_in', true)
       ]);
 
       setStats({
         games: gameRes.count || 0,
         specials: specRes.count || 0,
-        menuItems: menuRes.count || 0
+        menuItems: menuRes.count || 0,
+        emailSubscribers: emailSubRes.count || 0,
+        smsSubscribers: smsSubRes.count || 0
       });
     } catch (err) {
       console.error('Error fetching stats:', err);
@@ -166,6 +174,18 @@ export default function AdminDashboard() {
         >
           📈 Analytics
         </button>
+        <button
+          className={`tab-button ${activeTab === 'email-campaigns' ? 'active' : ''}`}
+          onClick={() => setActiveTab('email-campaigns')}
+        >
+          📧 Email
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'sms-campaigns' ? 'active' : ''}`}
+          onClick={() => setActiveTab('sms-campaigns')}
+        >
+          📱 SMS
+        </button>
       </div>
 
       <div className="dashboard-content">
@@ -185,6 +205,14 @@ export default function AdminDashboard() {
                 <div className="stat-number">{stats.menuItems}</div>
                 <div className="stat-label">Menu Items</div>
               </div>
+              <div className="stat-card">
+                <div className="stat-number">{stats.emailSubscribers}</div>
+                <div className="stat-label">Email Subscribers</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{stats.smsSubscribers}</div>
+                <div className="stat-label">SMS Subscribers</div>
+              </div>
             </div>
             <div className="quick-actions">
               <h3>Quick Actions</h3>
@@ -203,6 +231,8 @@ export default function AdminDashboard() {
         {activeTab === 'loyalty' && <LoyaltyProgram />}
         {activeTab === 'promos' && <PromoCodeManager />}
         {activeTab === 'analytics' && <AnalyticsDashboard />}
+        {activeTab === 'email-campaigns' && <EmailCampaignManager />}
+        {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
       </div>
     </div>
   );

@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 import '../styles/navigation.css';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    checkAuth();
+    
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    setIsAuthenticated(!!session);
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -34,6 +52,15 @@ export default function Navigation() {
           <li><a href="/watch-the-game" onClick={closeMenu}>Watch the Game</a></li>
           <li><a href="/blog" onClick={closeMenu}>Blog</a></li>
           <li><a href="/contact" onClick={closeMenu}>Contact</a></li>
+          <li>
+            <a
+              href={isAuthenticated ? "/dashboard" : "/login"}
+              onClick={closeMenu}
+              className="nav-cta nav-account"
+            >
+              {isAuthenticated ? "My Account" : "Login / Sign Up"}
+            </a>
+          </li>
           <li>
             <a
               href="https://loyalty.focuspos.com/addmember/?C=2786"

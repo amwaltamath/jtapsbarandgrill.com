@@ -15,6 +15,22 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   )
 );
 
+-- Ensure all columns exist for existing tables
+ALTER TABLE newsletter_subscribers
+  ADD COLUMN IF NOT EXISTS phone TEXT;
+
+ALTER TABLE newsletter_subscribers
+  ADD COLUMN IF NOT EXISTS name TEXT;
+
+ALTER TABLE newsletter_subscribers
+  ADD COLUMN IF NOT EXISTS sms_opt_in BOOLEAN DEFAULT false;
+
+ALTER TABLE newsletter_subscribers
+  ADD COLUMN IF NOT EXISTS email_opt_in BOOLEAN DEFAULT true;
+
+ALTER TABLE newsletter_subscribers
+  ADD COLUMN IF NOT EXISTS subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW();
+
 CREATE INDEX IF NOT EXISTS idx_newsletter_email ON newsletter_subscribers(email);
 CREATE INDEX IF NOT EXISTS idx_newsletter_phone ON newsletter_subscribers(phone);
 
@@ -24,9 +40,17 @@ DROP POLICY IF EXISTS "Allow public inserts" ON newsletter_subscribers;
 CREATE POLICY "Allow public inserts" ON newsletter_subscribers
   FOR INSERT TO anon WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Allow authenticated inserts" ON newsletter_subscribers;
+CREATE POLICY "Allow authenticated inserts" ON newsletter_subscribers
+  FOR INSERT TO authenticated WITH CHECK (true);
+
 DROP POLICY IF EXISTS "Allow authenticated reads" ON newsletter_subscribers;
 CREATE POLICY "Allow authenticated reads" ON newsletter_subscribers
   FOR SELECT TO authenticated USING (true);
+
+DROP POLICY IF EXISTS "Allow authenticated updates" ON newsletter_subscribers;
+CREATE POLICY "Allow authenticated updates" ON newsletter_subscribers
+  FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow authenticated deletes" ON newsletter_subscribers;
 CREATE POLICY "Allow authenticated deletes" ON newsletter_subscribers
@@ -238,4 +262,40 @@ CREATE POLICY "Allow public inserts" ON analytics_events
 DROP POLICY IF EXISTS "Allow authenticated reads" ON analytics_events;
 CREATE POLICY "Allow authenticated reads" ON analytics_events
   FOR SELECT TO authenticated USING (true);
+
+-- ========== PHASE 5: CUSTOMER ACCOUNTS ==========
+
+-- Customer Profiles
+CREATE TABLE IF NOT EXISTS customer_profiles (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE,
+  email TEXT NOT NULL,
+  name TEXT NOT NULL,
+  phone TEXT,
+  favorite_games BIGINT[],
+  favorite_specials BIGINT[],
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_customer_user_id ON customer_profiles(user_id);
+CREATE INDEX IF NOT EXISTS idx_customer_email ON customer_profiles(email);
+
+ALTER TABLE customer_profiles ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Users can view own profile" ON customer_profiles;
+CREATE POLICY "Users can view own profile" ON customer_profiles
+  FOR SELECT USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can update own profile" ON customer_profiles;
+CREATE POLICY "Users can update own profile" ON customer_profiles
+  FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can insert own profile" ON customer_profiles;
+CREATE POLICY "Users can insert own profile" ON customer_profiles
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Ensure phone column exists (safe for existing tables)
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS phone TEXT;
 
