@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { supabaseAdmin } from "../../lib/supabase";
-import { resend } from "../../lib/resend";
+import { getResend } from "../../lib/resend";
 
 export const POST: APIRoute = async ({ request }) => {
   if (request.method !== "POST") {
@@ -24,6 +24,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const resend = getResend();
+    if (!resend) {
+      return new Response(JSON.stringify({ error: "Resend not configured" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
     // Get all email subscribers
     const { data: subscribers, error: fetchError } = await supabaseAdmin
       .from("newsletter_subscribers")
@@ -38,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const emails = subscribers.map(s => s.email).filter(Boolean);
-    
+
     if (emails.length === 0) {
       return new Response(JSON.stringify({ success: true, sent: 0, message: "No subscribers" }), {
         status: 200,
@@ -46,34 +54,44 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Send email campaign via Resend
-    const emailResult = await resend.emails.send({
-      from: "JTAPS <noreply@jtapsbarandgrill.com>",
-      to: emails,
-      subject: subject,
-      html: `<p>${message}</p>`
-    });
+    // Send in batches (Resend max 50 recipients per request)
+    const batchSize = 50;
+    let sentCount = 0;
+    let lastMessageId: string | undefined;
 
-    if (emailResult.error) {
-      return new Response(JSON.stringify({ error: emailResult.error.message }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" }
+    for (let i = 0; i < emails.length; i += batchSize) {
+      const batch = emails.slice(i, i + batchSize);
+      const emailResult = await resend.emails.send({
+        from: "JTAPS <noreply@jtapsbarandgrill.com>",
+        to: batch,
+        subject: subject,
+        html: `<p>${message}</p>`
       });
+
+      if (emailResult.error) {
+        return new Response(JSON.stringify({ error: emailResult.error.message }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      sentCount += batch.length;
+      lastMessageId = emailResult.data?.id;
     }
 
     // Record campaign in database
     await supabaseAdmin.from("email_campaigns").insert({
       subject: subject,
       message: message,
-      sent_count: emails.length,
+      sent_count: sentCount,
       sent_at: new Date().toISOString()
     });
 
     return new Response(
       JSON.stringify({
         success: true,
-        sent: emails.length,
-        messageId: emailResult.data?.id
+        sent: sentCount,
+        messageId: lastMessageId
       }),
       {
         status: 200,
@@ -82,8 +100,9 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error) {
     console.error("Email campaign error:", error);
+    const detail = error instanceof Error ? error.message : String(error);
     return new Response(
-      JSON.stringify({ error: "Internal server error" }),
+      JSON.stringify({ error: "Internal server error", detail }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" }
