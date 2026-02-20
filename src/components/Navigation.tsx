@@ -9,17 +9,33 @@ export default function Navigation() {
   useEffect(() => {
     checkAuth();
     
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setIsAuthenticated(!!session);
-    });
+    // Listen for auth changes - only if supabase is available
+    if (supabase?.auth) {
+      try {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+          setIsAuthenticated(!!session);
+        });
 
-    return () => subscription.unsubscribe();
+        return () => subscription?.unsubscribe();
+      } catch (error) {
+        console.warn('Auth listener failed:', error);
+      }
+    }
   }, []);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    setIsAuthenticated(!!session);
+    if (!supabase?.auth) {
+      setIsAuthenticated(false);
+      return;
+    }
+    
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+    } catch (error) {
+      console.warn('Auth check failed:', error);
+      setIsAuthenticated(false);
+    }
   };
 
   const toggleMenu = () => {

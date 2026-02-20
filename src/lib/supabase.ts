@@ -9,11 +9,15 @@ function getSupabaseClient() {
     const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseAnonKey) {
-      throw new Error('Supabase environment variables are not set. Please check PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY.');
+    // Validate URLs are actual HTTP/HTTPS URLs, not undefined or empty strings
+    if (supabaseUrl && typeof supabaseUrl === 'string' && supabaseUrl.startsWith('http') && 
+        supabaseAnonKey && typeof supabaseAnonKey === 'string') {
+      supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
+    } else {
+      console.warn('Supabase environment variables are not properly configured.');
+      // Return a dummy/null client to prevent hydration errors
+      supabaseInstance = null;
     }
-
-    supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
   }
   return supabaseInstance;
 }
@@ -23,23 +27,33 @@ function getSupabaseAdminClient() {
     const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
     const serviceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!supabaseUrl || !serviceRoleKey) {
-      throw new Error('Supabase admin environment variables are not set.');
+    if (supabaseUrl && typeof supabaseUrl === 'string' && supabaseUrl.startsWith('http') && 
+        serviceRoleKey && typeof serviceRoleKey === 'string') {
+      supabaseAdminInstance = createClient(supabaseUrl, serviceRoleKey);
+    } else {
+      console.warn('Supabase admin environment variables are not properly configured.');
+      supabaseAdminInstance = null;
     }
-
-    supabaseAdminInstance = createClient(supabaseUrl, serviceRoleKey);
   }
   return supabaseAdminInstance;
 }
 
 export const supabase = new Proxy({} as SupabaseClient, {
   get(target, prop) {
-    return getSupabaseClient()[prop as keyof SupabaseClient];
+    const client = getSupabaseClient();
+    if (!client) {
+      return null;
+    }
+    return client[prop as keyof SupabaseClient];
   }
 });
 
 export const supabaseAdmin = new Proxy({} as SupabaseClient, {
   get(target, prop) {
-    return getSupabaseAdminClient()[prop as keyof SupabaseClient];
+    const client = getSupabaseAdminClient();
+    if (!client) {
+      return null;
+    }
+    return client[prop as keyof SupabaseClient];
   }
 });
