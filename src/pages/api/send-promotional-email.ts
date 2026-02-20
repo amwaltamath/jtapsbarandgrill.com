@@ -56,17 +56,31 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Send in batches (Resend max 50 recipients per request)
     const batchSize = 50;
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     let sentCount = 0;
     let lastMessageId: string | undefined;
 
     for (let i = 0; i < emails.length; i += batchSize) {
       const batch = emails.slice(i, i + batchSize);
-      const emailResult = await resend.emails.send({
+      let emailResult = await resend.emails.send({
         from: "JTAPS <noreply@jtapsbarandgrill.com>",
         to: batch,
         subject: subject,
         html: `<p>${message}</p>`
       });
+
+      if (emailResult.error) {
+        const messageText = emailResult.error.message || "";
+        if (messageText.includes("Too many requests")) {
+          await sleep(1000);
+          emailResult = await resend.emails.send({
+            from: "JTAPS <noreply@jtapsbarandgrill.com>",
+            to: batch,
+            subject: subject,
+            html: `<p>${message}</p>`
+          });
+        }
+      }
 
       if (emailResult.error) {
         return new Response(JSON.stringify({ error: emailResult.error.message }), {
@@ -77,6 +91,9 @@ export const POST: APIRoute = async ({ request }) => {
 
       sentCount += batch.length;
       lastMessageId = emailResult.data?.id;
+
+      // Respect Resend rate limits (max 2 requests/sec)
+      await sleep(600);
     }
 
     // Record campaign in database
