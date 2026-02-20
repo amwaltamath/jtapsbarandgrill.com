@@ -37,16 +37,17 @@ export const POST: APIRoute = async (context) => {
       try {
         // Personalize message if name is available
         const personalizedMessage = subscriber.name
-          ? `Hi ${subscriber.name}, ${message}`
+          ? Hi 6{subscriber.name}, 6{message}
           : message;
 
         await sendSMS(subscriber.phone, personalizedMessage);
         sent++;
         results.push({ phone: subscriber.phone, status: 'sent' });
       } catch (error) {
-        console.error(`Failed to send SMS to ${subscriber.phone}:`, error);
+        console.error(Failed to send SMS to 6{subscriber.phone}:, error);
         failed++;
-        results.push({ phone: subscriber.phone, status: 'failed', error: error.message });
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        results.push({ phone: subscriber.phone, status: 'failed', error: errorMessage });
       }
     }
 
