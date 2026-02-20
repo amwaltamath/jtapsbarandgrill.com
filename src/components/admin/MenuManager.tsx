@@ -32,6 +32,8 @@ export default function MenuManager() {
   }, []);
 
   const fetchMenuItems = async () => {
+    if (!supabase) return;
+    
     const { data, error } = await supabase
       .from('menu_items')
       .select('*')
@@ -46,6 +48,11 @@ export default function MenuManager() {
     e.preventDefault();
     setError('');
     setSuccess('');
+
+    if (!supabase) {
+      setError('Supabase not configured');
+      return;
+    }
 
     const { error } = await supabase.from('menu_items').insert([formData]);
 
@@ -68,6 +75,10 @@ export default function MenuManager() {
 
   const handleDeleteItem = async (id: number) => {
     if (confirm('Delete this menu item?')) {
+      if (!supabase) {
+        setError('Supabase not configured');
+        return;
+      }
       await supabase.from('menu_items').delete().eq('id', id);
       fetchMenuItems();
     }

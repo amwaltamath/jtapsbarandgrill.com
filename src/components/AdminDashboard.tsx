@@ -33,14 +33,30 @@ export default function AdminDashboard() {
   }, []);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    setIsAuthenticated(!!session);
-    if (session) {
-      fetchStats();
+    if (!supabase?.auth) {
+      console.warn('Supabase auth not available');
+      setIsAuthenticated(false);
+      return;
+    }
+    
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+      if (session) {
+        fetchStats();
+      }
+    } catch (err) {
+      console.error('Auth check error:', err);
+      setIsAuthenticated(false);
     }
   };
 
   const fetchStats = async () => {
+    if (!supabase) {
+      console.warn('Supabase not available');
+      return;
+    }
+
     try {
       const [gameRes, specRes, menuRes, emailSubRes, smsSubRes] = await Promise.all([
         supabase.from('game_calendar').select('id', { count: 'exact', head: true }),
@@ -64,6 +80,12 @@ export default function AdminDashboard() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!supabase?.auth) {
+      setError('Supabase is not configured. Please check environment variables.');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
@@ -84,7 +106,13 @@ export default function AdminDashboard() {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    if (supabase?.auth) {
+      try {
+        await supabase.auth.signOut();
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+    }
     setIsAuthenticated(false);
   };
 
@@ -94,6 +122,25 @@ export default function AdminDashboard() {
         <div className="login-card">
           <h1>JTAPS Admin</h1>
           <p className="login-subtitle">Business Management Dashboard</p>
+          
+          {!supabase?.auth && (
+            <div style={{
+              padding: '12px',
+              marginBottom: '16px',
+              backgroundColor: '#fee',
+              border: '1px solid #f99',
+              borderRadius: '4px',
+              fontSize: '14px',
+              color: '#c33'
+            }}>
+              ⚠️ <strong>Supabase Not Configured</strong><br />
+              Environment variables (PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY) are not set in Vercel.
+              <a href="https://vercel.com/dashboard" target="_blank" rel="noopener" style={{display: 'block', marginTop: '8px', color: '#c33', textDecoration: 'underline'}}>
+                Go to Vercel Settings →
+              </a>
+            </div>
+          )}
+          
           <form onSubmit={handleLogin}>
             <input
               type="email"
@@ -102,6 +149,7 @@ export default function AdminDashboard() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="form-input"
+              disabled={!supabase?.auth}
             />
             <input
               type="password"
@@ -110,8 +158,9 @@ export default function AdminDashboard() {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="form-input"
+              disabled={!supabase?.auth}
             />
-            <button type="submit" disabled={loading} className="form-button">
+            <button type="submit" disabled={loading || !supabase?.auth} className="form-button">
               {loading ? 'Logging in...' : 'Login'}
             </button>
             {error && <div className="error-message">{error}</div>}
