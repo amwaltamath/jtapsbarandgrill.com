@@ -9,16 +9,19 @@ import MenuManager from './admin/MenuManager';
 import AnalyticsDashboard from './admin/AnalyticsDashboard';
 import LoyaltyProgram from './admin/LoyaltyProgram';
 import PromoCodeManager from './admin/PromoCodeManager';
+import AdminUsersManager from './admin/AdminUsersManager';
 import EmailCampaignManager from './admin/EmailCampaignManager';
 import SMSCampaignManager from './admin/SMSCampaignManager';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState({
     games: 0,
@@ -36,18 +39,37 @@ export default function AdminDashboard() {
     if (!supabase?.auth) {
       console.warn('Supabase auth not available');
       setIsAuthenticated(false);
+      setIsAdmin(false);
+      setAuthChecked(true);
       return;
     }
-    
+
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      setIsAuthenticated(!!session);
+      const authenticated = Boolean(session);
+      setIsAuthenticated(authenticated);
+
       if (session) {
-        fetchStats();
+        const { data: adminRow } = await supabase
+          .from('admin_users')
+          .select('id')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+        const admin = Boolean(adminRow);
+        setIsAdmin(admin);
+        if (admin) {
+          fetchStats();
+        }
+      } else {
+        setIsAdmin(false);
       }
     } catch (err) {
       console.error('Auth check error:', err);
       setIsAuthenticated(false);
+      setIsAdmin(false);
+    } finally {
+      setAuthChecked(true);
     }
   };
 
@@ -80,7 +102,7 @@ export default function AdminDashboard() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!supabase?.auth) {
       setError('Supabase is not configured. Please check environment variables.');
       return;
@@ -89,20 +111,38 @@ export default function AdminDashboard() {
     setLoading(true);
     setError('');
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error: loginError } = await supabase.auth.signInWithPassword({
       email,
-      password,
+      password
     });
 
-    if (error) {
-      setError(error.message);
+    if (loginError) {
+      setError(loginError.message);
       setLoading(false);
       return;
     }
 
-    setIsAuthenticated(true);
+    const { data: { session } } = await supabase.auth.getSession();
+    const authenticated = Boolean(session);
+    setIsAuthenticated(authenticated);
+
+    if (session) {
+      const { data: adminRow } = await supabase
+        .from('admin_users')
+        .select('id')
+        .eq('user_id', session.user.id)
+        .maybeSingle();
+
+      const admin = Boolean(adminRow);
+      setIsAdmin(admin);
+      if (admin) {
+        fetchStats();
+      }
+    } else {
+      setIsAdmin(false);
+    }
+
     setLoading(false);
-    fetchStats();
   };
 
   const handleLogout = async () => {
@@ -114,7 +154,19 @@ export default function AdminDashboard() {
       }
     }
     setIsAuthenticated(false);
+    setIsAdmin(false);
   };
+
+  if (!authChecked) {
+    return (
+      <div className="admin-login">
+        <div className="login-card">
+          <h1>JTAPS Admin</h1>
+          <p className="login-subtitle">Checking access...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -122,7 +174,7 @@ export default function AdminDashboard() {
         <div className="login-card">
           <h1>JTAPS Admin</h1>
           <p className="login-subtitle">Business Management Dashboard</p>
-          
+
           {!supabase?.auth && (
             <div style={{
               padding: '12px',
@@ -140,7 +192,7 @@ export default function AdminDashboard() {
               </a>
             </div>
           )}
-          
+
           <form onSubmit={handleLogin}>
             <input
               type="email"
@@ -165,6 +217,18 @@ export default function AdminDashboard() {
             </button>
             {error && <div className="error-message">{error}</div>}
           </form>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="admin-login">
+        <div className="login-card">
+          <h1>JTAPS Admin</h1>
+          <p className="login-subtitle">You are signed in, but this account is not an admin.</p>
+          <button onClick={handleLogout} className="form-button">Logout</button>
         </div>
       </div>
     );
@@ -224,6 +288,12 @@ export default function AdminDashboard() {
           📈 Analytics
         </button>
         <button
+          className={`tab-button ${activeTab === 'users' ? 'active' : ''}`}
+          onClick={() => setActiveTab('users')}
+        >
+          👥 Users
+        </button>
+        <button
           className={`tab-button ${activeTab === 'email-campaigns' ? 'active' : ''}`}
           onClick={() => setActiveTab('email-campaigns')}
         >
@@ -280,6 +350,7 @@ export default function AdminDashboard() {
         {activeTab === 'loyalty' && <LoyaltyProgram />}
         {activeTab === 'promos' && <PromoCodeManager />}
         {activeTab === 'analytics' && <AnalyticsDashboard />}
+        {activeTab === 'users' && <AdminUsersManager />}
         {activeTab === 'email-campaigns' && <EmailCampaignManager />}
         {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
       </div>
