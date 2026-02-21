@@ -30,6 +30,8 @@ export default function EmailCampaignManager() {
   const [testEmail, setTestEmail] = useState('');
   const [importedCount, setImportedCount] = useState(0);
   const [duplicateCount, setDuplicateCount] = useState(0);
+  const [pageSize, setPageSize] = useState(100);
+  const [pageIndex, setPageIndex] = useState(0);
   
   const [formData, setFormData] = useState({
     subject: '',
@@ -40,6 +42,13 @@ export default function EmailCampaignManager() {
     fetchSubscribers();
     fetchCampaigns();
   }, []);
+
+  useEffect(() => {
+    const totalPages = Math.max(1, Math.ceil(subscribers.length / pageSize));
+    if (pageIndex >= totalPages) {
+      setPageIndex(totalPages - 1);
+    }
+  }, [subscribers.length, pageSize, pageIndex]);
 
   const fetchSubscribers = async () => {
     const { data, error } = await supabase
@@ -79,6 +88,11 @@ export default function EmailCampaignManager() {
     } else {
       setSelectedSubscribers([]);
     }
+  };
+
+  const selectRange = (startIndex: number, endIndex: number) => {
+    const rangeIds = subscribers.slice(startIndex, endIndex).map(s => s.id);
+    setSelectedSubscribers(rangeIds);
   };
 
   const handleSendTestEmail = async (e: React.FormEvent) => {
@@ -463,6 +477,11 @@ export default function EmailCampaignManager() {
     }
   };
 
+  const totalPages = Math.max(1, Math.ceil(subscribers.length / pageSize));
+  const pageStart = pageIndex * pageSize;
+  const pageEnd = Math.min(pageStart + pageSize, subscribers.length);
+  const pagedSubscribers = subscribers.slice(pageStart, pageEnd);
+
   return (
     <div className="campaign-manager">
       <h2>📧 Email Campaigns</h2>
@@ -593,13 +612,79 @@ contact@business.com,`}</code></pre>
               </label>
             </div>
 
+            <div className="form-group">
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>Send In Batches</label>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => {
+                    setPageIndex(0);
+                    selectRange(0, Math.min(pageSize, subscribers.length));
+                  }}
+                  disabled={subscribers.length === 0}
+                >
+                  Select First {pageSize}
+                </button>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => {
+                    const nextIndex = Math.min(pageIndex + 1, totalPages - 1);
+                    setPageIndex(nextIndex);
+                    const start = nextIndex * pageSize;
+                    selectRange(start, Math.min(start + pageSize, subscribers.length));
+                  }}
+                  disabled={subscribers.length === 0 || pageIndex >= totalPages - 1}
+                >
+                  Select Next {pageSize}
+                </button>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => {
+                    const prevIndex = Math.max(pageIndex - 1, 0);
+                    setPageIndex(prevIndex);
+                    const start = prevIndex * pageSize;
+                    selectRange(start, Math.min(start + pageSize, subscribers.length));
+                  }}
+                  disabled={subscribers.length === 0 || pageIndex === 0}
+                >
+                  Select Prev {pageSize}
+                </button>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => selectRange(pageStart, pageEnd)}
+                  disabled={subscribers.length === 0}
+                >
+                  Select This Page
+                </button>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  Page Size
+                  <input
+                    type="number"
+                    min={1}
+                    max={500}
+                    value={pageSize}
+                    onChange={(e) => setPageSize(Math.max(1, Number(e.target.value) || 1))}
+                    className="form-input"
+                    style={{ width: '90px', padding: '6px 8px' }}
+                  />
+                </label>
+                <span style={{ color: '#666', fontSize: '0.9rem' }}>
+                  Showing {subscribers.length === 0 ? 0 : pageStart + 1}-{pageEnd} of {subscribers.length}
+                </span>
+              </div>
+            </div>
+
             <div className="subscribers-list">
               <h4>Recipients ({selectedSubscribers.length} selected)</h4>
               <div className="subscribers-container">
-                {subscribers.length === 0 ? (
+                {pagedSubscribers.length === 0 ? (
                   <p className="empty-state">No email subscribers yet</p>
                 ) : (
-                  subscribers.map(subscriber => (
+                  pagedSubscribers.map(subscriber => (
                     <label key={subscriber.id} className="subscriber-item">
                       <input
                         type="checkbox"
