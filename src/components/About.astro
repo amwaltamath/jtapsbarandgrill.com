@@ -3,26 +3,33 @@
 ---
 
 <section class="about">
-  <div class="about-content">
-    <div class="rating">
-      <span class="stars">★★★★★</span>
-      <span class="score">10/10</span>
+  <div class="about-inner">
+    <div class="about-image reveal-on-scroll">
+      <img src="/images/6441-Glenway.jpg" alt="JTAPS Bar and Grill exterior on Glenway Avenue in Cincinnati" loading="lazy" width="600" height="450" />
+      <div class="about-image-accent"></div>
     </div>
-    
-    <h2>Family Owned, Since 2006</h2>
-    <p class="subtitle">FAMILY, FRIENDS & BEER</p>
-    
-    <div class="about-text">
-      <p>
-        With over 50 TV's, live sports betting, music and family fun, JTAPS is a great place to watch the game with the family.
-      </p>
-      <p>
-        JTAPS opened in 2006, and since then, we've remodeled our local bar from front to back. We even built a new outside seating area. Come in today and try one our season beers on tap.
-      </p>
-      <p class="signature">– JTAPS</p>
+    <div class="about-content reveal-on-scroll">
+      <span class="about-tag">OUR STORY</span>
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="score">10/10</span>
+      </div>
+      
+      <h2>Family Owned, Since 2006</h2>
+      <p class="subtitle">FAMILY, FRIENDS & BEER</p>
+      
+      <div class="about-text">
+        <p>
+          With over 50 TV's, live sports betting, music and family fun, JTAPS is a great place to watch the game with the family.
+        </p>
+        <p>
+          JTAPS opened in 2006, and since then, we've remodeled our local bar from front to back. We even built a new outside seating area. Come in today and try one of our seasonal beers on tap.
+        </p>
+        <p class="signature">– JTAPS</p>
+      </div>
+      
+      <a href="/contact" class="about-cta">Visit Us Today →</a>
     </div>
-    
-    <p class="tagline">GREAT LOCAL BAR AND GRILL</p>
   </div>
 </section>
 
@@ -30,20 +37,59 @@
   .about {
     background: var(--bg-light);
     padding: 6rem 2rem;
-    text-align: center;
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+    display: block;
+  }
+
+  .about-image-accent {
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--secondary-color);
+    border-radius: 14px;
+    z-index: -1;
   }
 
   .about-content {
-    max-width: 800px;
-    margin: 0 auto;
+    text-align: left;
+  }
+
+  .about-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
   }
 
   .rating {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .stars {
@@ -57,44 +103,79 @@
   }
 
   .about h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
     color: var(--primary-color);
+    letter-spacing: 1px;
+    line-height: 1.1;
   }
 
   .subtitle {
     color: var(--secondary-color);
     font-weight: bold;
     letter-spacing: 1px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
   }
 
   .about-text {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
   }
 
   .about-text p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.8;
     margin-bottom: 1rem;
+    color: #555;
   }
 
   .signature {
     font-style: italic;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    color: var(--primary-color) !important;
+    font-weight: 600;
   }
 
-  .tagline {
-    font-size: 1.2rem;
+  .about-cta {
+    display: inline-block;
+    margin-top: 1rem;
     color: var(--secondary-color);
-    font-weight: bold;
-    margin-top: 3rem;
-    letter-spacing: 2px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid var(--secondary-color);
+    padding: 0.7rem 2rem;
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
   }
 
-  @media (max-width: 1024px) {
+  .about-cta:hover {
+    background: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 900px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-content {
+      text-align: center;
+    }
+
+    .rating {
+      justify-content: center;
+    }
+
+    .about-image-accent { display: none; }
+  }
+
+  @media (max-width: 768px) {
     .about {
-      padding: 4rem 2rem;
+      padding: 4rem 1.5rem;
     }
 
     .about h2 {
@@ -102,7 +183,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 480px) {
     .about {
       padding: 3rem 1rem;
     }
@@ -111,36 +192,8 @@
       font-size: 1.8rem;
     }
 
-    .stars {
-      font-size: 1.3rem;
-    }
-
-    .score {
-      font-size: 1rem;
-    }
-
-    .about-text p {
-      font-size: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .about {
-      padding: 2rem 1rem;
-    }
-
-    .about h2 {
-      font-size: 1.5rem;
-    }
-
-    .rating {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
     .about-text p {
       font-size: 0.95rem;
-      line-height: 1.5;
     }
   }
 </style>

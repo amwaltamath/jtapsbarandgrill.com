@@ -8,7 +8,21 @@ import Layout from '../../layouts/Layout.astro';
   keywords="winterland bar cincinnati, seasonal bar decor, sports bar winter theme, jtaps bar and grill, cincinnati winter bar"
   ogImage="/images/Winterland.jpg"
 >
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jtapsbarandgrill.com/blog" },
+        { "@type": "ListItem", "position": 3, "name": "Winterland Bar", "item": "https://jtapsbarandgrill.com/blog/winterland-bar" }
+      ]
+    }
+  </script>
   <article class="blog-post">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> / <a href="/blog">Blog</a> / <span>Winterland Bar</span>
+    </nav>
     <header class="post-header">
       <h1>JTAPS Winterland Bar: Step Into the Season</h1>
       <div class="post-meta">
@@ -88,6 +102,21 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: #E13622;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
   .blog-post {
     max-width: 800px;
     margin: 0 auto;

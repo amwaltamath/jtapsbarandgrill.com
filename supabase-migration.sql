@@ -73,6 +73,45 @@ DROP POLICY IF EXISTS "Allow authenticated full access" ON email_campaigns;
 CREATE POLICY "Allow authenticated full access" ON email_campaigns
   FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
+-- Admin Users
+CREATE TABLE IF NOT EXISTS admin_users (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID UNIQUE NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT,
+  role TEXT DEFAULT 'admin',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_users_user_id ON admin_users(user_id);
+
+ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Users can view own admin status" ON admin_users;
+CREATE POLICY "Users can view own admin status" ON admin_users
+  FOR SELECT TO authenticated USING (auth.uid() = user_id);
+
+-- Email Campaign Progress
+CREATE TABLE IF NOT EXISTS email_campaign_progress (
+  id BIGSERIAL PRIMARY KEY,
+  campaign_key TEXT UNIQUE NOT NULL,
+  campaign_id BIGINT REFERENCES email_campaigns(id) ON DELETE SET NULL,
+  batch_size INT DEFAULT 100,
+  next_offset INT DEFAULT 0,
+  total_recipients INT DEFAULT 0,
+  last_sent_at TIMESTAMP WITH TIME ZONE,
+  completed_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_email_campaign_progress_key ON email_campaign_progress(campaign_key);
+
+ALTER TABLE email_campaign_progress ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow authenticated full access" ON email_campaign_progress;
+CREATE POLICY "Allow authenticated full access" ON email_campaign_progress
+  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
 -- SMS Campaigns
 CREATE TABLE IF NOT EXISTS sms_campaigns (
   id BIGSERIAL PRIMARY KEY,
@@ -298,4 +337,46 @@ CREATE POLICY "Users can insert own profile" ON customer_profiles
 -- Ensure phone column exists (safe for existing tables)
 ALTER TABLE customer_profiles
   ADD COLUMN IF NOT EXISTS phone TEXT;
+
+-- ========== PHASE 6: CUSTOMER CHECK-INS ==========
+
+-- Check-In Records
+CREATE TABLE IF NOT EXISTS customer_checkins (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  points_awarded INT DEFAULT 10,
+  checked_in_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION,
+  method TEXT DEFAULT 'manual'  -- 'manual', 'geo', 'qr'
+);
+
+CREATE INDEX IF NOT EXISTS idx_checkins_user_id ON customer_checkins(user_id);
+CREATE INDEX IF NOT EXISTS idx_checkins_date ON customer_checkins(checked_in_at);
+
+ALTER TABLE customer_checkins ENABLE ROW LEVEL SECURITY;
+
+-- Customers can view their own check-ins
+DROP POLICY IF EXISTS "Users can view own checkins" ON customer_checkins;
+CREATE POLICY "Users can view own checkins" ON customer_checkins
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- Customers can insert their own check-ins
+DROP POLICY IF EXISTS "Users can insert own checkins" ON customer_checkins;
+CREATE POLICY "Users can insert own checkins" ON customer_checkins
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Admins can view all check-ins (via service role key, bypasses RLS)
+
+-- Add check-in points and streak tracking to customer profiles
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS checkin_points INT DEFAULT 0;
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS total_checkins INT DEFAULT 0;
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS current_streak INT DEFAULT 0;
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS longest_streak INT DEFAULT 0;
+ALTER TABLE customer_profiles
+  ADD COLUMN IF NOT EXISTS last_checkin_date DATE;
 

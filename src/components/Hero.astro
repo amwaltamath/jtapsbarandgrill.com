@@ -6,8 +6,13 @@
   <div class="hero-content">
     <h1>JTAPS<br /><span>BAR AND GRILL</span></h1>
     <p class="hero-tagline">
-      Whether You're Here For The Big Game, A Casual Night Out, Or To Dig Into The Best Gyros And Wings In Town With A Cold Beer In Hand, Jtaps Bar And Grill Has You Covered. Swing By And Experience The Ultimate Sports Bar Vibe—Where Great Food, Epic Games, And Good Times Collide!
+      Cincinnati's favorite spot for game day. Famous Pete's Sauce wings, hand-carved gyros, ice-cold beer, and 50+ TVs. Come taste why locals call us the best wings in Cincinnati — where great food, epic games, and good times collide.
     </p>
+    <div class="hero-badges">
+      <span class="hero-badge">★ Voted Best Wings in Cincinnati</span>
+      <span class="hero-badge">★ 50+ HD TVs</span>
+      <span class="hero-badge">★ Since 2006</span>
+    </div>
     <div class="cta-group">
       <a href="https://togoorder.com/web/3136#/" target="_blank" class="cta-button">ORDER NOW</a>
       <a
@@ -23,8 +28,6 @@
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&display=swap');
-
   .hero {
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/6441-Glenway.jpg') center/cover;
     min-height: 70vh;
@@ -60,9 +63,28 @@
 
   .hero-tagline {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.8;
     font-weight: 500;
+  }
+
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge {
+    background: rgba(225, 54, 34, 0.9);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
   }
 
   .cta-button {

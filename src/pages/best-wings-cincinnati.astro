@@ -1,0 +1,742 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Best Wings in Cincinnati | JTAPS Bar and Grill - Pete's Famous Sauce"
+  description="Looking for the best wings in Cincinnati? JTAPS Bar and Grill has served legendary Pete's Sauce wings since 2006. Crispy, saucy, unforgettable. Visit 6441 Glenway Ave or order online!"
+  keywords="best wings cincinnati, best chicken wings cincinnati, wings near me cincinnati, pete's sauce, famous wings cincinnati, cincinnati wing restaurant, best wings in ohio, sports bar wings cincinnati"
+  ogImage="/images/Cincinnati Wings.jpg"
+>
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Best Wings Cincinnati", "item": "https://jtapsbarandgrill.com/best-wings-cincinnati" }
+      ]
+    }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where can I get the best wings in Cincinnati?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JTAPS Bar and Grill at 6441 Glenway Ave has been voted the best wings in Cincinnati. Our famous Pete's Sauce wings are crispy, saucy, and legendary. We've been serving Cincinnati's favorite wings since 2006."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Pete's Sauce at JTAPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pete's Sauce is JTAPS Bar and Grill's signature wing sauce — a closely guarded recipe that perfectly balances heat, sweetness, tanginess, and complex spices. It's the #1 reason people call our wings the best in Cincinnati."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What wing flavors does JTAPS offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JTAPS offers seven wing flavors: Pete's Famous Sauce (our signature), Buffalo, BBQ, Honey BBQ, Garlic Parmesan, Teriyaki, and Dry Rub. All sauces are made fresh in-house."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I order JTAPS wings for delivery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! You can order JTAPS wings for delivery or takeout through our online ordering system at togoorder.com, or call us at (513) 574-9777. We also offer catering for events and parties."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes JTAPS wings different from other Cincinnati wing restaurants?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JTAPS uses premium fresh chicken (never frozen for months), precise frying techniques for the perfect crispy-outside juicy-inside texture, and our legendary Pete's Sauce recipe perfected over nearly 20 years. Combined with 50+ TVs and an electric sports bar atmosphere, it's an experience no other wing spot in Cincinnati can match."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <!-- MenuItem Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Menu",
+      "name": "JTAPS Wings Menu",
+      "hasMenuSection": {
+        "@type": "MenuSection",
+        "name": "Famous Wings",
+        "hasMenuItem": [
+          { "@type": "MenuItem", "name": "Pete's Sauce Wings", "description": "Our legendary signature sauce — the perfect balance of heat, sweetness, tanginess, and depth" },
+          { "@type": "MenuItem", "name": "Buffalo Wings", "description": "Classic bold buffalo sauce on crispy fried wings" },
+          { "@type": "MenuItem", "name": "BBQ Wings", "description": "Sweet, smoky BBQ sauce on perfectly fried chicken wings" },
+          { "@type": "MenuItem", "name": "Honey BBQ Wings", "description": "Sticky-sweet honey BBQ glaze on crispy wings" },
+          { "@type": "MenuItem", "name": "Garlic Parmesan Wings", "description": "Creamy, garlicky parmesan sauce on golden wings" },
+          { "@type": "MenuItem", "name": "Teriyaki Wings", "description": "Sweet and savory Asian-inspired teriyaki glaze" },
+          { "@type": "MenuItem", "name": "Dry Rub Wings", "description": "Bold seasoning blend on extra-crispy wings, no sauce" }
+        ]
+      }
+    }
+  </script>
+
+  <div class="wings-page">
+    <!-- Hero Section -->
+    <section class="wings-hero">
+      <div class="wings-hero-content">
+        <span class="wings-badge">🏆 Cincinnati's #1 Wings</span>
+        <h1>Best Wings in Cincinnati</h1>
+        <p class="wings-hero-sub">Since 2006, JTAPS Bar and Grill has served the most legendary wings in Cincinnati. Crispy on the outside, juicy on the inside, and tossed in our famous Pete's Sauce — there's a reason locals keep coming back.</p>
+        <div class="wings-hero-cta">
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="btn-primary">Order Wings Now</a>
+          <a href="/menu" class="btn-secondary">See Full Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Bar -->
+    <section class="wings-proof">
+      <div class="proof-container">
+        <div class="proof-item">
+          <span class="proof-number">4.7★</span>
+          <span class="proof-label">Google Rating</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-number">850+</span>
+          <span class="proof-label">Reviews</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-number">19+</span>
+          <span class="proof-label">Years Serving</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-number">7</span>
+          <span class="proof-label">Wing Flavors</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Wings Image -->
+    <section class="wings-showcase reveal-on-scroll">
+      <div class="showcase-container">
+        <div class="showcase-image">
+          <img src="/images/Cincinnati Wings.jpg" alt="Best wings in Cincinnati — Pete's Famous Sauce wings at JTAPS Bar and Grill" width="700" height="500" loading="lazy" />
+        </div>
+        <div class="showcase-text">
+          <h2>The Legend: Pete's Famous Sauce</h2>
+          <p>Ask any regular what makes JTAPS wings special, and they'll tell you one word: <strong>Pete's Sauce</strong>. This closely guarded recipe delivers the perfect balance of heat, sweetness, tanginess, and complex depth.</p>
+          <p>Every wing gets generously coated — no wimpy dipping cups here. Each wing is fully enveloped in Pete's Sauce perfection. It's the reason people leave with their fingers licked clean and keep coming back for more.</p>
+          <a href="/blog/why-our-wings-are-the-best" class="btn-text">Read the full story →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- All Wing Flavors -->
+    <section class="wings-flavors">
+      <h2 class="section-title reveal-on-scroll">7 Wing Flavors, All Legendary</h2>
+      <p class="section-subtitle reveal-on-scroll">Every sauce made fresh in-house. Every wing fried to crispy perfection.</p>
+      <div class="flavors-grid">
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🔥</span>
+          <h3>Pete's Sauce</h3>
+          <span class="flavor-tag">★ Signature</span>
+          <p>The legend. Heat, flavor, and that perfect balance. The #1 reason Cincinnati calls JTAPS the best.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🌶️</span>
+          <h3>Buffalo</h3>
+          <p>Traditional bold buffalo — straightforward, classic, and satisfying for purists.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🍖</span>
+          <h3>BBQ</h3>
+          <p>Sweet, smoky, and perfectly charred. A mellower experience that doesn't sacrifice flavor.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🍯</span>
+          <h3>Honey BBQ</h3>
+          <p>Sticky-sweet goodness that takes BBQ to the next level. A fan favorite.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🧄</span>
+          <h3>Garlic Parmesan</h3>
+          <p>Creamy, garlicky, and absolutely addictive. For the adventurous wing lover.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">🥢</span>
+          <h3>Teriyaki</h3>
+          <p>Sweet and savory with an Asian-inspired twist. A refreshing change of pace.</p>
+        </div>
+        <div class="flavor-card reveal-on-scroll">
+          <span class="flavor-icon">✨</span>
+          <h3>Dry Rub</h3>
+          <p>Bold seasoning, extra-crispy, no sauce. Pure spiced perfection for those who like it dry.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why We're #1 -->
+    <section class="wings-why reveal-on-scroll">
+      <div class="why-container">
+        <h2>Why Cincinnati Calls JTAPS the Best</h2>
+        <div class="why-grid">
+          <div class="why-card">
+            <h3>🐔 Premium Chicken</h3>
+            <p>We source fresh, premium chicken wings from trusted suppliers. No freezer-burned, low-quality shortcuts — ever.</p>
+          </div>
+          <div class="why-card">
+            <h3>🎯 Precision Frying</h3>
+            <p>Exact oil temperature, proper timing, patted dry before frying — our process delivers crispy outside, juicy inside perfection.</p>
+          </div>
+          <div class="why-card">
+            <h3>🔥 Fresh Sauces</h3>
+            <p>All seven sauces are made fresh in-house. No frozen, pre-packaged wing sauces in our kitchen. Period.</p>
+          </div>
+          <div class="why-card">
+            <h3>📺 The Atmosphere</h3>
+            <p>50+ HD TVs, passionate fans, cold beer, and nearly 20 years of game-day energy. Wings taste better here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="wings-reviews">
+      <h2 class="section-title reveal-on-scroll">What Cincinnati Says About Our Wings</h2>
+      <div class="reviews-grid">
+        <blockquote class="review-card reveal-on-scroll">
+          <div class="review-stars">★★★★★</div>
+          <p>"Best wings in Cincinnati, hands down. Pete's Sauce is absolutely legendary. Been coming here for years and they never disappoint."</p>
+          <cite>— Marcus T.</cite>
+        </blockquote>
+        <blockquote class="review-card reveal-on-scroll">
+          <div class="review-stars">★★★★★</div>
+          <p>"Crispy on the outside, juicy on the inside. Every single time. I've been coming for 10 years and they're still the best wings in the city."</p>
+          <cite>— Robert M.</cite>
+        </blockquote>
+        <blockquote class="review-card reveal-on-scroll">
+          <div class="review-stars">★★★★★</div>
+          <p>"Ordered wings for a work event and they were gone in minutes. The variety of sauces is incredible. Game day at JTAPS is a Cincinnati tradition."</p>
+          <cite>— Amanda C.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ Section (visible to users too) -->
+    <section class="wings-faq">
+      <h2 class="section-title reveal-on-scroll">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <details class="faq-item reveal-on-scroll">
+          <summary>Where can I get the best wings in Cincinnati?</summary>
+          <p>JTAPS Bar and Grill at 6441 Glenway Ave has been voted the best wings in Cincinnati. Our famous Pete's Sauce wings are crispy, saucy, and legendary. We've been serving Cincinnati's favorite wings since 2006.</p>
+        </details>
+        <details class="faq-item reveal-on-scroll">
+          <summary>What is Pete's Sauce at JTAPS?</summary>
+          <p>Pete's Sauce is our signature wing sauce — a closely guarded recipe that perfectly balances heat, sweetness, tanginess, and complex spices. It's the #1 reason people call our wings the best in Cincinnati.</p>
+        </details>
+        <details class="faq-item reveal-on-scroll">
+          <summary>What wing flavors does JTAPS offer?</summary>
+          <p>We offer seven wing flavors: Pete's Famous Sauce (our signature), Buffalo, BBQ, Honey BBQ, Garlic Parmesan, Teriyaki, and Dry Rub. All sauces are made fresh in-house daily.</p>
+        </details>
+        <details class="faq-item reveal-on-scroll">
+          <summary>Can I order JTAPS wings for delivery?</summary>
+          <p>Yes! Order online through our website, or call (513) 574-9777 for takeout. We also cater for events and parties — our wings are always a hit!</p>
+        </details>
+        <details class="faq-item reveal-on-scroll">
+          <summary>What makes JTAPS wings different from other Cincinnati wing restaurants?</summary>
+          <p>Premium fresh chicken, precise frying techniques, our legendary Pete's Sauce perfected over nearly 20 years, and an unmatched sports bar atmosphere with 50+ TVs. It's the total experience.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="wings-cta">
+      <div class="cta-content reveal-on-scroll">
+        <h2>Ready to Taste the Best Wings in Cincinnati?</h2>
+        <p>Join us at JTAPS Bar and Grill — where legendary wings, cold beer, and 50+ TVs create the ultimate game-day experience.</p>
+        <div class="cta-actions">
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="btn-primary">Order Online Now</a>
+          <a href="tel:+15135749777" class="btn-secondary">Call (513) 574-9777</a>
+        </div>
+        <p class="cta-address">📍 6441 Glenway Ave, Cincinnati, OH 45211</p>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .wings-page {
+    background: var(--bg-light);
+  }
+
+  /* Hero */
+  .wings-hero {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/Cincinnati Wings.jpg') center/cover;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 6rem 2rem;
+  }
+
+  .wings-hero-content {
+    max-width: 800px;
+  }
+
+  .wings-badge {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .wings-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+
+  .wings-hero-sub {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .wings-hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(225, 54, 34, 0.4);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background: #fff;
+    color: var(--primary-color);
+  }
+
+  .btn-text {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.3s;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .btn-text:hover {
+    transform: translateX(4px);
+  }
+
+  /* Proof Bar */
+  .wings-proof {
+    background: var(--primary-color);
+    padding: 2rem 1rem;
+    border-bottom: 3px solid var(--secondary-color);
+  }
+
+  .proof-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .proof-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--secondary-color);
+  }
+
+  .proof-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.25rem;
+  }
+
+  /* Showcase */
+  .wings-showcase {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .showcase-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .showcase-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .showcase-text h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .showcase-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+  }
+
+  .showcase-text strong {
+    color: var(--secondary-color);
+  }
+
+  /* Flavors */
+  .wings-flavors {
+    background: #fff;
+    padding: 5rem 2rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+  }
+
+  .flavors-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .flavor-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .flavor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+
+  .flavor-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .flavor-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .flavor-tag {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 0.2rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .flavor-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Why Section */
+  .wings-why {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 5rem 2rem;
+  }
+
+  .why-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .wings-why h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--secondary-color);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .why-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+
+  .why-card p {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.7;
+  }
+
+  /* Reviews */
+  .wings-reviews {
+    padding: 5rem 2rem;
+    background: #fff;
+  }
+
+  .reviews-grid {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .review-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary-color);
+    margin: 0;
+  }
+
+  .review-stars {
+    color: #ffc107;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .review-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .review-card cite {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--secondary-color);
+  }
+
+  /* FAQ */
+  .wings-faq {
+    padding: 5rem 2rem;
+    background: var(--bg-light);
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 2rem auto 0;
+  }
+
+  .faq-item {
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    transition: transform 0.3s;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item p {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  /* CTA */
+  .wings-cta {
+    background: linear-gradient(135deg, #1a1a1a 0%, #E13622 100%);
+    color: #fff;
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .wings-cta h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .wings-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.7;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-address {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .wings-hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .wings-hero-sub {
+      font-size: 1rem;
+    }
+
+    .proof-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .showcase-container {
+      grid-template-columns: 1fr;
+    }
+
+    .wings-cta h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wings-hero {
+      min-height: 60vh;
+      padding: 4rem 1rem;
+    }
+
+    .wings-hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .proof-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

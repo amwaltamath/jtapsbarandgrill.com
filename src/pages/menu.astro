@@ -14,13 +14,26 @@ import Layout from '../layouts/Layout.astro';
       <p class="subtitle">CINCINNATI'S BEST WINGS, GYROS & MORE</p>
     </section>
 
+    <!-- Sticky Category Nav -->
+    <nav class="menu-nav" id="menuNav">
+      <div class="menu-nav-inner">
+        <a href="#wings" class="menu-nav-link active">🔥 Wings</a>
+        <a href="#gyros" class="menu-nav-link">🥙 Gyros</a>
+        <a href="#burgers" class="menu-nav-link">🍔 Burgers</a>
+        <a href="#sandwiches" class="menu-nav-link">🥪 Sandwiches</a>
+        <a href="#salads" class="menu-nav-link">🥗 Salads</a>
+        <a href="#sides" class="menu-nav-link">🍟 Sides</a>
+      </div>
+    </nav>
+
     <section class="menu-section">
-      <div class="menu-category">
+      <div class="menu-category" id="wings">
         <h2>🔥 Famous Wings</h2>
         <p class="category-desc">Voted Best Wings in Cincinnati - Try our Famous Pete's Sauce!</p>
         <div class="menu-items">
-          <div class="menu-item">
-            <img src="/images/menuitems/wings3.jpg" alt="Chicken Wings" class="menu-image" />
+          <div class="menu-item popular-item">
+            <span class="popular-badge">⭐ Most Popular</span>
+            <img src="/images/menuitems/wings3.jpg" alt="Best wings in Cincinnati with Pete's Famous Sauce at JTAPS Bar and Grill" class="menu-image" width="600" height="350" loading="lazy" />
             <div class="item-header">
               <h3>Chicken Wings</h3>
             </div>
@@ -28,14 +41,15 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
         </div>
+        <p class="category-link">🏆 <a href="/best-wings-cincinnati">Discover why we're voted #1 wings in Cincinnati →</a></p>
       </div>
 
-      <div class="menu-category">
+      <div class="menu-category" id="gyros">
         <h2>🥙 Amazing Gyros</h2>
         <p class="category-desc">Best Gyros in Cincinnati - Hand-Carved Greek Street Food</p>
         <div class="menu-items">
           <div class="menu-item">
-            <img src="/images/menuitems/gyrolamb.jpg" alt="Traditional Gyro" class="menu-image" />
+            <img src="/images/menuitems/gyrolamb.jpg" alt="Hand-carved lamb and beef gyro at JTAPS Cincinnati" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Traditional Gyro</h3>
             </div>
@@ -43,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/gyrochicken.jpg" alt="Chicken Gyro" class="menu-image" />
+            <img src="/images/menuitems/gyrochicken.jpg" alt="Grilled chicken gyro with tzatziki at JTAPS Bar and Grill" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Chicken Gyro</h3>
             </div>
@@ -53,12 +67,12 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="menu-category">
+      <div class="menu-category" id="burgers">
         <h2>🍔 Juicy Burgers</h2>
         <p class="category-desc">The Juiciest Burgers in Cincinnati</p>
         <div class="menu-items">
           <div class="menu-item">
-            <img src="/images/menuitems/burger.jpg" alt="Classic Cheeseburger" class="menu-image" />
+            <img src="/images/menuitems/burger.jpg" alt="Half-pound Angus cheeseburger at JTAPS sports bar Cincinnati" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Classic Cheeseburger</h3>
             </div>
@@ -66,7 +80,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/gryomelt.jpg" alt="Gyro Melt" class="menu-image" />
+            <img src="/images/menuitems/gryomelt.jpg" alt="Gyro melt with feta cheese at JTAPS Bar and Grill" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Gyro Melt</h3>
             </div>
@@ -76,12 +90,12 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="menu-category">
+      <div class="menu-category" id="sandwiches">
         <h2>🥪 Massive Sandwiches</h2>
         <p class="category-desc">Handheld Monuments - Not Your Average Sandwiches</p>
         <div class="menu-items">
           <div class="menu-item">
-            <img src="/images/menuitems/crispychickensandwich.jpg" alt="Crispy Chicken Sandwich" class="menu-image" />
+            <img src="/images/menuitems/crispychickensandwich.jpg" alt="Crispy buffalo chicken sandwich at JTAPS Cincinnati" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Crispy Chicken Sandwich</h3>
             </div>
@@ -89,7 +103,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/doubledecker2.jpg" alt="Classic Double Decker" class="menu-image" />
+            <img src="/images/menuitems/doubledecker2.jpg" alt="Classic Double Decker" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Classic Double Decker</h3>
             </div>
@@ -99,20 +113,20 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="menu-category">
+      <div class="menu-category" id="salads">
         <h2>🥗 Massive Salads</h2>
         <p class="category-desc">Built Like Entrees - Premium Proteins & House-Made Dressings</p>
         <div class="menu-items">
           <div class="menu-item">
-            <img src="/images/menuitems/gyrosalad.jpg" alt="Gyro Salad" class="menu-image" />
+            <img src="/images/menuitems/gyrosalad.jpg" alt="Buffalo wing salad at JTAPS sports bar Cincinnati" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
-              <h3>Buffilo Wing Salad</h3>
+              <h3>Buffalo Wing Salad</h3>
             </div>
             <p>Fresh greens, wings and wing sauce, cheese in a massive proportion</p>
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/gyrosaladlamb3.jpg" alt="Greek Salad" class="menu-image" />
+            <img src="/images/menuitems/gyrosaladlamb3.jpg" alt="Greek Salad" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Gyro Salad</h3>
             </div>
@@ -122,12 +136,12 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="menu-category">
+      <div class="menu-category" id="sides">
         <h2>🍟 Sides & More</h2>
         <p class="category-desc">Best Chips in Cincy - House-Fried Saratoga Chips & More</p>
         <div class="menu-items">
           <div class="menu-item">
-            <img src="/images/menuitems/saratogachips.jpg" alt="Saratoga Chips" class="menu-image" />
+            <img src="/images/menuitems/saratogachips.jpg" alt="Saratoga Chips" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Saratoga Chips</h3>
             </div>
@@ -135,7 +149,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/steakfries.jpg" alt="Steak Fries" class="menu-image" />
+            <img src="/images/menuitems/steakfries.jpg" alt="Steak Fries" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Steak Fries</h3>
             </div>
@@ -143,7 +157,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/onionrings.jpg" alt="Onion Rings" class="menu-image" />
+            <img src="/images/menuitems/onionrings.jpg" alt="Onion Rings" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Onion Rings</h3>
             </div>
@@ -151,7 +165,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/greekdip.jpg" alt="Greek Dip" class="menu-image" />
+            <img src="/images/menuitems/greekdip.jpg" alt="Greek Dip" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Greek Dip</h3>
             </div>
@@ -159,7 +173,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/cheesesticks.jpg" alt="Cheese Sticks" class="menu-image" />
+            <img src="/images/menuitems/cheesesticks.jpg" alt="Cheese Sticks" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Cheese Sticks</h3>
             </div>
@@ -167,7 +181,7 @@ import Layout from '../layouts/Layout.astro';
             <a href="https://togoorder.com/web/3136#/" target="_blank" class="order-now-btn">Order Now</a>
           </div>
           <div class="menu-item">
-            <img src="/images/menuitems/potatoskins2.jpg" alt="Potato Skins" class="menu-image" />
+            <img src="/images/menuitems/potatoskins2.jpg" alt="Potato Skins" class="menu-image" width="600" height="250" loading="lazy" />
             <div class="item-header">
               <h3>Potato Skins</h3>
             </div>
@@ -189,6 +203,83 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .menu-page {
     background: var(--bg-light);
+  }
+
+  /* Sticky Category Nav */
+  .menu-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .menu-nav-inner {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
+
+  .menu-nav-link {
+    color: #ccc;
+    text-decoration: none;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+  }
+
+  .menu-nav-link:hover,
+  .menu-nav-link.active {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+  }
+
+  /* Popular Item Badge */
+  .popular-item {
+    position: relative;
+    border: 2px solid var(--secondary-color);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 0.3rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  /* Category internal link */
+  .category-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .category-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+
+  .category-link a:hover {
+    transform: translateX(4px);
   }
 
   .menu-hero {
@@ -404,3 +495,37 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 </style>
+
+<script>
+  // Scroll-spy for sticky menu nav
+  const sections = document.querySelectorAll('.menu-category');
+  const navLinks = document.querySelectorAll('.menu-nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.menu-nav-link[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+
+  sections.forEach(section => { if (section.id) observer.observe(section); });
+
+  // Smooth scroll for nav links
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href')?.slice(1);
+      if (targetId) {
+        const target = document.getElementById(targetId);
+        if (target) {
+          const navHeight = document.getElementById('menuNav')?.offsetHeight || 0;
+          const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 10;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>

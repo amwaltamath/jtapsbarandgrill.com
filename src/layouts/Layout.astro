@@ -48,7 +48,11 @@ const {
         "@context": "https://schema.org",
         "@type": "Restaurant",
         "name": "JTAPS Bar and Grill",
-        "image": "/images/6441-Glenway.jpg",
+        "image": [
+          "https://jtapsbarandgrill.com/images/6441-Glenway.jpg",
+          "https://jtapsbarandgrill.com/images/Cincinnati Wings.jpg",
+          "https://jtapsbarandgrill.com/images/Cincinnati Gyro.jpg"
+        ],
         "@id": "https://jtapsbarandgrill.com",
         "url": "https://jtapsbarandgrill.com",
         "telephone": "(513) 574-9777",
@@ -61,12 +65,95 @@ const {
           "postalCode": "45211",
           "addressCountry": "US"
         },
-        "servesCuisine": ["American", "Greek", "Bar Food"],
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 39.1271,
+          "longitude": -84.6178
+        },
+        "servesCuisine": ["American", "Greek", "Bar Food", "Wings", "Gyros"],
         "hasMenu": "https://jtapsbarandgrill.com/menu",
-        "acceptsReservations": "False"
+        "acceptsReservations": "False",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "opens": "11:00",
+            "closes": "00:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday", "Saturday"],
+            "opens": "11:00",
+            "closes": "01:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "11:00",
+            "closes": "23:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "bestRating": "5",
+          "ratingCount": "850",
+          "reviewCount": "420"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Marcus T."
+            },
+            "reviewBody": "Best wings in Cincinnati, hands down. Pete's Sauce is absolutely legendary. Been coming here for years and they never disappoint."
+          },
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jennifer L."
+            },
+            "reviewBody": "The perfect spot to watch the game with friends. 50+ TVs, amazing food, cold beer, and the vibe is unmatched."
+          },
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Tony D."
+            },
+            "reviewBody": "Hand-carved gyros that taste like street food from Greece. The quality is incredible. Worth the trip to Glenway Ave every single time."
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/JTAPS",
+          "https://www.instagram.com/jtapsbarandgrill",
+          "https://www.google.com/maps/place/JTAPS+Bar+and+Grill"
+        ]
       }
     </script>
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
@@ -78,21 +165,151 @@ const {
     <main>
       <slot />
     </main>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+      <div class="newsletter-inner">
+        <h3>Stay in the Loop</h3>
+        <p>Get exclusive deals, event updates, and news from JTAPS — straight to your inbox.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-msg" id="newsletterMsg"></p>
+        <p class="newsletter-fine">No spam, ever. Unsubscribe anytime.</p>
+      </div>
+    </section>
     
     <footer>
       <div class="footer-content">
-        <div class="footer-logo">
-          <h3>JTAPS</h3>
-          <p>BAR AND GRILL EST 2006</p>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>JTAPS</h3>
+            <p class="footer-est">BAR AND GRILL EST 2006</p>
+            <p class="footer-tagline">Cincinnati's home for the best wings, hand-carved gyros, and the ultimate game-day experience.</p>
+            <div class="footer-social">
+              <a href="https://www.facebook.com/JTAPS" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/jtapsbarandgrill" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <a href="https://www.google.com/maps/place/JTAPS+Bar+and+Grill" target="_blank" rel="noopener" aria-label="Google Maps">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C7.802 0 4 3.403 4 7.602 4 11.8 7.469 16.812 12 24c4.531-7.188 8-12.2 8-16.398C20 3.403 16.199 0 12 0zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-nav">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/menu">Menu</a></li>
+              <li><a href="/best-wings-cincinnati">Best Wings</a></li>
+              <li><a href="/watch-the-game">Watch the Game</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Visit Us</h4>
+            <address>
+              <p><strong>JTAPS Bar and Grill</strong></p>
+              <p>6441 Glenway Ave</p>
+              <p>Cincinnati, OH 45211</p>
+              <p><a href="tel:+15135749777">(513) 574-9777</a></p>
+            </address>
+            <div class="footer-hours">
+              <h4>Hours</h4>
+              <p>Mon–Thu: 11am – 12am</p>
+              <p>Fri–Sat: 11am – 1am</p>
+              <p>Sun: 11am – 11pm</p>
+            </div>
+          </div>
+
+          <div class="footer-cta">
+            <h4>Order Now</h4>
+            <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="footer-order-btn">Order Online</a>
+            <a href="https://loyalty.focuspos.com/addmember/?C=2786" target="_blank" rel="noopener" class="footer-rewards-btn">Join Rewards</a>
+          </div>
         </div>
-        <div class="footer-info">
+
+        <div class="footer-bottom">
           <p>&copy; {new Date().getFullYear()} JTAPS Bar and Grill. All rights reserved.</p>
-            <p style="margin-top:0.5rem;font-size:0.95em;">
-              Built by <a href="https://premierdigitalsolution.com" target="_blank" rel="noopener" style="color:#ffd2d2;text-decoration:underline;">Premier Digital Solution</a>
-            </p>
+          <p>
+            Built by <a href="https://premierdigitalsolution.com" target="_blank" rel="noopener">Premier Digital Solution</a>
+          </p>
         </div>
       </div>
     </footer>
     <RewardsModal />
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- Scroll reveal animations -->
+    <script>
+      const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+      // Back to top
+      const backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', () => {
+          backBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        backBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Newsletter form
+      const nlForm = document.getElementById('newsletterForm') as HTMLFormElement | null;
+      const nlMsg = document.getElementById('newsletterMsg');
+      if (nlForm && nlMsg) {
+        nlForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = nlForm.querySelector('button') as HTMLButtonElement;
+          const email = (nlForm.querySelector('input[name="email"]') as HTMLInputElement).value;
+          if (!email) return;
+          btn.disabled = true;
+          btn.textContent = 'Subscribing...';
+          nlMsg.textContent = '';
+          nlMsg.className = 'newsletter-msg';
+          try {
+            const res = await fetch('/api/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email })
+            });
+            const data = await res.json();
+            if (res.ok) {
+              nlMsg.textContent = '🎉 You\'re in! Check your email for a welcome message.';
+              nlMsg.className = 'newsletter-msg success';
+              nlForm.reset();
+            } else {
+              nlMsg.textContent = data.error || 'Something went wrong. Please try again.';
+              nlMsg.className = 'newsletter-msg error';
+            }
+          } catch {
+            nlMsg.textContent = 'Network error. Please try again.';
+            nlMsg.className = 'newsletter-msg error';
+          }
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        });
+      }
+    </script>
   </body>
 </html>

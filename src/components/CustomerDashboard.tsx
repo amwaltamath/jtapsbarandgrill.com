@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import CheckIn from './CheckIn';
 import '../styles/customer-dashboard.css';
 
 interface Game {
@@ -37,7 +38,7 @@ export default function CustomerDashboard() {
   const [specials, setSpecials] = useState<Special[]>([]);
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'games' | 'specials'>('games');
+  const [activeTab, setActiveTab] = useState<'checkin' | 'games' | 'specials'>('checkin');
 
   useEffect(() => {
     checkAuth();
@@ -177,6 +178,12 @@ export default function CustomerDashboard() {
 
       <div className="dashboard-nav">
         <button
+          className={`nav-tab ${activeTab === 'checkin' ? 'active' : ''}`}
+          onClick={() => setActiveTab('checkin')}
+        >
+          📍 Check In
+        </button>
+        <button
           className={`nav-tab ${activeTab === 'games' ? 'active' : ''}`}
           onClick={() => setActiveTab('games')}
         >
@@ -191,6 +198,12 @@ export default function CustomerDashboard() {
       </div>
 
       <div className="dashboard-content">
+        {activeTab === 'checkin' && (
+          <div className="content-section">
+            <CheckIn />
+          </div>
+        )}
+
         {activeTab === 'games' && (
           <div className="content-section">
             <h2>Upcoming Games</h2>

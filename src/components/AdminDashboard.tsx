@@ -12,6 +12,41 @@ import PromoCodeManager from './admin/PromoCodeManager';
 import AdminUsersManager from './admin/AdminUsersManager';
 import EmailCampaignManager from './admin/EmailCampaignManager';
 import SMSCampaignManager from './admin/SMSCampaignManager';
+import CheckInManager from './admin/CheckInManager';
+
+const NAV_SECTIONS = [
+  {
+    label: 'Main',
+    items: [
+      { key: 'overview', icon: '📊', label: 'Overview' },
+      { key: 'analytics', icon: '📈', label: 'Analytics' },
+    ]
+  },
+  {
+    label: 'Content',
+    items: [
+      { key: 'games', icon: '🏈', label: 'Game Calendar' },
+      { key: 'specials', icon: '🎉', label: 'Specials' },
+      { key: 'menu', icon: '🍗', label: 'Menu' },
+    ]
+  },
+  {
+    label: 'Customers',
+    items: [
+      { key: 'checkins', icon: '📍', label: 'Check-Ins' },
+      { key: 'loyalty', icon: '💳', label: 'Loyalty' },
+      { key: 'promos', icon: '🎟️', label: 'Promo Codes' },
+      { key: 'users', icon: '👥', label: 'Users' },
+    ]
+  },
+  {
+    label: 'Campaigns',
+    items: [
+      { key: 'email-campaigns', icon: '📧', label: 'Email' },
+      { key: 'sms-campaigns', icon: '📱', label: 'SMS' },
+    ]
+  }
+];
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,6 +56,7 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState({
@@ -28,7 +64,9 @@ export default function AdminDashboard() {
     specials: 0,
     menuItems: 0,
     emailSubscribers: 0,
-    smsSubscribers: 0
+    smsSubscribers: 0,
+    checkins: 0,
+    loyaltyMembers: 0
   });
 
   useEffect(() => {
@@ -80,12 +118,14 @@ export default function AdminDashboard() {
     }
 
     try {
-      const [gameRes, specRes, menuRes, emailSubRes, smsSubRes] = await Promise.all([
+      const [gameRes, specRes, menuRes, emailSubRes, smsSubRes, checkinRes, loyaltyRes] = await Promise.all([
         supabase.from('game_calendar').select('id', { count: 'exact', head: true }),
         supabase.from('specials').select('id', { count: 'exact', head: true }),
         supabase.from('menu_items').select('id', { count: 'exact', head: true }),
         supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).eq('email_opt_in', true),
-        supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).eq('sms_opt_in', true)
+        supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).eq('sms_opt_in', true),
+        supabase.from('customer_checkins').select('id', { count: 'exact', head: true }),
+        supabase.from('loyalty_members').select('id', { count: 'exact', head: true })
       ]);
 
       setStats({
@@ -93,7 +133,9 @@ export default function AdminDashboard() {
         specials: specRes.count || 0,
         menuItems: menuRes.count || 0,
         emailSubscribers: emailSubRes.count || 0,
-        smsSubscribers: smsSubRes.count || 0
+        smsSubscribers: smsSubRes.count || 0,
+        checkins: checkinRes.count || 0,
+        loyaltyMembers: loyaltyRes.count || 0
       });
     } catch (err) {
       console.error('Error fetching stats:', err);
@@ -161,8 +203,10 @@ export default function AdminDashboard() {
     return (
       <div className="admin-login">
         <div className="login-card">
+          <div className="login-logo">🍗</div>
           <h1>JTAPS Admin</h1>
           <p className="login-subtitle">Checking access...</p>
+          <div className="login-spinner"></div>
         </div>
       </div>
     );
@@ -172,48 +216,49 @@ export default function AdminDashboard() {
     return (
       <div className="admin-login">
         <div className="login-card">
+          <div className="login-logo">🍗</div>
           <h1>JTAPS Admin</h1>
           <p className="login-subtitle">Business Management Dashboard</p>
 
           {!supabase?.auth && (
-            <div style={{
-              padding: '12px',
-              marginBottom: '16px',
-              backgroundColor: '#fee',
-              border: '1px solid #f99',
-              borderRadius: '4px',
-              fontSize: '14px',
-              color: '#c33'
-            }}>
+            <div className="login-warning">
               ⚠️ <strong>Supabase Not Configured</strong><br />
               Environment variables (PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY) are not set in Vercel.
-              <a href="https://vercel.com/dashboard" target="_blank" rel="noopener" style={{display: 'block', marginTop: '8px', color: '#c33', textDecoration: 'underline'}}>
+              <a href="https://vercel.com/dashboard" target="_blank" rel="noopener">
                 Go to Vercel Settings →
               </a>
             </div>
           )}
 
-          <form onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="form-input"
-              disabled={!supabase?.auth}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="form-input"
-              disabled={!supabase?.auth}
-            />
-            <button type="submit" disabled={loading || !supabase?.auth} className="form-button">
-              {loading ? 'Logging in...' : 'Login'}
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="login-field">
+              <label htmlFor="admin-email">Email</label>
+              <input
+                id="admin-email"
+                type="email"
+                placeholder="admin@jtapsbarandgrill.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="form-input"
+                disabled={!supabase?.auth}
+              />
+            </div>
+            <div className="login-field">
+              <label htmlFor="admin-password">Password</label>
+              <input
+                id="admin-password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="form-input"
+                disabled={!supabase?.auth}
+              />
+            </div>
+            <button type="submit" disabled={loading || !supabase?.auth} className="form-button login-btn">
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
             {error && <div className="error-message">{error}</div>}
           </form>
@@ -226,134 +271,202 @@ export default function AdminDashboard() {
     return (
       <div className="admin-login">
         <div className="login-card">
-          <h1>JTAPS Admin</h1>
-          <p className="login-subtitle">You are signed in, but this account is not an admin.</p>
-          <button onClick={handleLogout} className="form-button">Logout</button>
+          <div className="login-logo">🔒</div>
+          <h1>Access Denied</h1>
+          <p className="login-subtitle">You are signed in, but this account does not have admin privileges.</p>
+          <button onClick={handleLogout} className="form-button login-btn">Sign Out</button>
         </div>
       </div>
     );
   }
 
+  const currentTabLabel = NAV_SECTIONS.flatMap(s => s.items).find(i => i.key === activeTab)?.label || 'Overview';
+
   return (
-    <div className="admin-dashboard">
-      <header className="admin-header">
-        <div className="header-left">
-          <h1>JTAPS Admin Dashboard</h1>
-          <p className="header-subtitle">Sports Bar Management System</p>
-        </div>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
-      </header>
-
-      <div className="dashboard-tabs">
-        <button
-          className={`tab-button ${activeTab === 'overview' ? 'active' : ''}`}
-          onClick={() => setActiveTab('overview')}
-        >
-          📊 Overview
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'games' ? 'active' : ''}`}
-          onClick={() => setActiveTab('games')}
-        >
-          🏈 Game Calendar
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'specials' ? 'active' : ''}`}
-          onClick={() => setActiveTab('specials')}
-        >
-          🎉 Specials
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'menu' ? 'active' : ''}`}
-          onClick={() => setActiveTab('menu')}
-        >
-          🍗 Menu
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'loyalty' ? 'active' : ''}`}
-          onClick={() => setActiveTab('loyalty')}
-        >
-          💳 Loyalty
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'promos' ? 'active' : ''}`}
-          onClick={() => setActiveTab('promos')}
-        >
-          🎟️ Promo Codes
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => setActiveTab('analytics')}
-        >
-          📈 Analytics
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'users' ? 'active' : ''}`}
-          onClick={() => setActiveTab('users')}
-        >
-          👥 Users
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'email-campaigns' ? 'active' : ''}`}
-          onClick={() => setActiveTab('email-campaigns')}
-        >
-          📧 Email
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'sms-campaigns' ? 'active' : ''}`}
-          onClick={() => setActiveTab('sms-campaigns')}
-        >
-          📱 SMS
-        </button>
-      </div>
-
-      <div className="dashboard-content">
-        {activeTab === 'overview' && (
-          <div className="overview-section">
-            <h2>Business Overview</h2>
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-number">{stats.games}</div>
-                <div className="stat-label">Upcoming Games</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">{stats.specials}</div>
-                <div className="stat-label">Active Specials</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">{stats.menuItems}</div>
-                <div className="stat-label">Menu Items</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">{stats.emailSubscribers}</div>
-                <div className="stat-label">Email Subscribers</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">{stats.smsSubscribers}</div>
-                <div className="stat-label">SMS Subscribers</div>
-              </div>
-            </div>
-            <div className="quick-actions">
-              <h3>Quick Actions</h3>
-              <button onClick={() => setActiveTab('games')} className="action-button">
-                Add Game Event
-              </button>
-              <button onClick={() => setActiveTab('specials')} className="action-button">
-                Create Special
-              </button>
+    <div className={`admin-dashboard ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
+      {/* Sidebar */}
+      <aside className="admin-sidebar">
+        <div className="sidebar-header">
+          <div className="sidebar-brand">
+            <span className="brand-icon">🍗</span>
+            <div className="brand-text">
+              <span className="brand-name">JTAPS</span>
+              <span className="brand-role">Admin Panel</span>
             </div>
           </div>
-        )}
-        {activeTab === 'games' && <GameCalendar />}
-        {activeTab === 'specials' && <SpecialsManager />}
-        {activeTab === 'menu' && <MenuManager />}
-        {activeTab === 'loyalty' && <LoyaltyProgram />}
-        {activeTab === 'promos' && <PromoCodeManager />}
-        {activeTab === 'analytics' && <AnalyticsDashboard />}
-        {activeTab === 'users' && <AdminUsersManager />}
-        {activeTab === 'email-campaigns' && <EmailCampaignManager />}
-        {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
-      </div>
+          <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle sidebar">
+            {sidebarOpen ? '◀' : '▶'}
+          </button>
+        </div>
+
+        <nav className="sidebar-nav">
+          {NAV_SECTIONS.map(section => (
+            <div key={section.label} className="nav-group">
+              <div className="nav-group-label">{section.label}</div>
+              {section.items.map(item => (
+                <button
+                  key={item.key}
+                  className={`nav-item ${activeTab === item.key ? 'active' : ''}`}
+                  onClick={() => setActiveTab(item.key)}
+                  title={item.label}
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          ))}
+        </nav>
+
+        <div className="sidebar-footer">
+          <button onClick={handleLogout} className="sidebar-logout">
+            <span className="nav-icon">🚪</span>
+            <span className="nav-label">Sign Out</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Mobile Header */}
+      <header className="admin-topbar">
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle menu">
+          ☰
+        </button>
+        <h1 className="topbar-title">{currentTabLabel}</h1>
+        <button onClick={handleLogout} className="topbar-logout">Sign Out</button>
+      </header>
+
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+
+      {/* Main Content */}
+      <main className="admin-main">
+        <div className="main-header">
+          <h2 className="page-title">{currentTabLabel}</h2>
+          <div className="header-meta">
+            <span className="current-date">
+              {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
+            </span>
+          </div>
+        </div>
+
+        <div className="main-body">
+          {activeTab === 'overview' && (
+            <div className="overview-section">
+              {/* Stats Grid */}
+              <div className="overview-stats">
+                <div className="stat-card stat-red" onClick={() => setActiveTab('games')}>
+                  <div className="stat-icon">🏈</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.games}</div>
+                    <div className="stat-label">Upcoming Games</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-orange" onClick={() => setActiveTab('specials')}>
+                  <div className="stat-icon">🎉</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.specials}</div>
+                    <div className="stat-label">Active Specials</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-blue" onClick={() => setActiveTab('menu')}>
+                  <div className="stat-icon">🍗</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.menuItems}</div>
+                    <div className="stat-label">Menu Items</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-green" onClick={() => setActiveTab('email-campaigns')}>
+                  <div className="stat-icon">📧</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.emailSubscribers}</div>
+                    <div className="stat-label">Email Subscribers</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-purple" onClick={() => setActiveTab('sms-campaigns')}>
+                  <div className="stat-icon">📱</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.smsSubscribers}</div>
+                    <div className="stat-label">SMS Subscribers</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-teal" onClick={() => setActiveTab('checkins')}>
+                  <div className="stat-icon">📍</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.checkins}</div>
+                    <div className="stat-label">Total Check-Ins</div>
+                  </div>
+                </div>
+                <div className="stat-card stat-gold" onClick={() => setActiveTab('loyalty')}>
+                  <div className="stat-icon">💳</div>
+                  <div className="stat-content">
+                    <div className="stat-number">{stats.loyaltyMembers}</div>
+                    <div className="stat-label">Loyalty Members</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="overview-row">
+                <div className="overview-card">
+                  <h3>⚡ Quick Actions</h3>
+                  <div className="quick-actions-grid">
+                    <button onClick={() => setActiveTab('games')} className="quick-action-btn">
+                      <span>🏈</span> Add Game
+                    </button>
+                    <button onClick={() => setActiveTab('specials')} className="quick-action-btn">
+                      <span>🎉</span> New Special
+                    </button>
+                    <button onClick={() => setActiveTab('menu')} className="quick-action-btn">
+                      <span>🍗</span> Edit Menu
+                    </button>
+                    <button onClick={() => setActiveTab('email-campaigns')} className="quick-action-btn">
+                      <span>📧</span> Send Email
+                    </button>
+                    <button onClick={() => setActiveTab('sms-campaigns')} className="quick-action-btn">
+                      <span>📱</span> Send SMS
+                    </button>
+                    <button onClick={() => setActiveTab('promos')} className="quick-action-btn">
+                      <span>🎟️</span> Create Promo
+                    </button>
+                  </div>
+                </div>
+
+                <div className="overview-card">
+                  <h3>💡 Tips & Reminders</h3>
+                  <ul className="tips-list">
+                    <li>
+                      <span className="tip-icon">📅</span>
+                      <span>Schedule email campaigns 3 days before big sporting events</span>
+                    </li>
+                    <li>
+                      <span className="tip-icon">🎯</span>
+                      <span>Create game-day specials tied to upcoming matchups</span>
+                    </li>
+                    <li>
+                      <span className="tip-icon">🔥</span>
+                      <span>SMS flash deals (2-hour windows) drive same-day traffic</span>
+                    </li>
+                    <li>
+                      <span className="tip-icon">📍</span>
+                      <span>Check-in rewards encourage repeat visits and loyalty</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'games' && <GameCalendar />}
+          {activeTab === 'specials' && <SpecialsManager />}
+          {activeTab === 'menu' && <MenuManager />}
+          {activeTab === 'loyalty' && <LoyaltyProgram />}
+          {activeTab === 'promos' && <PromoCodeManager />}
+          {activeTab === 'analytics' && <AnalyticsDashboard />}
+          {activeTab === 'users' && <AdminUsersManager />}
+          {activeTab === 'email-campaigns' && <EmailCampaignManager />}
+          {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
+          {activeTab === 'checkins' && <CheckInManager />}
+        </div>
+      </main>
     </div>
   );
 }

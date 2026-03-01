@@ -8,7 +8,57 @@ import Layout from '../../layouts/Layout.astro';
   keywords="best wings cincinnati, famous wings, pete's sauce wings, sports bar wings, chicken wings cincinnati, wing recipes, wing sauce"
   ogImage="/images/Cincinnati Wings.jpg"
 >
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jtapsbarandgrill.com/blog" },
+        { "@type": "ListItem", "position": 3, "name": "Best Wings Cincinnati", "item": "https://jtapsbarandgrill.com/blog/why-our-wings-are-the-best" }
+      ]
+    }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What makes JTAPS wings the best in Cincinnati?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JTAPS uses premium fresh-delivered chicken, precise frying techniques, and our legendary Pete's Sauce recipe perfected over nearly 20 years. Combined with 50+ TVs and the ultimate sports bar atmosphere, it's an experience no other wing spot in Cincinnati can match."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Pete's Sauce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pete's Sauce is JTAPS' signature wing sauce — a closely guarded recipe that perfectly balances heat, sweetness, tanginess, and complex spices. Every wing is generously coated for maximum flavor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many wing flavors does JTAPS offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JTAPS offers 7 wing flavors: Pete's Famous Sauce, Buffalo, BBQ, Honey BBQ, Garlic Parmesan, Teriyaki, and Dry Rub. All sauces made fresh in-house."
+          }
+        }
+      ]
+    }
+  </script>
+
   <article class="blog-post">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> / <a href="/blog">Blog</a> / <span>Best Wings Cincinnati</span>
+    </nav>
     <header class="post-header">
       <h1>Why Our Wings Are the Best in Cincinnati: The JTAPS Story</h1>
       <div class="post-meta">
@@ -208,6 +258,12 @@ import Layout from '../../layouts/Layout.astro';
       <div class="post-footer">
         <p><strong>JTAPS Bar and Grill</strong> | 6441 Glenway Ave, Cincinnati, OH 45211 | (513) 574-9777</p>
         <p>Open for all games. 50+ HD TVs. Famous Wings. Cold Beer. Legendary Atmosphere.</p>
+        <div class="post-links">
+          <a href="/best-wings-cincinnati">🏆 See Our Wings Page</a>
+          <a href="/menu">📖 View Full Menu</a>
+          <a href="/blog/seasonal-beers">🍺 Our Seasonal Beers</a>
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener">🛒 Order Online</a>
+        </div>
       </div>
     </div>
   </article>
@@ -315,6 +371,42 @@ import Layout from '../../layouts/Layout.astro';
   .post-footer p {
     margin: 8px 0;
     font-size: 0.95rem;
+  }
+
+  .post-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .post-links a {
+    color: #E13622;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+
+  .post-links a:hover {
+    transform: translateX(3px);
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: #E13622;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {

@@ -8,7 +8,21 @@ import Layout from '../../layouts/Layout.astro';
   keywords="seasonal beer cincinnati, craft beer sports bar, best beer cincinnati, seasonal beer selection, craft breweries cincinnati, beer on tap"
   ogImage="/images/6441-Glenway.jpg"
 >
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jtapsbarandgrill.com/blog" },
+        { "@type": "ListItem", "position": 3, "name": "Seasonal Beers", "item": "https://jtapsbarandgrill.com/blog/seasonal-beers" }
+      ]
+    }
+  </script>
   <article class="blog-post">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> / <a href="/blog">Blog</a> / <span>Seasonal Beers</span>
+    </nav>
     <header class="post-header">
       <h1>20+ Seasonal Beers at JTAPS: Your Guide to Our Rotating Selection</h1>
       <div class="post-meta">
@@ -211,6 +225,21 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: #E13622;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
   .blog-post {
     max-width: 800px;
     margin: 0 auto;
