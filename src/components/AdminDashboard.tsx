@@ -56,7 +56,9 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(
+    typeof window !== 'undefined' ? window.innerWidth > 1024 : true
+  );
 
   const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState({
@@ -71,6 +73,14 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     checkAuth();
+
+    const handleResize = () => {
+      if (window.innerWidth <= 1024) {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const checkAuth = async () => {
@@ -307,7 +317,10 @@ export default function AdminDashboard() {
                 <button
                   key={item.key}
                   className={`nav-item ${activeTab === item.key ? 'active' : ''}`}
-                  onClick={() => setActiveTab(item.key)}
+                  onClick={() => {
+                    setActiveTab(item.key);
+                    if (window.innerWidth <= 1024) setSidebarOpen(false);
+                  }}
                   title={item.label}
                 >
                   <span className="nav-icon">{item.icon}</span>
