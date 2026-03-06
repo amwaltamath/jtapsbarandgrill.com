@@ -76,7 +76,7 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
   <!-- Email Container -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; width: 100% !important; margin: 0; padding: 0;">
     <tr>
-      <td align="center" style="padding: 0;">
+      <td style="padding: 0;">
         <!-- Email Content Table -->
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; background-color: #ffffff;">
           
