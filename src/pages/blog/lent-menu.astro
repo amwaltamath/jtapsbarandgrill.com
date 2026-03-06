@@ -1,0 +1,344 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = 'Lent Menu & Perfect Outdoor Vibes at JTAPS';
+const description = 'Discover our delicious 2026 Lent menu featuring meat-free specials like Boom Boom Shrimp, Jerk Tuna, and veggie options. Perfect for enjoying on our remodeled outdoor patio.';
+---
+
+<Layout title={title} description={description}>
+  <main class="blog-post">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Lent Specials + Our Amazing Outdoor Area!</h1>
+        <p class="hero-subtitle">Meat-Free Favorites & Spring Patio Perfection at JTAPS</p>
+        <a href="tel:5136442337" class="cta-button">Call (513) 644-2337 – Patio Seating Available!</a>
+      </div>
+    </section>
+
+    <!-- Lent Menu Section -->
+    <section class="content-section">
+      <h2 class="section-title">Our 2026 Lent Menu</h2>
+      <p>Observing Lent? Dive into these delicious, meat-free specials available now. Fresh, bold flavors to keep you satisfied!</p>
+
+      <div class="menu-grid">
+        <!-- Boom Boom Shrimp -->
+        <div class="menu-item">
+          <h3>Boom Boom Shrimp</h3>
+          <p>Shrimp tossed in red onions, banana peppers, green peppers, pepperoncini's & our signature Boom Boom sauce.</p>
+          <p class="price">$11</p>
+        </div>
+
+        <!-- Veggie Spring Rolls -->
+        <div class="menu-item">
+          <h3>Veggie Spring Rolls</h3>
+          <p>Four lightly fried veggie spring rolls served with teriyaki sauce.</p>
+          <p class="price">$9</p>
+        </div>
+
+        <!-- Zucchini Fries -->
+        <div class="menu-item">
+          <h3>Zucchini Fries</h3>
+          <p>Basket of zucchini fries served with a side of house-made ranch.</p>
+          <p class="price">$9</p>
+        </div>
+
+        <!-- Hushpuppies -->
+        <div class="menu-item">
+          <h3>Hushpuppies</h3>
+          <p>A basket of hushpuppies served with tartar sauce for dipping.</p>
+          <p class="price">$7</p>
+        </div>
+
+        <!-- Jerk Tuna Melt -->
+        <div class="menu-item">
+          <h3>Jerk Tuna Melt</h3>
+          <p>Spicy jerk tuna with tomato & American cheese. Served with Saratoga chips.</p>
+          <p class="price">$13</p>
+        </div>
+
+        <!-- Jerk Tuna Quesadilla -->
+        <div class="menu-item">
+          <h3>Jerk Tuna Quesadilla</h3>
+          <p>12" tortilla stuffed with spicy jerk tuna, shredded cheese, peppers & onions. Served with sour cream & house-made pico de gallo.</p>
+          <p class="price">$13</p>
+        </div>
+      </div>
+
+      <p class="note">Pair with our seasonal beers on tap or a refreshing drink!</p>
+    </section>
+
+    <!-- Outdoor Area Section -->
+    <section class="content-section outdoor-section">
+      <h2 class="section-title">Our Outdoor Area – Perfect for Cincinnati Weather!</h2>
+      <p>Right now in March, the spring weather is ideal – mild temps, fresh air, and no extreme heat or cold. Our remodeled outdoor patio is the perfect spot to enjoy your Lent specials al fresco!</p>
+      
+      <ul class="features-list">
+        <li>Spacious seating for groups, families, or just kicking back with friends</li>
+        <li>Great for watching games on our screens while soaking up the sunshine</li>
+        <li>Relaxed neighborhood vibe – the kind locals love when the weather turns nice</li>
+        <li>Plenty of room to dine comfortably outdoors, fresh breeze and all</li>
+      </ul>
+
+      <p>Whether you're grabbing Boom Boom Shrimp or a Jerk Tuna Quesadilla, nothing beats enjoying it outside in this perfect spring setup. Come claim your spot before the crowds hit!</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>Ready to Join Us?</h2>
+      <div class="button-group">
+        <a href="tel:5136442337" class="cta-button primary">Call (513) 644-2337</a>
+        <a href="/" class="cta-button secondary">Visit Our Website</a>
+      </div>
+      <p class="location-info">
+        <strong>JTAPS Bar & Grill</strong><br>
+        6441 Glenway Avenue<br>
+        Cincinnati, OH 45211
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #E13622 100%);
+    color: white;
+    padding: 80px 30px;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+    margin: 0 0 15px;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 24px;
+    margin: 0 0 30px;
+    opacity: 0.95;
+  }
+
+  /* Content Section */
+  .content-section {
+    padding: 60px 40px;
+    background-color: #ffffff;
+  }
+
+  .outdoor-section {
+    background-color: #f9f9f9;
+  }
+
+  .section-title {
+    font-size: 36px;
+    color: #E13622;
+    margin: 0 0 20px;
+    text-align: center;
+  }
+
+  .content-section > p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin: 0 0 20px;
+  }
+
+  /* Menu Grid */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+  }
+
+  .menu-item {
+    background: #f9f9f9;
+    padding: 25px;
+    border-left: 4px solid #E13622;
+    border-radius: 4px;
+  }
+
+  .menu-item h3 {
+    font-size: 20px;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+  }
+
+  .menu-item p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 10px;
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #E13622;
+    margin: 15px 0 0;
+  }
+
+  .note {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-top: 30px;
+  }
+
+  /* Features List */
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+  }
+
+  .features-list li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    padding: 12px 0 12px 30px;
+    position: relative;
+  }
+
+  .features-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #E13622;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 60px 40px;
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 36px;
+    margin: 0 0 30px;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: #E13622;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #E13622;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #c41a0a;
+    border-color: #c41a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(225, 54, 34, 0.3);
+  }
+
+  .cta-button.secondary {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+  }
+
+  .cta-button.secondary:hover {
+    background-color: white;
+    color: #1a1a1a;
+  }
+
+  .location-info {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #ccc;
+    margin: 0;
+  }
+
+  .location-info strong {
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* Responsive Design */
+  @media only screen and (max-width: 768px) {
+    .hero-section {
+      padding: 60px 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 36px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+    }
+
+    .content-section,
+    .cta-section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .menu-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .cta-button {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .hero-content h1 {
+      font-size: 28px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+    }
+
+    .section-title {
+      font-size: 24px;
+    }
+
+    .content-section > p,
+    .features-list li {
+      font-size: 14px;
+    }
+
+    .menu-item h3 {
+      font-size: 18px;
+    }
+  }
+</style>
