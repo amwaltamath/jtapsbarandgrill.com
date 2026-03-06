@@ -50,14 +50,17 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
       overflow: hidden;
     }
     /* Responsive */
-    @media only screen and (max-width: 640px) {
-      .email-container {
-        width: 100% !important;
-        max-width: 100% !important;
-      }
+    @media only screen and (max-width: 480px) {
       .email-content-cell {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      .email-header-title {
+        font-size: 24px !important;
+      }
+      .cta-button {
+        width: 100% !important;
+        text-align: center !important;
       }
     }
   </style>
@@ -73,9 +76,9 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
   <!-- Email Container -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; width: 100% !important; margin: 0; padding: 0;">
     <tr>
-      <td align="center" style="padding: 20px 0;">
+      <td align="center" style="padding: 0;">
         <!-- Email Content Table -->
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 640px; width: 100%; background-color: #ffffff;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width: 100%; background-color: #ffffff;">
           
           <!-- Header -->
           <tr>
@@ -85,7 +88,7 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
                   <td style="background-color: #E13622; border-radius: 50%; width: 70px; height: 70px; text-align: center; vertical-align: middle; font-size: 32px; font-weight: bold; color: #ffffff; font-family: Georgia, serif;">JT</td>
                 </tr>
               </table>
-              <h1 style="color: #ffffff; margin: 20px 0 10px; font-size: 28px; font-weight: bold; line-height: 1.3;">JTAPS Bar &amp; Grill</h1>
+              <h1 class="email-header-title" style="color: #ffffff; margin: 20px 0 10px; font-size: 28px; font-weight: bold; line-height: 1.3;">JTAPS Bar &amp; Grill</h1>
               <p style="color: #cccccc; margin: 0; font-size: 16px;">Sports &#8226; Food &#8226; Fun</p>
             </td>
           </tr>
@@ -109,10 +112,10 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
           <!-- Call to Action Section -->
           <tr>
             <td style="padding: 20px 30px; text-align: center; background-color: #f9f9f9;" class="email-content-cell">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto; width: 100%; max-width: 400px;">
                 <tr>
-                  <td style="background-color: #E13622; border-radius: 6px; padding: 14px 28px;">
-                    <a href="https://jtapsbarandgrill.com" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block;">Visit Our Website</a>
+                  <td class="cta-button" style="background-color: #E13622; border-radius: 6px; padding: 16px 32px; text-align: center;">
+                    <a href="https://jtapsbarandgrill.com" style="color: #ffffff; text-decoration: none; font-size: 18px; font-weight: bold; display: block;">Visit Our Website</a>
                   </td>
                 </tr>
               </table>
@@ -121,7 +124,7 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
 
           <!-- Location & Contact Info -->
           <tr>
-            <td style="padding: 30px; background-color: #1a1a1a; color: #ffffff; text-align: center;">
+            <td style="padding: 30px; background-color: #1a1a1a; color: #ffffff; text-align: center;" class="email-content-cell">
               <p style="margin: 0 0 15px; font-size: 18px; font-weight: bold;">📍 Find Us</p>
               <p style="margin: 0 0 5px; font-size: 14px; line-height: 1.6;">
                 6441 Glenway Avenue<br>
@@ -138,7 +141,7 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
 
           <!-- Social Media Links -->
           <tr>
-            <td style="padding: 20px; background-color: #1a1a1a; text-align: center;">
+            <td style="padding: 20px; background-color: #1a1a1a; text-align: center;" class="email-content-cell">
               <p style="color: #ffffff; margin: 0 0 15px; font-size: 14px; font-weight: bold;">Follow Us</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
                 <tr>
