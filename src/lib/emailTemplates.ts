@@ -22,9 +22,14 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
       background-color: #f4f4f4;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      width: 100% !important;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
     table {
       border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
     }
     img {
       border: 0;
@@ -44,31 +49,51 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
       opacity: 0;
       overflow: hidden;
     }
+    /* Responsive */
+    @media only screen and (max-width: 640px) {
+      .email-container {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .email-content-cell {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+    }
   </style>
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td { font-family: Arial, Helvetica, sans-serif !important; }
+  </style>
+  <![endif]-->
 </head>
-<body style="margin: 0; padding: 0; background-color: #f4f4f4;">
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; width: 100% !important;">
   ${preheader ? `<div class="preheader">${preheader}</div>` : ''}
   
   <!-- Email Container -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; padding: 20px 0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; width: 100% !important; margin: 0; padding: 0;">
     <tr>
-      <td align="center">
+      <td align="center" style="padding: 20px 0;">
         <!-- Email Content Table -->
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 100%; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" class="email-container" style="max-width: 640px; width: 100%; background-color: #ffffff;">
           
-          <!-- Header with Logo -->
+          <!-- Header -->
           <tr>
-            <td style="background: linear-gradient(135deg, #1a1a1a 0%, #E13622 100%); padding: 40px 30px; text-align: center;">
-              <img src="https://jtapsbarandgrill.com/images/jtaps-logo.png" alt="JTAPS Bar & Grill" width="200" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-              <h1 style="color: #ffffff; margin: 20px 0 10px; font-size: 28px; font-weight: bold; line-height: 1.3;">JTAPS Bar & Grill</h1>
-              <p style="color: #ffffff; margin: 0; font-size: 16px; opacity: 0.95;">Sports • Food • Fun</p>
+            <td style="background-color: #1a1a1a; padding: 40px 30px; text-align: center;" class="email-content-cell">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+                <tr>
+                  <td style="background-color: #E13622; border-radius: 50%; width: 70px; height: 70px; text-align: center; vertical-align: middle; font-size: 32px; font-weight: bold; color: #ffffff; font-family: Georgia, serif;">JT</td>
+                </tr>
+              </table>
+              <h1 style="color: #ffffff; margin: 20px 0 10px; font-size: 28px; font-weight: bold; line-height: 1.3;">JTAPS Bar &amp; Grill</h1>
+              <p style="color: #cccccc; margin: 0; font-size: 16px;">Sports &#8226; Food &#8226; Fun</p>
             </td>
           </tr>
 
           <!-- Greeting -->
           ${recipientName ? `
           <tr>
-            <td style="padding: 30px 30px 10px; color: #333333; font-size: 18px; font-weight: bold;">
+            <td style="padding: 30px 30px 10px; color: #333333; font-size: 18px; font-weight: bold;" class="email-content-cell">
               Hi ${recipientName},
             </td>
           </tr>
@@ -76,14 +101,14 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
 
           <!-- Main Content -->
           <tr>
-            <td style="padding: ${recipientName ? '10px' : '30px'} 30px 30px; color: #333333; font-size: 16px; line-height: 1.6;">
+            <td style="padding: ${recipientName ? '10px' : '30px'} 30px 30px; color: #333333; font-size: 16px; line-height: 1.6;" class="email-content-cell">
               ${content}
             </td>
           </tr>
 
           <!-- Call to Action Section -->
           <tr>
-            <td style="padding: 20px 30px; text-align: center; background-color: #f9f9f9;">
+            <td style="padding: 20px 30px; text-align: center; background-color: #f9f9f9;" class="email-content-cell">
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
                 <tr>
                   <td style="background-color: #E13622; border-radius: 6px; padding: 14px 28px;">
@@ -133,7 +158,7 @@ export function createEmailTemplate({ recipientName, content, preheader }: Email
 
           <!-- Footer -->
           <tr>
-            <td style="padding: 20px 30px; background-color: #0d0d0d; color: #999999; font-size: 12px; text-align: center; line-height: 1.6;">
+            <td style="padding: 20px 30px; background-color: #0d0d0d; color: #999999; font-size: 12px; text-align: center; line-height: 1.6;" class="email-content-cell">
               <p style="margin: 0 0 10px;">
                 You're receiving this email because you subscribed to updates from JTAPS Bar & Grill.
               </p>
