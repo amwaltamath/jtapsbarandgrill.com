@@ -1,18 +1,30 @@
 import { Twilio } from 'twilio';
 
-const accountSid = import.meta.env.TWILIO_ACCOUNT_SID;
-const authToken = import.meta.env.TWILIO_AUTH_TOKEN;
-const fromNumber = import.meta.env.TWILIO_PHONE_NUMBER;
+let twilioInstance: Twilio | null = null;
 
-if (!accountSid || !authToken || !fromNumber) {
-  throw new Error('Twilio environment variables are not set. Please check TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_PHONE_NUMBER.');
+function getTwilioClient(): Twilio | null {
+  if (!twilioInstance) {
+    const accountSid = import.meta.env.TWILIO_ACCOUNT_SID;
+    const authToken = import.meta.env.TWILIO_AUTH_TOKEN;
+    if (accountSid && authToken) {
+      twilioInstance = new Twilio(accountSid, authToken);
+    }
+  }
+  return twilioInstance;
 }
 
-export const twilio = new Twilio(accountSid, authToken);
+function getFromNumber(): string {
+  return import.meta.env.TWILIO_PHONE_NUMBER || '';
+}
 
 export const sendSMS = async (to: string, message: string) => {
+  const client = getTwilioClient();
+  const fromNumber = getFromNumber();
+  if (!client || !fromNumber) {
+    throw new Error('Twilio is not configured. Check TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_PHONE_NUMBER.');
+  }
   try {
-    const result = await twilio.messages.create({
+    const result = await client.messages.create({
       body: message,
       from: fromNumber,
       to: to
