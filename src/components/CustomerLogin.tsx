@@ -12,7 +12,8 @@ export default function CustomerLogin() {
     email: '',
     password: '',
     name: '',
-    phone: ''
+    phone: '',
+    smsOptIn: false
   });
 
   useEffect(() => {
@@ -28,8 +29,8 @@ export default function CustomerLogin() {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -86,13 +87,33 @@ export default function CustomerLogin() {
 
       // Create customer profile
       if (data.user) {
+        const profileData: Record<string, unknown> = {
+          user_id: data.user.id,
+          email: formData.email.toLowerCase().trim(),
+          name: formData.name
+        };
+        if (formData.phone.trim()) {
+          profileData.phone = formData.phone.trim();
+        }
+
         const { error: profileError } = await supabase
           .from('customer_profiles')
-          .insert([{
-            user_id: data.user.id,
-            email: formData.email.toLowerCase().trim(),
-            name: formData.name
-          }]);
+          .insert([profileData]);
+
+        // If phone provided and SMS opted in, add to newsletter_subscribers for SMS
+        if (formData.smsOptIn && formData.phone.trim()) {
+          const rawPhone = formData.phone.trim().replace(/[^+\d]/g, '');
+          const normalizedPhone = rawPhone.startsWith('+') ? rawPhone : '+1' + rawPhone;
+          await supabase
+            .from('newsletter_subscribers')
+            .upsert({
+              email: formData.email.toLowerCase().trim(),
+              name: formData.name,
+              phone: normalizedPhone,
+              sms_opt_in: true,
+              email_opt_in: true
+            }, { onConflict: 'email' });
+        }
 
         if (profileError) {
           console.error('Profile creation error:', profileError);
@@ -212,6 +233,22 @@ export default function CustomerLogin() {
                 className="form-input"
               />
             </div>
+
+            {formData.phone.trim() && (
+              <div className="form-group" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <input
+                  id="smsOptIn"
+                  type="checkbox"
+                  name="smsOptIn"
+                  checked={formData.smsOptIn}
+                  onChange={handleInputChange}
+                  style={{ marginTop: '4px', width: '18px', height: '18px', cursor: 'pointer' }}
+                />
+                <label htmlFor="smsOptIn" style={{ fontSize: '14px', lineHeight: '1.4', cursor: 'pointer' }}>
+                  Yes, send me text message alerts about promotions, specials, and events from JTAPS Bar &amp; Grill. Msg &amp; data rates may apply. Reply STOP to unsubscribe.
+                </label>
+              </div>
+            )}
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
