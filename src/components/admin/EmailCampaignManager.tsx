@@ -58,16 +58,38 @@ export default function EmailCampaignManager() {
   }, [subscribers.length, pageSize, pageIndex]);
 
   const fetchSubscribers = async () => {
-    const { data, error } = await supabase
-      .from('newsletter_subscribers')
-      .select('*')
-      .eq('email_opt_in', true)
-      .order('created_at', { ascending: false })
-      .range(0, 9999); // Fetch up to 10,000 subscribers (Supabase default is 1000)
+    // Supabase limits responses to 1000 rows by default, so we paginate
+    const PAGE_SIZE = 1000;
+    let allData: Subscriber[] = [];
+    let from = 0;
+    let hasMore = true;
 
-    if (!error && data) {
-      setSubscribers(data);
+    while (hasMore) {
+      const { data, error } = await supabase
+        .from('newsletter_subscribers')
+        .select('*')
+        .eq('email_opt_in', true)
+        .order('created_at', { ascending: false })
+        .range(from, from + PAGE_SIZE - 1);
+
+      if (error) {
+        console.error('Error fetching subscribers:', error);
+        break;
+      }
+
+      if (data && data.length > 0) {
+        allData = [...allData, ...data];
+        from += PAGE_SIZE;
+        // If we got fewer than PAGE_SIZE rows, we've reached the end
+        if (data.length < PAGE_SIZE) {
+          hasMore = false;
+        }
+      } else {
+        hasMore = false;
+      }
     }
+
+    setSubscribers(allData);
   };
 
   const fetchCampaigns = async () => {
