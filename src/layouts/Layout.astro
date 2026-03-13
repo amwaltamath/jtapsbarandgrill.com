@@ -172,8 +172,16 @@ const {
         <h3>Stay in the Loop</h3>
         <p>Get exclusive deals, event updates, and news from JTAPS — straight to your inbox.</p>
         <form class="newsletter-form" id="newsletterForm">
-          <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
-          <button type="submit">Subscribe</button>
+          <div class="newsletter-input-group">
+            <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+            <button type="submit">Subscribe</button>
+          </div>
+          <div class="newsletter-checkbox">
+            <input type="checkbox" id="smsOptIn" name="smsOptIn" />
+            <label for="smsOptIn">
+              I'd like to receive SMS promotions and agree to the <a href="/terms-conditions" target="_blank" rel="noopener">SMS Terms & Conditions</a>
+            </label>
+          </div>
         </form>
         <p class="newsletter-msg" id="newsletterMsg"></p>
         <p class="newsletter-fine">No spam, ever. Unsubscribe anytime.</p>
@@ -235,6 +243,12 @@ const {
           </div>
         </div>
 
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <span class="divider">•</span>
+          <a href="/terms-conditions">Terms & Conditions</a>
+        </div>
+
         <div class="footer-bottom">
           <p>&copy; {new Date().getFullYear()} JTAPS Bar and Grill. All rights reserved.</p>
           <p>
@@ -282,6 +296,7 @@ const {
           e.preventDefault();
           const btn = nlForm.querySelector('button') as HTMLButtonElement;
           const email = (nlForm.querySelector('input[name="email"]') as HTMLInputElement).value;
+          const smsOptIn = (nlForm.querySelector('input[name="smsOptIn"]') as HTMLInputElement).checked;
           if (!email) return;
           btn.disabled = true;
           btn.textContent = 'Subscribing...';
@@ -291,7 +306,7 @@ const {
             const res = await fetch('/api/subscribe', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email })
+              body: JSON.stringify({ email, smsOptIn })
             });
             const data = await res.json();
             if (res.ok) {

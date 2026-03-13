@@ -245,7 +245,10 @@ export default function CustomerLogin() {
                   style={{ marginTop: '4px', width: '18px', height: '18px', cursor: 'pointer' }}
                 />
                 <label htmlFor="smsOptIn" style={{ fontSize: '14px', lineHeight: '1.4', cursor: 'pointer' }}>
-                  Yes, send me text message alerts about promotions, specials, and events from JTAPS Bar &amp; Grill. Msg &amp; data rates may apply. Reply STOP to unsubscribe.
+                  I'd like to receive SMS promotions and agree to the{' '}
+                  <a href="/terms-conditions" target="_blank" rel="noopener noreferrer" style={{ color: '#E13622', textDecoration: 'none', fontWeight: '500' }}>
+                    SMS Terms & Conditions
+                  </a>
                 </label>
               </div>
             )}

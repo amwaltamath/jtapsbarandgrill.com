@@ -9,6 +9,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const email = body?.email?.trim().toLowerCase();
+    const smsOptIn = body?.smsOptIn === true;
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return new Response(
@@ -32,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { error: insertError } = await supabaseAdmin
       .from("newsletter_subscribers")
-      .insert({ email });
+      .insert({ email, sms_opt_in: smsOptIn });
 
     if (insertError) {
       console.error("Supabase insert error:", insertError);
