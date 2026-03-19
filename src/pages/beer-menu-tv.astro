@@ -33,7 +33,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       width: 100vw;
       display: flex;
       flex-direction: column;
-      padding: 1.5rem 2.5rem 1rem;
+      padding: 1.2rem 1.8rem 0.8rem;
     }
 
     /* ---- Header ---- */
@@ -65,7 +65,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .tv-header h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
+      font-size: 2.4rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -95,24 +95,24 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .beer-table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 8px;
+      border-spacing: 10px;
       table-layout: fixed;
     }
 
     .beer-table td {
       width: 25%;
       vertical-align: top;
-      background: #1b1c1e;
-      border: 1px solid #2a2a2c;
-      border-left: 4px solid #E13622;
-      border-radius: 6px;
-      padding: 12px 14px;
+      background: #1c1d20;
+      border: 2px solid #3a3a3f;
+      border-left: 5px solid #E13622;
+      border-radius: 8px;
+      padding: 14px 16px;
     }
 
     .beer-table td.is-featured {
       border-color: #FFD700;
-      border-left: 4px solid #FFD700;
-      background: #1e1d14;
+      border-left: 5px solid #FFD700;
+      background: #22210f;
     }
 
     .beer-table td.empty-cell {
@@ -125,13 +125,13 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       background: transparent !important;
       border: none !important;
       border-left: none !important;
-      padding: 10px 4px 4px !important;
+      padding: 8px 4px 4px !important;
       font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #999;
+      color: #ccc;
     }
 
     .section-heading-cell .heading-inner {
@@ -141,22 +141,22 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .section-heading-cell .heading-inner .accent {
       display: table-cell;
-      width: 24px;
+      width: 30px;
       vertical-align: middle;
     }
 
     .section-heading-cell .heading-inner .accent-bar {
       display: block;
-      width: 24px;
+      width: 30px;
       height: 3px;
       background: #E13622;
     }
 
     .section-heading-cell .heading-inner .label {
       display: table-cell;
-      padding: 0 8px;
+      padding: 0 10px;
       white-space: nowrap;
-      color: #999;
+      color: #ccc;
     }
 
     .section-heading-cell .heading-inner .line {
@@ -168,14 +168,14 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .section-heading-cell .heading-inner .line-bar {
       display: block;
       height: 1px;
-      background: #2a2a2c;
+      background: #3a3a3f;
     }
 
     .beer-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: #f0ece4;
+      color: #ffffff;
       line-height: 1.2;
     }
 
@@ -183,7 +183,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .beer-price {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #E13622;
       float: right;
@@ -194,46 +194,46 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     td.is-featured .beer-price { color: #FFD700; }
 
     .beer-brewery {
-      font-size: 0.7rem;
-      color: #777;
-      margin-top: 2px;
+      font-size: 0.82rem;
+      color: #aaa;
+      margin-top: 3px;
     }
 
     .beer-meta {
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     .beer-style {
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #E13622;
-      background: rgba(225,54,34,0.08);
-      border: 1px solid rgba(225,54,34,0.18);
-      border-radius: 3px;
-      padding: 1px 5px;
+      background: rgba(225,54,34,0.12);
+      border: 1px solid rgba(225,54,34,0.3);
+      border-radius: 4px;
+      padding: 2px 7px;
       display: inline-block;
     }
 
     .beer-abv {
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: #888;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid #333;
-      border-radius: 3px;
-      padding: 1px 5px;
-      margin-left: 3px;
+      color: #bbb;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-left: 4px;
       display: inline-block;
     }
 
     .beer-desc {
-      font-size: 0.65rem;
-      color: #3a3a3c;
+      font-size: 0.78rem;
+      color: #888;
       font-style: italic;
-      line-height: 1.35;
-      margin-top: 3px;
+      line-height: 1.4;
+      margin-top: 4px;
     }
 
     /* ---- Status states ---- */
