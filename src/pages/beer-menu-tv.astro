@@ -102,15 +102,17 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .beer-table td {
       width: 25%;
       vertical-align: top;
-      background: #17181a;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 10px 14px;
+      background: #1b1c1e;
+      border: 1px solid #2a2a2c;
+      border-left: 4px solid #E13622;
+      border-radius: 6px;
+      padding: 12px 14px;
     }
 
     .beer-table td.is-featured {
-      border-color: rgba(255, 215, 0, 0.45);
-      background: #1a1910;
+      border-color: #FFD700;
+      border-left: 4px solid #FFD700;
+      background: #1e1d14;
     }
 
     .beer-table td.empty-cell {
@@ -122,41 +124,78 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .section-heading-cell {
       background: transparent !important;
       border: none !important;
-      padding: 6px 4px 2px !important;
+      border-left: none !important;
+      padding: 10px 4px 4px !important;
       font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.4em;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #E13622;
-      border-bottom: 1px solid #222 !important;
+      color: #999;
+    }
+
+    .section-heading-cell .heading-inner {
+      display: table;
+      width: 100%;
+    }
+
+    .section-heading-cell .heading-inner .accent {
+      display: table-cell;
+      width: 24px;
+      vertical-align: middle;
+    }
+
+    .section-heading-cell .heading-inner .accent-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: #E13622;
+    }
+
+    .section-heading-cell .heading-inner .label {
+      display: table-cell;
+      padding: 0 8px;
+      white-space: nowrap;
+      color: #999;
+    }
+
+    .section-heading-cell .heading-inner .line {
+      display: table-cell;
+      width: 99%;
+      vertical-align: middle;
+    }
+
+    .section-heading-cell .heading-inner .line-bar {
+      display: block;
+      height: 1px;
+      background: #2a2a2c;
     }
 
     .beer-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #e4e0d8;
-      line-height: 1.15;
-      text-transform: uppercase;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f0ece4;
+      line-height: 1.2;
     }
 
     td.is-featured .beer-name { color: #fff; }
 
     .beer-price {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #666;
+      color: #E13622;
       float: right;
-      margin-left: 6px;
+      margin-left: 8px;
+      white-space: nowrap;
     }
 
     td.is-featured .beer-price { color: #FFD700; }
 
     .beer-brewery {
-      font-size: 0.68rem;
-      color: #555;
+      font-size: 0.7rem;
+      color: #777;
       margin-top: 2px;
     }
 
@@ -180,9 +219,9 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .beer-abv {
       font-size: 0.6rem;
       font-weight: 600;
-      color: #555;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid #272727;
+      color: #888;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid #333;
       border-radius: 3px;
       padding: 1px 5px;
       margin-left: 3px;
@@ -381,7 +420,13 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
           .filter(function(k) { return groups[k] && groups[k].length > 0; })
           .forEach(function(k) {
             // Section heading row spanning all columns
-            html += '<tr><td colspan="' + COLS + '" class="section-heading-cell">' + esc(k) + '</td></tr>';
+            html += '<tr><td colspan="' + COLS + '" class="section-heading-cell">' +
+              '<div class="heading-inner">' +
+                '<div class="accent"><span class="accent-bar"></span></div>' +
+                '<div class="label">' + esc(k) + '</div>' +
+                '<div class="line"><span class="line-bar"></span></div>' +
+              '</div>' +
+            '</td></tr>';
             // Beer cells in rows of COLS
             var items = groups[k];
             for (var i = 0; i < items.length; i += COLS) {
