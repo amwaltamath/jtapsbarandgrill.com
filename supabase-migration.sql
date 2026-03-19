@@ -380,3 +380,37 @@ ALTER TABLE customer_profiles
 ALTER TABLE customer_profiles
   ADD COLUMN IF NOT EXISTS last_checkin_date DATE;
 
+-- ========== PHASE 7: BEER MENU (TV DISPLAY) ==========
+
+-- Beer Menu Items
+CREATE TABLE IF NOT EXISTS beer_menu (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  brewery TEXT,
+  style TEXT NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2) NOT NULL,
+  abv DECIMAL(4,1),
+  ibu INT,
+  serving TEXT DEFAULT 'Draft',
+  available BOOLEAN DEFAULT true,
+  featured BOOLEAN DEFAULT false,
+  sort_order INT DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_beer_style ON beer_menu(style);
+CREATE INDEX IF NOT EXISTS idx_beer_available ON beer_menu(available);
+
+ALTER TABLE beer_menu ENABLE ROW LEVEL SECURITY;
+
+-- Public can read available beers (for TV display page)
+DROP POLICY IF EXISTS "Allow public reads" ON beer_menu;
+CREATE POLICY "Allow public reads" ON beer_menu
+  FOR SELECT TO anon USING (true);
+
+DROP POLICY IF EXISTS "Allow authenticated full access" ON beer_menu;
+CREATE POLICY "Allow authenticated full access" ON beer_menu
+  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+

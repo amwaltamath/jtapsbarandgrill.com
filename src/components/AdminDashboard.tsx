@@ -13,6 +13,7 @@ import AdminUsersManager from './admin/AdminUsersManager';
 import EmailCampaignManager from './admin/EmailCampaignManager';
 import SMSCampaignManager from './admin/SMSCampaignManager';
 import CheckInManager from './admin/CheckInManager';
+import BeerMenuManager from './admin/BeerMenuManager';
 
 const NAV_SECTIONS = [
   {
@@ -28,6 +29,7 @@ const NAV_SECTIONS = [
       { key: 'games', icon: '🏈', label: 'Game Calendar' },
       { key: 'specials', icon: '🎉', label: 'Specials' },
       { key: 'menu', icon: '🍗', label: 'Menu' },
+      { key: 'beer-menu', icon: '🍺', label: 'Beer Menu' },
     ]
   },
   {
@@ -478,6 +480,7 @@ export default function AdminDashboard() {
           {activeTab === 'email-campaigns' && <EmailCampaignManager />}
           {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
           {activeTab === 'checkins' && <CheckInManager />}
+          {activeTab === 'beer-menu' && <BeerMenuManager />}
         </div>
       </main>
     </div>
