@@ -22,7 +22,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #0b0c0e;
+      background: #000000;
       color: #e8e4dc;
       height: 100vh;
       width: 100vw;
@@ -150,40 +150,40 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     /* ---- Multi-column newspaper-style flow ---- */
     .beer-column-flow {
       height: 100%;
-      column-gap: 14px;
+      column-gap: 16px;
       /* column-count set dynamically via JS */
     }
 
-    /* ---- Beer Card — visible tile design ---- */
+    /* ---- Beer Card — high-contrast tile ---- */
     .beer-card {
       break-inside: avoid;
-      background: #1a1d22;
-      border: 1px solid #33363d;
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
+      background: #1c1f26;
+      border: 2px solid #3a3e48;
+      border-radius: 12px;
+      padding: 14px 16px 12px 18px;
+      margin-bottom: 14px;
       position: relative;
       overflow: hidden;
       animation: fadeIn 0.35s ease both;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 1px rgba(255,255,255,0.05) inset;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
     }
 
-    /* Left accent stripe */
+    /* Bold left accent bar */
     .beer-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
-      width: 4px;
+      width: 5px;
       background: #E13622;
-      border-radius: 10px 0 0 10px;
+      border-radius: 12px 0 0 12px;
     }
 
     .beer-card.is-featured {
-      border-color: rgba(255,215,0,0.4);
-      background: linear-gradient(135deg, #242112, #1a1d22 60%);
-      box-shadow: 0 2px 12px rgba(255,215,0,0.08), 0 2px 8px rgba(0,0,0,0.4);
+      border-color: rgba(255,215,0,0.5);
+      background: linear-gradient(135deg, #2a2714, #1c1f26 60%);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 0 12px rgba(255,215,0,0.06);
     }
 
     .beer-card.is-featured::before {
@@ -192,11 +192,10 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .beer-card.is-featured .featured-star {
       position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.7rem;
+      top: 10px;
+      right: 12px;
+      font-size: 0.75rem;
       color: #FFD700;
-      opacity: 0.9;
     }
 
     /* Card top row: name + price */
@@ -204,14 +203,14 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
-      padding-left: 2px;
+      gap: 12px;
+      padding-left: 4px;
     }
 
     .beer-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: #fff;
       line-height: 1.15;
       flex: 1;
@@ -219,7 +218,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .beer-price {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #E13622;
       white-space: nowrap;
@@ -232,10 +231,10 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     /* Brewery */
     .beer-brewery {
-      font-size: 0.65rem;
-      color: #888;
-      margin-top: 2px;
-      padding-left: 2px;
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 3px;
+      padding-left: 4px;
       font-weight: 500;
       white-space: nowrap;
       overflow: hidden;
@@ -246,21 +245,21 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .beer-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 6px;
-      padding-left: 2px;
+      gap: 6px;
+      margin-top: 8px;
+      padding-left: 4px;
     }
 
     .beer-style {
-      font-size: 0.58rem;
+      font-size: 0.62rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: #E13622;
-      background: rgba(225,54,34,0.12);
-      border: 1px solid rgba(225,54,34,0.3);
+      background: rgba(225,54,34,0.15);
+      border: 1px solid rgba(225,54,34,0.35);
       border-radius: 4px;
-      padding: 2px 7px;
+      padding: 3px 8px;
     }
 
     .beer-card.is-featured .beer-style {
@@ -270,23 +269,23 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     }
 
     .beer-abv {
-      font-size: 0.58rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      color: #999;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid #3a3a40;
+      color: #aaa;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #4a4a52;
       border-radius: 4px;
-      padding: 2px 7px;
+      padding: 3px 8px;
     }
 
     .beer-ibu {
-      font-size: 0.58rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      color: #777;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid #333;
+      color: #888;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #3e3e44;
       border-radius: 4px;
-      padding: 2px 7px;
+      padding: 3px 8px;
     }
 
     /* ---- Status / loading ---- */
