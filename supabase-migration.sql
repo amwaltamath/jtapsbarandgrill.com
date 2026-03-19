@@ -400,6 +400,10 @@ CREATE TABLE IF NOT EXISTS beer_menu (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Ensure price column is nullable (alter for existing tables)
+ALTER TABLE beer_menu
+  ALTER COLUMN price DROP NOT NULL;
+
 CREATE INDEX IF NOT EXISTS idx_beer_style ON beer_menu(style);
 CREATE INDEX IF NOT EXISTS idx_beer_available ON beer_menu(available);
 

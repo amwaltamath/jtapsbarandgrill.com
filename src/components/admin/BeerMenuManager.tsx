@@ -287,60 +287,98 @@ export default function BeerMenuManager() {
 
       {Object.entries(groupedByServing).map(([serving, servingItems]) =>
         servingItems.length > 0 && (
-          <div key={serving}>
-            <h3>🍺 {serving}</h3>
-            <div className="table-container">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Brewery</th>
-                    <th>Style</th>
-                    <th>ABV</th>
-                    <th>IBU</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {servingItems.map(item => (
-                    <tr key={item.id} style={item.featured ? { background: 'rgba(225, 54, 34, 0.05)' } : undefined}>
-                      <td>
-                        <strong>{item.name}</strong>
-                        {item.featured && <span style={{ marginLeft: '0.5rem', color: '#E13622' }}>⭐</span>}
-                        {item.description && (
-                          <div style={{ fontSize: '0.8rem', color: '#888', marginTop: '0.25rem' }}>{item.description}</div>
-                        )}
-                      </td>
-                      <td>{item.brewery || '—'}</td>
-                      <td>{item.style}</td>
-                      <td>{item.abv != null ? `${item.abv}%` : '—'}</td>
-                      <td>{item.ibu != null ? item.ibu : '—'}</td>
-                      <td>{item.price != null ? `$${item.price.toFixed(2)}` : '—'}</td>
-                      <td>
-                        <button
-                          onClick={() => toggleAvailability(item)}
-                          className={item.available ? 'status-badge status-active' : 'status-badge status-inactive'}
-                          style={{ cursor: 'pointer', border: 'none', background: item.available ? '#e8f5e9' : '#fce4ec', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem' }}
-                        >
-                          {item.available ? '✅ On Tap' : '❌ Off'}
-                        </button>
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: '0.25rem' }}>
-                          <button onClick={() => handleEdit(item)} className="edit-button" style={{ background: '#2196F3', color: '#fff', border: 'none', padding: '0.25rem 0.5rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}>
-                            Edit
-                          </button>
-                          <button onClick={() => handleDelete(item.id)} className="delete-button">
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div key={serving} style={{ marginTop: '1.5rem' }}>
+            <h3 style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ display: 'inline-block', width: '24px', height: '2px', background: '#E13622' }} />
+              🍺 {serving}
+              <span style={{ display: 'inline-block', flex: 1, height: '1px', background: '#eee' }} />
+              <span style={{ fontWeight: 400, color: '#bbb' }}>{servingItems.length} beer{servingItems.length !== 1 ? 's' : ''}</span>
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem' }}>
+              {servingItems.map(item => (
+                <div key={item.id} style={{
+                  border: `1px solid ${item.featured ? '#FFD700' : '#e5e5e5'}`,
+                  borderLeft: `4px solid ${item.featured ? '#FFD700' : item.available ? '#E13622' : '#ccc'}`,
+                  borderRadius: '6px',
+                  padding: '0.85rem 1rem',
+                  background: item.available ? '#fff' : '#fafafa',
+                  opacity: item.available ? 1 : 0.65,
+                  display: 'flex',
+                  flexDirection: 'column' as const,
+                  gap: '0.4rem'
+                }}>
+                  {/* Name row */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <div>
+                      <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1a1a1a' }}>{item.name}</span>
+                      {item.featured && <span title="Featured" style={{ marginLeft: '0.35rem', fontSize: '0.75rem' }}>⭐</span>}
+                      {item.brewery && (
+                        <div style={{ fontSize: '0.75rem', color: '#888', marginTop: '0.1rem' }}>{item.brewery}</div>
+                      )}
+                    </div>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#E13622', whiteSpace: 'nowrap' }}>
+                      {item.price != null ? `$${item.price.toFixed(2)}` : ''}
+                    </span>
+                  </div>
+
+                  {/* Badges */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.3rem' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 600, background: 'rgba(225,54,34,0.08)', color: '#E13622', border: '1px solid rgba(225,54,34,0.2)', borderRadius: '3px', padding: '1px 6px' }}>
+                      {item.style}
+                    </span>
+                    {item.abv != null && (
+                      <span style={{ fontSize: '0.7rem', background: '#f4f4f4', color: '#666', border: '1px solid #e0e0e0', borderRadius: '3px', padding: '1px 6px' }}>
+                        {item.abv}% ABV
+                      </span>
+                    )}
+                    {item.ibu != null && (
+                      <span style={{ fontSize: '0.7rem', background: '#f4f4f4', color: '#666', border: '1px solid #e0e0e0', borderRadius: '3px', padding: '1px 6px' }}>
+                        {item.ibu} IBU
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Description */}
+                  {item.description && (
+                    <div style={{ fontSize: '0.78rem', color: '#999', fontStyle: 'italic', lineHeight: 1.4 }}>
+                      {item.description}
+                    </div>
+                  )}
+
+                  {/* Actions */}
+                  <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.25rem', alignItems: 'center' }}>
+                    <button
+                      onClick={() => toggleAvailability(item)}
+                      style={{
+                        flex: 1,
+                        cursor: 'pointer',
+                        border: `1px solid ${item.available ? '#a5d6a7' : '#ef9a9a'}`,
+                        background: item.available ? '#e8f5e9' : '#fce4ec',
+                        color: item.available ? '#2e7d32' : '#c62828',
+                        padding: '0.3rem 0.5rem',
+                        borderRadius: '4px',
+                        fontSize: '0.78rem',
+                        fontWeight: 600
+                      }}
+                    >
+                      {item.available ? '✅ On Tap' : '❌ Off Tap'}
+                    </button>
+                    <button
+                      onClick={() => handleEdit(item)}
+                      style={{ background: '#2196F3', color: '#fff', border: 'none', padding: '0.3rem 0.75rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600 }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="delete-button"
+                      style={{ padding: '0.3rem 0.75rem', fontSize: '0.78rem' }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )
