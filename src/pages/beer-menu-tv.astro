@@ -105,6 +105,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       align-items: baseline;
       padding: 0.5rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      gap: 1rem;
     }
 
     .beer-item:last-child {
@@ -145,7 +146,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       font-weight: 600;
       color: #E13622;
       white-space: nowrap;
-      margin-left: 1rem;
+      flex-shrink: 0;
     }
 
     .beer-description {
@@ -293,7 +294,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
                   </div>
                   ${beer.description ? `<div class="beer-description">${escapeHtml(beer.description)}</div>` : ''}
                 </div>
-                <div class="beer-price">$${Number(beer.price).toFixed(2)}</div>
+                ${beer.price != null ? `<div class="beer-price">$${Number(beer.price).toFixed(2)}</div>` : ''}
               </div>
             `).join('')}
           </div>

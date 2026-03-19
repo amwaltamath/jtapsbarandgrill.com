@@ -7,7 +7,7 @@ interface BeerItem {
   brewery: string;
   style: string;
   description: string;
-  price: number;
+  price: number | null;
   abv: number | null;
   ibu: number | null;
   serving: string;
@@ -30,7 +30,7 @@ const defaultFormData = {
   brewery: '',
   style: 'IPA',
   description: '',
-  price: 0,
+  price: '',
   abv: '',
   ibu: '',
   serving: 'Draft',
@@ -80,7 +80,7 @@ export default function BeerMenuManager() {
       brewery: formData.brewery,
       style: formData.style,
       description: formData.description,
-      price: formData.price,
+      price: formData.price ? parseFloat(String(formData.price)) : null,
       abv: formData.abv ? parseFloat(formData.abv as string) : null,
       ibu: formData.ibu ? parseInt(formData.ibu as string, 10) : null,
       serving: formData.serving,
@@ -123,7 +123,7 @@ export default function BeerMenuManager() {
       brewery: item.brewery || '',
       style: item.style,
       description: item.description || '',
-      price: item.price,
+      price: item.price != null ? String(item.price) : '',
       abv: item.abv != null ? String(item.abv) : '',
       ibu: item.ibu != null ? String(item.ibu) : '',
       serving: item.serving || 'Draft',
@@ -230,11 +230,10 @@ export default function BeerMenuManager() {
           <div className="form-grid">
             <input
               type="number"
-              placeholder="Price"
+              placeholder="Price (optional)"
               value={formData.price}
-              onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
+              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
               step="0.01"
-              required
               className="form-input"
             />
             <input
@@ -318,7 +317,7 @@ export default function BeerMenuManager() {
                       <td>{item.style}</td>
                       <td>{item.abv != null ? `${item.abv}%` : '—'}</td>
                       <td>{item.ibu != null ? item.ibu : '—'}</td>
-                      <td>${item.price.toFixed(2)}</td>
+                      <td>{item.price != null ? `$${item.price.toFixed(2)}` : '—'}</td>
                       <td>
                         <button
                           onClick={() => toggleAvailability(item)}

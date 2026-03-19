@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS beer_menu (
   brewery TEXT,
   style TEXT NOT NULL,
   description TEXT,
-  price DECIMAL(10,2) NOT NULL,
+  price DECIMAL(10,2),
   abv DECIMAL(4,1),
   ibu INT,
   serving TEXT DEFAULT 'Draft',
