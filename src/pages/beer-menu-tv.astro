@@ -150,50 +150,53 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     /* ---- Multi-column newspaper-style flow ---- */
     .beer-column-flow {
       height: 100%;
-      column-gap: 10px;
+      column-gap: 14px;
       /* column-count set dynamically via JS */
     }
 
     /* ---- Beer Card — visible tile design ---- */
     .beer-card {
       break-inside: avoid;
-      background: #16181c;
-      border: 1px solid #2a2c32;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
+      background: #1a1d22;
+      border: 1px solid #33363d;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
       position: relative;
       overflow: hidden;
       animation: fadeIn 0.35s ease both;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 1px rgba(255,255,255,0.05) inset;
     }
 
-    /* Top accent stripe */
+    /* Left accent stripe */
     .beer-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #E13622, rgba(225,54,34,0.2));
+      bottom: 0;
+      width: 4px;
+      background: #E13622;
+      border-radius: 10px 0 0 10px;
     }
 
     .beer-card.is-featured {
-      border-color: rgba(255,215,0,0.35);
-      background: linear-gradient(160deg, #1e1c10, #16181c 70%);
+      border-color: rgba(255,215,0,0.4);
+      background: linear-gradient(135deg, #242112, #1a1d22 60%);
+      box-shadow: 0 2px 12px rgba(255,215,0,0.08), 0 2px 8px rgba(0,0,0,0.4);
     }
 
     .beer-card.is-featured::before {
-      background: linear-gradient(90deg, #FFD700, rgba(255,215,0,0.2));
+      background: #FFD700;
     }
 
     .beer-card.is-featured .featured-star {
       position: absolute;
-      top: 7px;
-      right: 8px;
-      font-size: 0.6rem;
+      top: 8px;
+      right: 10px;
+      font-size: 0.7rem;
       color: #FFD700;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     /* Card top row: name + price */
@@ -201,12 +204,13 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
+      padding-left: 2px;
     }
 
     .beer-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: #fff;
       line-height: 1.15;
@@ -215,7 +219,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .beer-price {
       font-family: 'Oswald', sans-serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #E13622;
       white-space: nowrap;
@@ -229,8 +233,9 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     /* Brewery */
     .beer-brewery {
       font-size: 0.65rem;
-      color: #777;
-      margin-top: 1px;
+      color: #888;
+      margin-top: 2px;
+      padding-left: 2px;
       font-weight: 500;
       white-space: nowrap;
       overflow: hidden;
@@ -241,20 +246,21 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .beer-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 5px;
+      gap: 5px;
+      margin-top: 6px;
+      padding-left: 2px;
     }
 
     .beer-style {
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: #E13622;
-      background: rgba(225,54,34,0.1);
-      border: 1px solid rgba(225,54,34,0.25);
-      border-radius: 3px;
-      padding: 2px 6px;
+      background: rgba(225,54,34,0.12);
+      border: 1px solid rgba(225,54,34,0.3);
+      border-radius: 4px;
+      padding: 2px 7px;
     }
 
     .beer-card.is-featured .beer-style {
@@ -264,23 +270,23 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     }
 
     .beer-abv {
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       font-weight: 600;
-      color: #888;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid #333;
-      border-radius: 3px;
-      padding: 2px 6px;
+      color: #999;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #3a3a40;
+      border-radius: 4px;
+      padding: 2px 7px;
     }
 
     .beer-ibu {
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       font-weight: 600;
-      color: #666;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid #2a2a2d;
-      border-radius: 3px;
-      padding: 2px 6px;
+      color: #777;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 2px 7px;
     }
 
     /* ---- Status / loading ---- */
@@ -333,9 +339,10 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     /* ---- Footer ticker ---- */
     .tv-footer {
       flex-shrink: 0;
-      margin-top: 0.4rem;
-      padding-top: 0.35rem;
-      border-top: 1px solid #141417;
+      margin-top: 0.6rem;
+      padding: 0.7rem 0;
+      border-top: 1px solid #1e1e22;
+      background: linear-gradient(180deg, transparent, rgba(225,54,34,0.03));
       overflow: hidden;
     }
 
@@ -346,16 +353,16 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     }
 
     .ticker-item {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.62rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #2a2a2d;
-      padding: 0 1.8rem;
+      letter-spacing: 0.15em;
+      color: #444;
+      padding: 0 2.2rem;
     }
 
-    .ticker-dot { color: #E13622; font-size: 0.45rem; }
+    .ticker-dot { color: #E13622; font-size: 0.6rem; }
 
     /* ---- Animations ---- */
     @keyframes loadSlide {
