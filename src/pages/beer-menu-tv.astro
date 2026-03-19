@@ -1,6 +1,7 @@
 ---
 /**
  * Full-screen beer menu display designed for bar TVs.
+ * Column-flow grid that fills the screen like a premium taproom board.
  * Auto-refreshes every 60 seconds with smooth crossfade.
  */
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
@@ -21,33 +22,20 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #0a0a0c;
+      background: #08090b;
       color: #e8e4dc;
       height: 100vh;
       width: 100vw;
       overflow: hidden;
     }
 
-    /* Subtle background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(225,54,34,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(225,54,34,0.03) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
     .tv-wrapper {
       position: relative;
-      z-index: 1;
       height: 100vh;
       width: 100vw;
       display: flex;
       flex-direction: column;
-      padding: 1rem 1.5rem 0.6rem;
+      padding: 0.8rem 1.2rem 0.4rem;
     }
 
     /* ---- Header ---- */
@@ -55,10 +43,9 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       flex-shrink: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.8rem;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.6rem;
       position: relative;
     }
 
@@ -66,62 +53,76 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       content: '';
       position: absolute;
       bottom: 0;
-      left: 5%;
-      right: 5%;
+      left: 0;
+      right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(225,54,34,0.5) 30%, rgba(225,54,34,0.5) 70%, transparent);
+      background: linear-gradient(90deg, #E13622, rgba(225,54,34,0.15) 60%, transparent);
     }
 
     .header-logo {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #E13622, #c42810);
-      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #E13622, #b8200e);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       line-height: 1;
-      box-shadow: 0 4px 20px rgba(225,54,34,0.3);
+      flex-shrink: 0;
     }
-
-    .header-text { text-align: center; }
 
     .tv-header h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       line-height: 1;
       color: #fff;
     }
 
     .tv-header h1 .brand { color: #E13622; }
 
-    .tv-header .tagline {
-      font-family: 'Inter', sans-serif;
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .stat-badge {
+      font-family: 'Oswald', sans-serif;
       font-size: 0.7rem;
-      color: #555;
-      letter-spacing: 0.3em;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-top: 0.25rem;
-      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #666;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 3px 10px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stat-badge strong {
+      color: #E13622;
+      font-weight: 700;
     }
 
     .header-live {
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       color: #444;
     }
 
@@ -135,10 +136,10 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(34,197,94,0); }
     }
 
-    /* ---- Body ---- */
+    /* ---- Body — the main grid area ---- */
     .tv-body {
       flex: 1;
       min-height: 0;
@@ -146,240 +147,186 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       transition: opacity 0.4s ease;
     }
 
-    /* ---- Section Layout ---- */
-    .menu-sections {
+    /* ---- Column-flow grid: fills screen top-to-bottom, left-to-right ---- */
+    .beer-columns {
       height: 100%;
+      display: grid;
+      gap: 6px;
+      /* columns & rows set dynamically via JS */
+    }
+
+    /* ---- Section label (inline within a column) ---- */
+    .section-label {
+      grid-column: 1 / -1;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 0.6rem;
+      padding: 2px 0;
     }
 
-    .menu-section {
-      animation: fadeSlideIn 0.5s ease both;
+    .section-label-icon {
+      font-size: 0.85rem;
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-icon {
-      font-size: 1rem;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(225,54,34,0.1);
-      border: 1px solid rgba(225,54,34,0.2);
-      border-radius: 6px;
-    }
-
-    .section-title {
+    .section-label-text {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #888;
-    }
-
-    .section-count {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
       color: #555;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid #2a2a2d;
-      border-radius: 10px;
-      padding: 2px 8px;
     }
 
-    .section-line {
+    .section-label-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, #2a2a2d, transparent);
-    }
-
-    /* ---- Beer Grid ---- */
-    .beer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      background: #1a1a1d;
     }
 
     /* ---- Beer Card ---- */
     .beer-card {
-      background: linear-gradient(145deg, rgba(28,29,33,0.9), rgba(20,21,24,0.95));
-      border: 1px solid #2a2a2d;
-      border-radius: 10px;
-      padding: 12px 14px;
+      background: #111318;
+      border: 1px solid #1e1f24;
+      border-left: 3px solid #E13622;
+      border-radius: 6px;
+      padding: 8px 10px 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-      animation: fadeIn 0.4s ease both;
-    }
-
-    .beer-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #E13622, rgba(225,54,34,0.3));
-      opacity: 0.6;
+      animation: fadeIn 0.35s ease both;
     }
 
     .beer-card.is-featured {
-      border-color: rgba(255,215,0,0.3);
-      background: linear-gradient(145deg, rgba(34,33,20,0.95), rgba(25,24,14,0.95));
+      border-left-color: #FFD700;
+      background: linear-gradient(90deg, rgba(40,38,15,0.6), #111318 60%);
     }
 
-    .beer-card.is-featured::before {
-      background: linear-gradient(90deg, #FFD700, rgba(255,215,0,0.3));
-      opacity: 0.8;
+    /* Left info block */
+    .card-info {
+      flex: 1;
+      min-width: 0;
     }
 
-    .beer-card.is-featured::after {
-      content: '★';
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.65rem;
-      color: #FFD700;
-      opacity: 0.7;
-    }
-
-    /* Card content */
-    .card-top {
+    .card-row-1 {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: baseline;
+      gap: 6px;
     }
 
     .beer-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #fff;
-      line-height: 1.2;
-      flex: 1;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
+    .beer-brewery {
+      font-size: 0.6rem;
+      color: #555;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex-shrink: 1;
+    }
+
+    .card-row-2 {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .beer-style {
+      font-size: 0.55rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #E13622;
+      background: rgba(225,54,34,0.08);
+      border: 1px solid rgba(225,54,34,0.18);
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+
+    .beer-card.is-featured .beer-style {
+      color: #daa520;
+      background: rgba(255,215,0,0.06);
+      border-color: rgba(255,215,0,0.15);
+    }
+
+    .beer-abv {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #666;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #222;
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+
+    .beer-ibu {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #555;
+      border: 1px solid #1e1e22;
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+
+    /* Right price block */
     .beer-price {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #E13622;
       white-space: nowrap;
       flex-shrink: 0;
+      padding-left: 4px;
     }
 
     .beer-card.is-featured .beer-price {
       color: #FFD700;
     }
 
-    .beer-brewery {
-      font-size: 0.72rem;
-      color: #777;
-      margin-top: 2px;
-      font-weight: 500;
-    }
-
-    .beer-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 6px;
-    }
-
-    .beer-style {
-      font-size: 0.6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #E13622;
-      background: rgba(225,54,34,0.08);
-      border: 1px solid rgba(225,54,34,0.2);
-      border-radius: 4px;
-      padding: 2px 6px;
-    }
-
-    .beer-card.is-featured .beer-style {
-      color: #FFD700;
-      background: rgba(255,215,0,0.08);
-      border-color: rgba(255,215,0,0.2);
-    }
-
-    .beer-abv {
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: #999;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid #333;
-      border-radius: 4px;
-      padding: 2px 6px;
-    }
-
-    .beer-ibu {
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: #777;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid #2a2a2d;
-      border-radius: 4px;
-      padding: 2px 6px;
-    }
-
-    .beer-desc {
-      font-size: 0.68rem;
-      color: #666;
-      line-height: 1.35;
-      margin-top: 5px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* ---- Status states ---- */
+    /* ---- Status / loading ---- */
     .status-message {
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.8rem;
     }
 
     .status-icon {
-      font-size: 3rem;
-      opacity: 0.2;
+      font-size: 2.5rem;
+      opacity: 0.15;
       animation: float 3s ease-in-out infinite;
     }
 
     .status-text {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #333;
+      color: #2a2a2d;
     }
 
     .status-sub {
-      font-size: 0.72rem;
-      color: #2a2a2a;
-      letter-spacing: 0.05em;
+      font-size: 0.65rem;
+      color: #222;
+      letter-spacing: 0.04em;
     }
 
     .loading-bar {
-      width: 120px;
+      width: 100px;
       height: 2px;
-      background: #1a1a1d;
+      background: #151518;
       border-radius: 2px;
       overflow: hidden;
     }
@@ -387,39 +334,19 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     .loading-bar::after {
       content: '';
       display: block;
-      width: 40%;
+      width: 35%;
       height: 100%;
       background: #E13622;
       border-radius: 2px;
       animation: loadSlide 1.2s ease-in-out infinite;
     }
 
-    @keyframes loadSlide {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(350%); }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* ---- Footer ticker ---- */
     .tv-footer {
       flex-shrink: 0;
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid #1a1a1d;
+      margin-top: 0.4rem;
+      padding-top: 0.35rem;
+      border-top: 1px solid #141417;
       overflow: hidden;
     }
 
@@ -431,15 +358,31 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     .ticker-item {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #333;
-      padding: 0 2rem;
+      letter-spacing: 0.1em;
+      color: #2a2a2d;
+      padding: 0 1.8rem;
     }
 
-    .ticker-dot { color: #E13622; font-size: 0.5rem; }
+    .ticker-dot { color: #E13622; font-size: 0.45rem; }
+
+    /* ---- Animations ---- */
+    @keyframes loadSlide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(380%); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-4px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
 
     @keyframes ticker {
       from { transform: translateX(0); }
@@ -451,13 +394,13 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
   <div class="tv-wrapper">
     <div class="tv-header">
       <div class="header-logo">&#x1F37A;</div>
-      <div class="header-text">
-        <h1><span class="brand">JTAPS</span> BEER MENU</h1>
-        <div class="tagline">Bar &amp; Grill &nbsp;&bull;&nbsp; Cincinnati, OH</div>
-      </div>
-      <div class="header-live">
-        <span class="live-dot"></span>
-        Live
+      <h1><span class="brand">JTAPS</span> BEER MENU</h1>
+      <div class="header-right">
+        <div id="header-stats" class="header-stats"></div>
+        <div class="header-live">
+          <span class="live-dot"></span>
+          Live
+        </div>
       </div>
     </div>
 
@@ -493,14 +436,12 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
   <script is:inline define:vars={{ SUPABASE_URL, SUPABASE_KEY }}>
     var tvBody = document.getElementById('beer-tv-body');
+    var headerStats = document.getElementById('header-stats');
     var isFirstLoad = true;
 
     var servingIcons = {
-      'Draft': '🍺',
-      'Bottle': '🍾',
-      'Can': '🥫',
-      'Crowler': '🫙',
-      'Growler': '🍻'
+      'Draft': '\u{1F37A}', 'Bottle': '\u{1F37E}', 'Can': '\u{1F964}',
+      'Crowler': '\u{1FAD9}', 'Growler': '\u{1F37B}'
     };
 
     function showStatus(icon, text, sub) {
@@ -521,41 +462,56 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
     function renderCard(beer, index) {
       var cls = 'beer-card' + (beer.featured ? ' is-featured' : '');
-      var delay = isFirstLoad ? ' style="animation-delay:' + (index * 0.04) + 's"' : '';
+      var delay = isFirstLoad ? ' style="animation-delay:' + (index * 0.025) + 's"' : '';
 
       var price = beer.price != null
-        ? '<span class="beer-price">$' + Number(beer.price).toFixed(2) + '</span>'
+        ? '<div class="beer-price">$' + Number(beer.price).toFixed(2) + '</div>'
         : '';
 
       var brewery = beer.brewery
-        ? '<div class="beer-brewery">' + esc(beer.brewery) + '</div>'
+        ? '<span class="beer-brewery">' + esc(beer.brewery) + '</span>'
         : '';
 
-      var tags = '';
+      var row2 = '';
       if (beer.style || beer.abv != null || beer.ibu != null) {
-        tags = '<div class="beer-tags">';
-        if (beer.style) tags += '<span class="beer-style">' + esc(beer.style) + '</span>';
-        if (beer.abv != null) tags += '<span class="beer-abv">' + beer.abv + '% ABV</span>';
-        if (beer.ibu != null) tags += '<span class="beer-ibu">' + beer.ibu + ' IBU</span>';
-        tags += '</div>';
+        row2 = '<div class="card-row-2">';
+        if (beer.style) row2 += '<span class="beer-style">' + esc(beer.style) + '</span>';
+        if (beer.abv != null) row2 += '<span class="beer-abv">' + beer.abv + '%</span>';
+        if (beer.ibu != null) row2 += '<span class="beer-ibu">' + beer.ibu + ' IBU</span>';
+        row2 += '</div>';
       }
 
-      var desc = beer.description
-        ? '<div class="beer-desc">' + esc(beer.description) + '</div>'
-        : '';
-
       return '<div class="' + cls + '"' + delay + '>' +
-        '<div class="card-top">' +
-          '<div class="beer-name">' + esc(beer.name) + '</div>' +
-          price +
+        '<div class="card-info">' +
+          '<div class="card-row-1">' +
+            '<span class="beer-name">' + esc(beer.name) + '</span>' +
+            brewery +
+          '</div>' +
+          row2 +
         '</div>' +
-        brewery + tags + desc +
+        price +
       '</div>';
+    }
+
+    /**
+     * Distribute beers into N columns, flowing top→bottom then left→right.
+     * Returns an array of arrays (one per column).
+     */
+    function distributeToColumns(beers, numCols) {
+      var cols = [];
+      for (var c = 0; c < numCols; c++) cols.push([]);
+      var perCol = Math.ceil(beers.length / numCols);
+      beers.forEach(function(beer, i) {
+        var col = Math.floor(i / perCol);
+        if (col >= numCols) col = numCols - 1;
+        cols[col].push(beer);
+      });
+      return cols;
     }
 
     async function fetchBeers() {
       if (!SUPABASE_URL || !SUPABASE_KEY || SUPABASE_URL === 'undefined') {
-        showStatus('&#x26A0;', 'Supabase not configured', 'Check environment variables');
+        showStatus('\u26A0', 'Supabase not configured', 'Check environment variables');
         return;
       }
 
@@ -571,17 +527,23 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
         if (!res.ok) {
           var errText = await res.text();
-          showStatus('&#x26A0;', 'Error ' + res.status, errText.slice(0, 100));
+          showStatus('\u26A0', 'Error ' + res.status, errText.slice(0, 100));
           return;
         }
 
         var beers = await res.json();
 
         if (!beers || beers.length === 0) {
-          showStatus('&#x1F37A;', 'No beers on tap right now', 'Check back soon!');
+          showStatus('\u{1F37A}', 'No beers on tap right now', 'Check back soon!');
           return;
         }
 
+        /* ---- Measure available height to compute optimal rows ---- */
+        var bodyHeight = tvBody.clientHeight;
+        var cardHeight = 52;  /* ~height of one compact card + gap */
+        var maxRows = Math.max(4, Math.floor(bodyHeight / cardHeight));
+
+        /* ---- Group by serving type ---- */
         var servingOrder = ['Draft', 'Bottle', 'Can', 'Crowler', 'Growler'];
         var groups = {};
         beers.forEach(function(b) {
@@ -590,33 +552,44 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
           groups[k].push(b);
         });
 
-        var cardIndex = 0;
-        var html = '<div class="menu-sections">';
+        /* Flatten beers in serving order */
+        var orderedBeers = [];
+        var servingSections = [];
+        servingOrder.forEach(function(k) {
+          if (groups[k] && groups[k].length > 0) {
+            servingSections.push({ key: k, startIdx: orderedBeers.length, count: groups[k].length });
+            orderedBeers = orderedBeers.concat(groups[k]);
+          }
+        });
 
-        servingOrder
-          .filter(function(k) { return groups[k] && groups[k].length > 0; })
-          .forEach(function(k, sectionIdx) {
-            var icon = servingIcons[k] || '🍺';
-            var count = groups[k].length;
+        /* Determine column count: aim to fill the screen */
+        var totalBeers = orderedBeers.length;
+        var numCols = Math.max(3, Math.ceil(totalBeers / maxRows));
+        if (numCols > 5) numCols = 5;
+        var rows = Math.ceil(totalBeers / numCols);
 
-            html += '<div class="menu-section" style="animation-delay:' + (sectionIdx * 0.1) + 's">';
+        /* Build CSS grid with column-first flow */
+        var html = '<div class="beer-columns" style="' +
+          'grid-template-columns: repeat(' + numCols + ', 1fr);' +
+          'grid-template-rows: repeat(' + rows + ', 1fr);' +
+          'grid-auto-flow: column;">';
 
-            html += '<div class="section-header">' +
-              '<div class="section-icon">' + icon + '</div>' +
-              '<span class="section-title">' + esc(k) + '</span>' +
-              '<span class="section-count">' + count + '</span>' +
-              '<div class="section-line"></div>' +
-            '</div>';
-
-            html += '<div class="beer-grid">';
-            groups[k].forEach(function(beer) {
-              html += renderCard(beer, cardIndex++);
-            });
-            html += '</div></div>';
-          });
+        var cardIdx = 0;
+        orderedBeers.forEach(function(beer) {
+          html += renderCard(beer, cardIdx++);
+        });
 
         html += '</div>';
 
+        /* ---- Update header stat badges ---- */
+        var statsHtml = '';
+        servingSections.forEach(function(s) {
+          var icon = servingIcons[s.key] || '\u{1F37A}';
+          statsHtml += '<span class="stat-badge">' + icon + ' <strong>' + s.count + '</strong> ' + esc(s.key) + '</span>';
+        });
+        headerStats.innerHTML = statsHtml;
+
+        /* ---- Render with crossfade on refresh ---- */
         if (!isFirstLoad) {
           tvBody.style.opacity = '0';
           setTimeout(function() {
@@ -628,7 +601,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
           isFirstLoad = false;
         }
       } catch (err) {
-        showStatus('&#x26A0;', 'Could not load menu', String(err).slice(0, 80));
+        showStatus('\u26A0', 'Could not load menu', String(err).slice(0, 80));
       }
     }
 
