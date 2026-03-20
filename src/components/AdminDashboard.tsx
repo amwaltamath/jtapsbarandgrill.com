@@ -50,6 +50,12 @@ const NAV_SECTIONS = [
   }
 ];
 
+// Role-based access: maps role name → allowed tab keys (or 'all')
+const ROLE_ALLOWED_TABS: Record<string, string[] | 'all'> = {
+  admin: 'all',
+  beer_menu: ['beer-menu'],
+};
+
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -63,6 +69,7 @@ export default function AdminDashboard() {
   );
 
   const [activeTab, setActiveTab] = useState('overview');
+  const [userRole, setUserRole] = useState<string>('admin');
   const [stats, setStats] = useState({
     games: 0,
     specials: 0,
@@ -102,14 +109,23 @@ export default function AdminDashboard() {
       if (session) {
         const { data: adminRow } = await supabase
           .from('admin_users')
-          .select('id')
+          .select('id, role')
           .eq('user_id', session.user.id)
           .maybeSingle();
 
         const admin = Boolean(adminRow);
         setIsAdmin(admin);
-        if (admin) {
-          fetchStats();
+        if (admin && adminRow) {
+          const role = adminRow.role || 'admin';
+          setUserRole(role);
+          // Set initial tab based on role permissions
+          const allowed = ROLE_ALLOWED_TABS[role];
+          if (allowed !== 'all' && allowed) {
+            setActiveTab(allowed[0]);
+          }
+          if (role === 'admin') {
+            fetchStats();
+          }
         }
       } else {
         setIsAdmin(false);
@@ -183,14 +199,22 @@ export default function AdminDashboard() {
     if (session) {
       const { data: adminRow } = await supabase
         .from('admin_users')
-        .select('id')
+        .select('id, role')
         .eq('user_id', session.user.id)
         .maybeSingle();
 
       const admin = Boolean(adminRow);
       setIsAdmin(admin);
-      if (admin) {
-        fetchStats();
+      if (admin && adminRow) {
+        const role = adminRow.role || 'admin';
+        setUserRole(role);
+        const allowed = ROLE_ALLOWED_TABS[role];
+        if (allowed !== 'all' && allowed) {
+          setActiveTab(allowed[0]);
+        }
+        if (role === 'admin') {
+          fetchStats();
+        }
       }
     } else {
       setIsAdmin(false);
@@ -292,7 +316,20 @@ export default function AdminDashboard() {
     );
   }
 
-  const currentTabLabel = NAV_SECTIONS.flatMap(s => s.items).find(i => i.key === activeTab)?.label || 'Overview';
+  // Filter nav sections based on role permissions
+  const allowedTabs = ROLE_ALLOWED_TABS[userRole];
+  const filteredSections = allowedTabs === 'all'
+    ? NAV_SECTIONS
+    : NAV_SECTIONS
+        .map(section => ({
+          ...section,
+          items: section.items.filter(item =>
+            Array.isArray(allowedTabs) && allowedTabs.includes(item.key)
+          )
+        }))
+        .filter(section => section.items.length > 0);
+
+  const currentTabLabel = filteredSections.flatMap(s => s.items).find(i => i.key === activeTab)?.label || 'Overview';
 
   return (
     <div className={`admin-dashboard ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
@@ -303,7 +340,7 @@ export default function AdminDashboard() {
             <span className="brand-icon">🍗</span>
             <div className="brand-text">
               <span className="brand-name">JTAPS</span>
-              <span className="brand-role">Admin Panel</span>
+              <span className="brand-role">{userRole === 'admin' ? 'Admin Panel' : 'Beer Menu'}</span>
             </div>
           </div>
           <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle sidebar">
@@ -312,7 +349,7 @@ export default function AdminDashboard() {
         </div>
 
         <nav className="sidebar-nav">
-          {NAV_SECTIONS.map(section => (
+          {filteredSections.map(section => (
             <div key={section.label} className="nav-group">
               <div className="nav-group-label">{section.label}</div>
               {section.items.map(item => (

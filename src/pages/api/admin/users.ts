@@ -76,16 +76,17 @@ export const GET: APIRoute = async ({ request }) => {
 
   const { data: adminRows } = await supabaseAdmin
     .from('admin_users')
-    .select('user_id');
+    .select('user_id, role');
 
-  const adminSet = new Set((adminRows || []).map((row) => row.user_id));
+  const adminMap = new Map((adminRows || []).map((row) => [row.user_id, row.role || 'admin']));
 
   const users = data.users.map((user) => ({
     id: user.id,
     email: user.email ?? null,
     created_at: user.created_at ?? null,
     last_sign_in_at: user.last_sign_in_at ?? null,
-    is_admin: adminSet.has(user.id)
+    is_admin: adminMap.has(user.id),
+    role: adminMap.get(user.id) || null
   }));
 
   return new Response(JSON.stringify({ users }), {
@@ -110,7 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const { action, userId } = await request.json();
+  const { action, userId, role } = await request.json();
 
   if (!userId || typeof userId !== 'string') {
     return new Response(JSON.stringify({ error: 'Missing userId' }), {
@@ -119,9 +120,37 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  if (action !== 'promote' && action !== 'demote') {
+  const validActions = ['promote', 'demote', 'set_role'];
+  if (!validActions.includes(action)) {
     return new Response(JSON.stringify({ error: 'Invalid action' }), {
       status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  if (action === 'set_role') {
+    const validRoles = ['admin', 'beer_menu'];
+    if (!role || !validRoles.includes(role)) {
+      return new Response(JSON.stringify({ error: 'Invalid role' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const { error } = await supabaseAdmin
+      .from('admin_users')
+      .update({ role })
+      .eq('user_id', userId);
+
+    if (error) {
+      return new Response(JSON.stringify({ error: 'Failed to update role' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   }

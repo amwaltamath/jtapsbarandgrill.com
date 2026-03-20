@@ -7,7 +7,13 @@ interface ManagedUser {
   created_at: string | null;
   last_sign_in_at: string | null;
   is_admin: boolean;
+  role: string | null;
 }
+
+const ROLE_LABELS: Record<string, string> = {
+  admin: 'Admin (Full Access)',
+  beer_menu: 'Beer Menu Only',
+};
 
 export default function AdminUsersManager() {
   const [users, setUsers] = useState<ManagedUser[]>([]);
@@ -90,6 +96,46 @@ export default function AdminUsersManager() {
     }
   };
 
+  const updateRole = async (userId: string, role: string) => {
+    setActionLoading(userId);
+    setError('');
+    setSuccess('');
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setError('Not authenticated. Please login again.');
+        setActionLoading(null);
+        return;
+      }
+
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({
+          action: 'set_role',
+          userId,
+          role
+        })
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to update role');
+      }
+
+      setSuccess(`Role updated to ${ROLE_LABELS[role] || role}.`);
+      fetchUsers();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update role');
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
   return (
     <div className="section-card">
       <div className="section-header">
@@ -126,7 +172,22 @@ export default function AdminUsersManager() {
                   <td>{user.email || 'Unknown'}</td>
                   <td>{user.created_at ? new Date(user.created_at).toLocaleDateString() : '-'}</td>
                   <td>{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleDateString() : '-'}</td>
-                  <td>{user.is_admin ? 'Admin' : 'User'}</td>
+                  <td>
+                    {user.is_admin
+                      ? <select
+                          value={user.role || 'admin'}
+                          onChange={(e) => updateRole(user.id, e.target.value)}
+                          disabled={isBusy}
+                          className="form-input"
+                          style={{ padding: '4px 8px', fontSize: '0.85rem' }}
+                        >
+                          {Object.entries(ROLE_LABELS).map(([value, label]) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                      : 'User'
+                    }
+                  </td>
                   <td>
                     {user.is_admin ? (
                       <button
