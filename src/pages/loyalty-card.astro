@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import LoyaltyCard from '../components/LoyaltyCard';
+import LoyaltyCardWidget from '../components/LoyaltyCard';
 ---
 
 <Layout
@@ -8,7 +8,7 @@ import LoyaltyCard from '../components/LoyaltyCard';
   description="Your JTAPS Rewards loyalty card. Save to Apple Wallet or Google Wallet for quick access every visit."
 >
   <main class="loyalty-page">
-    <LoyaltyCard client:only="react" />
+    <LoyaltyCardWidget client:only="react" />
   </main>
 </Layout>
 
