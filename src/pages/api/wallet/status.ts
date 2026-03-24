@@ -22,17 +22,31 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   // Fetch customer profile
-  const { data: profile } = await supabaseAdmin
+  let { data: profile } = await supabaseAdmin
     .from('customer_profiles')
     .select('name, email, checkin_points, total_checkins, current_streak, longest_streak, created_at, member_since, last_checkin_date')
     .eq('user_id', user.id)
     .single();
 
+  // Auto-create profile if the user is authenticated but has no profile row
   if (!profile) {
-    return new Response(
-      JSON.stringify({ error: 'Customer profile not found' }),
-      { status: 404, headers: { 'Content-Type': 'application/json' } }
-    );
+    const { data: newProfile, error: insertError } = await supabaseAdmin
+      .from('customer_profiles')
+      .insert({
+        user_id: user.id,
+        email: user.email || '',
+        name: user.user_metadata?.name || user.email?.split('@')[0] || 'Member',
+      })
+      .select('name, email, checkin_points, total_checkins, current_streak, longest_streak, created_at, member_since, last_checkin_date')
+      .single();
+
+    if (insertError || !newProfile) {
+      return new Response(
+        JSON.stringify({ error: 'Could not create your loyalty profile. Please try again.' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    profile = newProfile;
   }
 
   const points = profile.checkin_points || 0;

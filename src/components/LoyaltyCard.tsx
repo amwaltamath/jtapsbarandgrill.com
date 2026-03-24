@@ -172,11 +172,18 @@ export default function LoyaltyCard() {
   }
 
   if (error) {
+    const isAuthError = error.includes('log in') || error.includes('Authentication');
     return (
       <div className="loyalty-card-container">
         <div className="loyalty-card-error">
           <p>{error}</p>
-          <a href="/login" className="loyalty-login-link">Log in to view your card</a>
+          {isAuthError ? (
+            <a href="/login" className="loyalty-login-link">Log in to view your card</a>
+          ) : (
+            <button onClick={() => { setError(''); setLoading(true); fetchStatus(); }} className="loyalty-login-link">
+              Try Again
+            </button>
+          )}
         </div>
       </div>
     );
