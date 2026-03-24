@@ -1,0 +1,113 @@
+workflows:
+  # ────────────────────────────────────────────────────────
+  #  iOS – Build & Publish to App Store Connect
+  # ────────────────────────────────────────────────────────
+  ios-release:
+    name: iOS Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.jtapsbarandgrill.app
+      groups:
+        - app_store_credentials  # set APP_STORE_CONNECT_KEY_IDENTIFIER, etc.
+      node: 20
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install Node dependencies
+        script: npm ci
+
+      - name: Sync Capacitor iOS
+        script: npx cap sync ios
+
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+
+      - name: Build iOS app
+        script: |
+          xcode-project build-ipa \
+            --workspace ios/App/App.xcworkspace \
+            --scheme App \
+            --archive-flags="-destination 'generic/platform=iOS'"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        # API key configured in Codemagic dashboard under "app_store_credentials" group
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false  # set true when ready for production
+      email:
+        recipients:
+          - amwaltamath@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  # ────────────────────────────────────────────────────────
+  #  Android – Build & Publish to Google Play
+  # ────────────────────────────────────────────────────────
+  android-release:
+    name: Android Release
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      android_signing:
+        - jtaps_keystore  # configured in Codemagic dashboard
+      groups:
+        - google_play_credentials  # set GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+      node: 20
+      java: 17
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install Node dependencies
+        script: npm ci
+
+      - name: Sync Capacitor Android
+        script: npx cap sync android
+
+      - name: Set Android version
+        script: |
+          LATEST_BUILD=$(google-play get-latest-build-number \
+            --package-name "com.jtapsbarandgrill.app") || LATEST_BUILD=0
+          cd android
+          echo "android.injected.version.code=$((LATEST_BUILD + 1))" >> gradle.properties
+          echo "android.injected.version.name=1.0.$((LATEST_BUILD + 1))" >> gradle.properties
+
+      - name: Build Android AAB
+        script: |
+          cd android
+          ./gradlew bundleRelease
+
+    artifacts:
+      - android/app/build/outputs/**/*.aab
+      - android/app/build/outputs/**/*.apk
+
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal  # internal → alpha → beta → production
+        submit_as_draft: true
+      email:
+        recipients:
+          - amwaltamath@gmail.com
+        notify:
+          success: true
+          failure: true
