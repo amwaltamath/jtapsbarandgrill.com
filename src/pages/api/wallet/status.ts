@@ -21,12 +21,32 @@ export const GET: APIRoute = async ({ request }) => {
     );
   }
 
-  // Fetch customer profile
-  let { data: profile } = await supabaseAdmin
+  // Fetch customer profile — only select columns guaranteed to exist
+  let { data: profile, error: fetchError } = await supabaseAdmin
     .from('customer_profiles')
-    .select('name, email, checkin_points, total_checkins, current_streak, longest_streak, created_at, member_since, last_checkin_date')
+    .select('name, email, checkin_points, total_checkins, current_streak, longest_streak, created_at, last_checkin_date')
     .eq('user_id', user.id)
     .single();
+
+  // If the select failed due to missing columns, try a minimal select
+  if (fetchError && !profile) {
+    const { data: basicProfile } = await supabaseAdmin
+      .from('customer_profiles')
+      .select('name, email, created_at')
+      .eq('user_id', user.id)
+      .single();
+
+    if (basicProfile) {
+      profile = {
+        ...basicProfile,
+        checkin_points: 0,
+        total_checkins: 0,
+        current_streak: 0,
+        longest_streak: 0,
+        last_checkin_date: null,
+      };
+    }
+  }
 
   // Auto-create profile if the user is authenticated but has no profile row
   if (!profile) {
@@ -37,16 +57,24 @@ export const GET: APIRoute = async ({ request }) => {
         email: user.email || '',
         name: user.user_metadata?.name || user.email?.split('@')[0] || 'Member',
       })
-      .select('name, email, checkin_points, total_checkins, current_streak, longest_streak, created_at, member_since, last_checkin_date')
+      .select('name, email, created_at')
       .single();
 
     if (insertError || !newProfile) {
+      console.error('Profile insert error:', insertError);
       return new Response(
-        JSON.stringify({ error: 'Could not create your loyalty profile. Please try again.' }),
+        JSON.stringify({ error: 'Could not create your loyalty profile.', detail: insertError?.message }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    profile = newProfile;
+    profile = {
+      ...newProfile,
+      checkin_points: 0,
+      total_checkins: 0,
+      current_streak: 0,
+      longest_streak: 0,
+      last_checkin_date: null,
+    };
   }
 
   const points = profile.checkin_points || 0;
@@ -74,7 +102,7 @@ export const GET: APIRoute = async ({ request }) => {
         totalCheckins: profile.total_checkins || 0,
         currentStreak: profile.current_streak || 0,
         longestStreak: profile.longest_streak || 0,
-        memberSince: profile.member_since || profile.created_at,
+        memberSince: (profile as any).member_since || profile.created_at,
         lastCheckin: profile.last_checkin_date,
       },
       wallets: {

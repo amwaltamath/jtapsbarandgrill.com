@@ -81,7 +81,7 @@ export default function LoyaltyCard() {
 
       if (!res.ok) {
         const body = await res.json();
-        throw new Error(body.error || 'Failed to load loyalty card');
+        throw new Error(body.detail ? `${body.error}: ${body.detail}` : body.error || 'Failed to load loyalty card');
       }
 
       const walletData: WalletData = await res.json();
