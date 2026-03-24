@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LoyaltyCard from '../components/LoyaltyCard';
+---
+
+<Layout
+  title="My Loyalty Card - JTAPS Bar and Grill"
+  description="Your JTAPS Rewards loyalty card. Save to Apple Wallet or Google Wallet for quick access every visit."
+>
+  <main class="loyalty-page">
+    <LoyaltyCard client:only="react" />
+  </main>
+</Layout>
+
+<style>
+  .loyalty-page {
+    min-height: 80vh;
+    background: #f5f5f5;
+    padding: 40px 0;
+  }
+</style>

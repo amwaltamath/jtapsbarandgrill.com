@@ -1,0 +1,568 @@
+/* ── Loyalty Card Styles ────────────────────────────────────────────────────── */
+
+.loyalty-card-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Loading & Error States */
+.loyalty-card-loading,
+.loyalty-card-error {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #eee;
+  border-top-color: #E13622;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loyalty-login-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 28px;
+  background: #E13622;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.loyalty-login-link:hover {
+  background: #c42e1c;
+}
+
+/* Section */
+.loyalty-card-section {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin: 0 0 6px;
+}
+
+.section-subtitle {
+  color: #666;
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+}
+
+/* ── Card (flippable) ──────────────────────────────────────────────────────── */
+
+.loyalty-card-wrapper {
+  perspective: 1000px;
+  cursor: pointer;
+  margin: 0 auto 20px;
+  max-width: 380px;
+  height: 240px;
+  user-select: none;
+}
+
+.loyalty-card-wrapper.flipped .loyalty-card-front {
+  transform: rotateY(180deg);
+}
+
+.loyalty-card-wrapper.flipped .loyalty-card-back {
+  transform: rotateY(0deg);
+}
+
+.loyalty-card-front,
+.loyalty-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  transition: transform 0.6s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.loyalty-card-front {
+  color: white;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.loyalty-card-back {
+  background: white;
+  transform: rotateY(-180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Shine overlay */
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 60%
+  );
+  pointer-events: none;
+  animation: shine 4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% { transform: translateX(-30%) translateY(-30%); }
+  50% { transform: translateX(30%) translateY(30%); }
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.card-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-logo-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.card-logo-sub {
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.card-tier-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 2px solid;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tier-icon {
+  font-size: 0.85rem;
+}
+
+/* Points */
+.card-points-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.points-number {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.points-label {
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Member info */
+.card-member-info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.member-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.member-since {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* Stats row */
+.card-stats-row {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 8px;
+}
+
+.card-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+/* Flip hint */
+.card-flip-hint {
+  position: absolute;
+  bottom: 6px;
+  right: 12px;
+  font-size: 0.6rem;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.card-flip-hint.dark {
+  color: #999;
+}
+
+/* ── Card Back ─────────────────────────────────────────────────────────────── */
+
+.card-back-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  flex: 1;
+}
+
+.card-qr-section {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.card-qr-section svg {
+  border-radius: 8px;
+}
+
+.qr-hint {
+  font-size: 0.65rem;
+  color: #999;
+  margin: 4px 0 0;
+}
+
+.card-back-info {
+  text-align: left;
+}
+
+.card-back-info h4 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.rewards-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+.rewards-list li {
+  padding: 2px 0;
+}
+
+.rewards-earn {
+  font-size: 0.75rem;
+  color: #E13622;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Tier Progress ─────────────────────────────────────────────────────────── */
+
+.tier-progress-section {
+  max-width: 380px;
+  margin: 0 auto 20px;
+}
+
+.tier-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.tier-progress-bar {
+  height: 8px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tier-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+/* ── QR Toggle ─────────────────────────────────────────────────────────────── */
+
+.qr-toggle-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+
+.qr-toggle-btn:hover {
+  background: #333;
+}
+
+.qr-fullscreen {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-fullscreen svg {
+  border-radius: 12px;
+}
+
+.qr-fullscreen-text {
+  margin: 12px 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ── Wallet Buttons ────────────────────────────────────────────────────────── */
+
+.wallet-buttons {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.wallet-title {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+}
+
+.wallet-subtitle {
+  margin: 0 0 20px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.wallet-btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wallet-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 220px;
+  justify-content: center;
+}
+
+.wallet-btn:disabled {
+  cursor: not-allowed;
+}
+
+.apple-wallet-btn {
+  background: #000;
+  color: #fff;
+}
+
+.apple-wallet-btn:hover:not(:disabled) {
+  background: #222;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.apple-wallet-btn.disabled {
+  background: #ccc;
+  color: #888;
+}
+
+.google-wallet-btn {
+  background: #fff;
+  color: #1a1a1a;
+  border: 2px solid #e0e0e0;
+}
+
+.google-wallet-btn:hover:not(:disabled) {
+  border-color: #4285f4;
+  color: #4285f4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+}
+
+.google-wallet-btn.disabled {
+  background: #f5f5f5;
+  color: #aaa;
+  border-color: #eee;
+}
+
+.wallet-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.wallet-btn-text {
+  white-space: nowrap;
+}
+
+.wallet-coming-soon {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  background: #fff8e1;
+  color: #8d6e00;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.wallet-installed-info {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.wallet-installed-info p {
+  margin: 0;
+}
+
+/* ── Home Screen Prompt ────────────────────────────────────────────────────── */
+
+.homescreen-prompt {
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+}
+
+.homescreen-prompt h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.homescreen-prompt p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .loyalty-card-container {
+    padding: 12px;
+  }
+
+  .loyalty-card-wrapper {
+    height: 220px;
+  }
+
+  .loyalty-card-front {
+    padding: 16px 18px;
+  }
+
+  .points-number {
+    font-size: 2.4rem;
+  }
+
+  .card-back-content {
+    flex-direction: column;
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .card-qr-section svg {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .wallet-btn {
+    min-width: unset;
+    width: 100%;
+    padding: 14px 16px;
+  }
+
+  .wallet-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

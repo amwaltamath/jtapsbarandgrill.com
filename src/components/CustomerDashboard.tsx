@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import CheckIn from './CheckIn';
+import LoyaltyCard from './LoyaltyCard';
 import '../styles/customer-dashboard.css';
 
 interface Game {
@@ -38,7 +39,7 @@ export default function CustomerDashboard() {
   const [specials, setSpecials] = useState<Special[]>([]);
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'checkin' | 'games' | 'specials'>('checkin');
+  const [activeTab, setActiveTab] = useState<'checkin' | 'loyalty' | 'games' | 'specials'>('checkin');
 
   useEffect(() => {
     checkAuth();
@@ -184,6 +185,12 @@ export default function CustomerDashboard() {
           📍 Check In
         </button>
         <button
+          className={`nav-tab ${activeTab === 'loyalty' ? 'active' : ''}`}
+          onClick={() => setActiveTab('loyalty')}
+        >
+          💳 Loyalty Card
+        </button>
+        <button
           className={`nav-tab ${activeTab === 'games' ? 'active' : ''}`}
           onClick={() => setActiveTab('games')}
         >
@@ -201,6 +208,12 @@ export default function CustomerDashboard() {
         {activeTab === 'checkin' && (
           <div className="content-section">
             <CheckIn />
+          </div>
+        )}
+
+        {activeTab === 'loyalty' && (
+          <div className="content-section">
+            <LoyaltyCard />
           </div>
         )}
 
