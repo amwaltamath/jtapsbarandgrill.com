@@ -75,8 +75,9 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (err) {
     console.error("SMS campaign error:", err);
+    const errorMessage = err instanceof Error ? err.message : "Something went wrong. Please try again.";
     return new Response(
-      JSON.stringify({ error: "Something went wrong. Please try again." }),
+      JSON.stringify({ error: errorMessage }),
       { status: 500, headers }
     );
   }

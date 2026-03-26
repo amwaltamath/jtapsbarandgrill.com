@@ -1,11 +1,15 @@
 import { Twilio } from 'twilio';
 
+function getEnv(key: string): string {
+  return import.meta.env[key] || process.env[key] || '';
+}
+
 let twilioInstance: Twilio | null = null;
 
 function getTwilioClient(): Twilio | null {
   if (!twilioInstance) {
-    const accountSid = import.meta.env.TWILIO_ACCOUNT_SID;
-    const authToken = import.meta.env.TWILIO_AUTH_TOKEN;
+    const accountSid = getEnv('TWILIO_ACCOUNT_SID');
+    const authToken = getEnv('TWILIO_AUTH_TOKEN');
     if (accountSid && authToken) {
       twilioInstance = new Twilio(accountSid, authToken);
     }
@@ -14,7 +18,7 @@ function getTwilioClient(): Twilio | null {
 }
 
 function getFromNumber(): string {
-  return import.meta.env.TWILIO_PHONE_NUMBER || '';
+  return getEnv('TWILIO_PHONE_NUMBER');
 }
 
 export const sendSMS = async (to: string, message: string) => {
