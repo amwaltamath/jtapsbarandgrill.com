@@ -77,7 +77,21 @@ export const GET: APIRoute = async ({ request }) => {
     };
   }
 
-  const points = profile.checkin_points || 0;
+  // Merge check-in points with POS loyalty points
+  const checkinPoints = profile.checkin_points || 0;
+  let posPoints = 0;
+  const profileEmail = profile.email || user.email;
+  if (profileEmail) {
+    const { data: loyaltyRow } = await supabaseAdmin
+      .from('loyalty_members')
+      .select('points')
+      .eq('email', profileEmail.toLowerCase())
+      .maybeSingle();
+    if (loyaltyRow) {
+      posPoints = loyaltyRow.points || 0;
+    }
+  }
+  const points = checkinPoints + posPoints;
   const tier = computeTier(points);
 
   // Check if user already has wallet passes installed
