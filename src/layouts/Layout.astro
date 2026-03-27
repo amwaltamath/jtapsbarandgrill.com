@@ -162,6 +162,15 @@ const {
     <link rel="icon" type="image/png" href="/jtaps-logo.png" />
     <link rel="apple-touch-icon" type="image/png" href="/jtaps-logo.png" />
     <title>{title}</title>
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SP56V57TQ1"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SP56V57TQ1');
+    </script>
   </head>
   <body>
     <header>
