@@ -6,12 +6,12 @@ workflows:
     name: iOS Release
     max_build_duration: 60
     instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: app_store_credentials
     environment:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.jtapsbarandgrill.app
-      integrations:
-        app_store_connect: app_store_credentials
       node: 20
       xcode: latest
       cocoapods: default
