@@ -12,7 +12,7 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.jtapsbarandgrill.app
-      node: 20
+      node: 22
       xcode: latest
       cocoapods: default
     triggering:
@@ -67,7 +67,7 @@ workflows:
         - jtaps_keystore  # configured in Codemagic dashboard
       groups:
         - google_play_credentials  # set GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-      node: 20
+      node: 22
       java: 17
     triggering:
       events:
