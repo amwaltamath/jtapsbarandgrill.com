@@ -45,8 +45,9 @@ workflows:
 
     publishing:
       app_store_connect:
-        # Requires app_store_connect integration configured in Codemagic dashboard
-        auth: integration
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_API_KEY
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
         submit_to_app_store: false  # set true when ready for production
       email:
