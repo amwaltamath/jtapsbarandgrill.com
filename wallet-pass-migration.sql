@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS wallet_passes (
   pass_serial TEXT NOT NULL UNIQUE,
   device_library_id TEXT,
   push_token TEXT,
+  authentication_token TEXT,
   points_snapshot INT DEFAULT 0,
   tier_snapshot TEXT DEFAULT 'bronze',
   last_updated TIMESTAMPTZ DEFAULT NOW(),
@@ -20,6 +21,9 @@ CREATE TABLE IF NOT EXISTS wallet_passes (
 -- Index for fast lookups by user
 CREATE INDEX IF NOT EXISTS idx_wallet_passes_user_id ON wallet_passes(user_id);
 CREATE INDEX IF NOT EXISTS idx_wallet_passes_serial ON wallet_passes(pass_serial);
+CREATE INDEX IF NOT EXISTS idx_wallet_passes_auth_token
+  ON wallet_passes(authentication_token)
+  WHERE authentication_token IS NOT NULL;
 
 -- RLS policies
 ALTER TABLE wallet_passes ENABLE ROW LEVEL SECURITY;

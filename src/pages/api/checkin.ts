@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { supabaseAdmin } from "../../lib/supabase";
+import { pushWalletUpdateForUser } from "../../lib/apns";
 
 const POINTS_PER_CHECKIN = 10;
 const STREAK_BONUS = 5; // extra points for 3+ day streak
@@ -146,6 +147,9 @@ export const POST: APIRoute = async ({ request }) => {
         last_checkin_date: todayStr
       })
       .eq("user_id", user.id);
+
+    // Fire-and-forget: notify Apple Wallet devices of the points change
+    pushWalletUpdateForUser(supabaseAdmin, user.id).catch(() => {});
 
     return new Response(
       JSON.stringify({

@@ -171,13 +171,24 @@ src/
       apple-pass.ts        — GET: generates and downloads .pkpass
       google-pass.ts       — GET: generates Google Wallet save URL
       status.ts            — GET: returns member data + wallet config status
+      apple/v1/
+        log.ts                                         — POST: Apple error log
+        devices/[deviceLibraryIdentifier]/
+          registrations/[passTypeIdentifier]/
+            index.ts       — GET: serial numbers updated since timestamp
+            [serialNumber].ts — POST/DELETE: register/unregister device
+        passes/[passTypeIdentifier]/
+          [serialNumber].ts — GET: fetch latest pass (called after push)
     loyalty-card.astro     — Standalone loyalty card page
+  lib/
+    apns.ts                — APNs HTTP/2 push utility
   components/
     LoyaltyCard.tsx        — React component (card UI, QR code, wallet buttons)
   styles/
     loyalty-card.css       — All loyalty card styling
 
-wallet-pass-migration.sql — Database migration
+wallet-pass-migration.sql  — Database migration (tables, triggers)
+wallet-push-migration.sql  — Adds authentication_token column to wallet_passes
 ```
 
 ### API Endpoints
@@ -187,16 +198,28 @@ wallet-pass-migration.sql — Database migration
 | `/api/wallet/status` | GET | Bearer token | Member data + wallet availability |
 | `/api/wallet/apple-pass` | GET | Bearer token | `.pkpass` file download |
 | `/api/wallet/google-pass` | GET | Bearer token | `{ url: "..." }` save URL |
+| `/api/wallet/apple/v1/devices/{did}/registrations/{type}/{serial}` | POST | ApplePass token | Register device for push |
+| `/api/wallet/apple/v1/devices/{did}/registrations/{type}/{serial}` | DELETE | ApplePass token | Unregister device |
+| `/api/wallet/apple/v1/devices/{did}/registrations/{type}` | GET | — | Serials updated since timestamp |
+| `/api/wallet/apple/v1/passes/{type}/{serial}` | GET | ApplePass token | Latest `.pkpass` |
+| `/api/wallet/apple/v1/log` | POST | — | Apple error logging |
 
-### Data Flow
+### Push Notification Data Flow
 
-1. Customer logs in → visits Dashboard or `/loyalty-card`
-2. `LoyaltyCard` component calls `/api/wallet/status` to get member data + which wallets are configured
-3. Card renders with points, tier, QR code, and available wallet buttons
-4. When customer clicks a wallet button:
-   - **Apple**: Downloads `.pkpass` → customer taps to add to Wallet
-   - **Google**: Opens Google Wallet save URL in new tab
-5. Pass installation tracked in `wallet_passes` table
+When a customer checks in and points are updated:
+1. `checkin.ts` calls `pushWalletUpdateForUser()` (fire-and-forget)
+2. Queries `wallet_passes` for rows with `push_token` set for that user
+3. Sends an empty APNs HTTP/2 push to each registered device
+4. Device wakes up and calls `GET /api/wallet/apple/v1/passes/{type}/{serial}`
+5. Server regenerates the pass with fresh points/tier and returns it
+6. Apple Wallet updates the pass display automatically
+
+### Pass Download Flow (initial install)
+
+1. Customer clicks "Add to Apple Wallet"
+2. `GET /api/wallet/apple-pass` — generates `.pkpass` with `webServiceURL` and a random `authenticationToken` baked in; both stored in `wallet_passes`
+3. Customer adds pass → iOS calls `POST .../registrations/...` with the device push token → stored in `wallet_passes.push_token`
+4. Future check-ins trigger step 1 of the push flow above
 
 ---
 
@@ -210,6 +233,8 @@ wallet-pass-migration.sql — Database migration
 | `APPLE_PASS_KEY_BASE64` | Apple Wallet | Base64 private key |
 | `APPLE_WWDR_CERT_BASE64` | Apple Wallet | Base64 WWDR certificate |
 | `APPLE_PASS_KEY_PASSPHRASE` | Apple Wallet | (Optional) Key passphrase |
+| `APPLE_APNS_ENV` | Push notifications | `production` or `sandbox` (default: `production`) |
+| `PUBLIC_SITE_URL` | Push notifications | Full URL e.g. `https://jtapsbarandgrill.com` (used as `webServiceURL`) |
 | `GOOGLE_WALLET_ISSUER_ID` | Google Wallet | Google Pay issuer ID |
 | `GOOGLE_WALLET_CLASS_ID` | Google Wallet | Loyalty class ID |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Google Wallet | Service account email |

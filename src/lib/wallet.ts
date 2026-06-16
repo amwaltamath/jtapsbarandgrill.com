@@ -46,6 +46,21 @@ interface PassConfig {
   signerKeyPassphrase?: string;
 }
 
+// ── Auth Token ───────────────────────────────────────────────────────────────
+
+/**
+ * Generate a cryptographically random authentication token for a wallet pass.
+ * This token is embedded in the .pkpass and sent back by Apple in the
+ * Authorization header of every web service call so we can verify the request.
+ */
+export function generatePassAuthToken(): string {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
 // ── Tier Helpers ─────────────────────────────────────────────────────────────
 
 export function getTierInfo(tier: string) {
@@ -92,7 +107,10 @@ export function isAppleWalletConfigured(): boolean {
   return getApplePassConfig() !== null;
 }
 
-export async function generateApplePass(member: LoyaltyMember): Promise<Buffer> {
+export async function generateApplePass(
+  member: LoyaltyMember,
+  authToken?: string
+): Promise<Buffer> {
   const config = getApplePassConfig();
   if (!config) {
     throw new Error('Apple Wallet is not configured. Set the required environment variables.');
@@ -100,6 +118,16 @@ export async function generateApplePass(member: LoyaltyMember): Promise<Buffer> 
 
   const tierInfo = getTierInfo(member.tier);
   const serial = `jtaps-loyalty-${member.userId}`;
+
+  // Include web service fields only when an auth token is provided.
+  // This enables push-notification updates after the pass is installed.
+  const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://jtapsbarandgrill.com';
+  const webServiceFields = authToken
+    ? {
+        webServiceURL: `${siteUrl}/api/wallet/apple/v1/`,
+        authenticationToken: authToken,
+      }
+    : {};
 
   const pass = new PKPass(
     {},
@@ -120,6 +148,7 @@ export async function generateApplePass(member: LoyaltyMember): Promise<Buffer> 
       labelColor: 'rgb(200, 200, 200)',
       logoText: 'JTAPS',
       associatedStoreIdentifiers: [],
+      ...webServiceFields,
     }
   );
 

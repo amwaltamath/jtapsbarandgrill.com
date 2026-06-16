@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../../lib/supabase';
-import { generateApplePass, isAppleWalletConfigured, computeTier } from '../../../lib/wallet';
-import type { LoyaltyMember } from '../../../lib/wallet';
+import { generateApplePass, isAppleWalletConfigured, generatePassAuthToken } from '../../../lib/wallet';
+import { getLoyaltyMemberSnapshot } from '../../../lib/loyaltyMember';
 
 export const GET: APIRoute = async ({ request }) => {
   // Check if Apple Wallet is configured
@@ -31,39 +31,23 @@ export const GET: APIRoute = async ({ request }) => {
     );
   }
 
-  // Fetch customer profile
-  const { data: profile, error: profileError } = await supabaseAdmin
-    .from('customer_profiles')
-    .select('name, email, checkin_points, total_checkins, current_streak, created_at, member_since')
-    .eq('user_id', user.id)
-    .single();
-
-  if (profileError || !profile) {
-    return new Response(
-      JSON.stringify({ error: 'Customer profile not found. Please check in first.' }),
-      { status: 404, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
-
-  const points = profile.checkin_points || 0;
-  const tier = computeTier(points);
-
-  const member: LoyaltyMember = {
-    userId: user.id,
-    name: profile.name || user.email?.split('@')[0] || 'Member',
-    email: profile.email || user.email || '',
-    points,
-    tier,
-    totalCheckins: profile.total_checkins || 0,
-    currentStreak: profile.current_streak || 0,
-    memberSince: profile.member_since || profile.created_at,
-  };
-
   try {
-    const passBuffer = await generateApplePass(member);
+    const { member } = await getLoyaltyMemberSnapshot(supabaseAdmin, user);
+
+    // Generate or reuse the authentication token for push notification support
+    const serial = `jtaps-loyalty-${user.id}`;
+
+    const { data: existing } = await supabaseAdmin
+      .from('wallet_passes')
+      .select('authentication_token')
+      .eq('pass_serial', serial)
+      .maybeSingle();
+
+    const authToken = existing?.authentication_token || generatePassAuthToken();
+
+    const passBuffer = await generateApplePass(member, authToken);
 
     // Record the wallet pass in the database
-    const serial = `jtaps-loyalty-${user.id}`;
     await supabaseAdmin
       .from('wallet_passes')
       .upsert(
@@ -71,8 +55,9 @@ export const GET: APIRoute = async ({ request }) => {
           user_id: user.id,
           pass_type: 'apple',
           pass_serial: serial,
-          points_snapshot: points,
-          tier_snapshot: tier,
+          authentication_token: authToken,
+          points_snapshot: member.points,
+          tier_snapshot: member.tier,
           last_updated: new Date().toISOString(),
         },
         { onConflict: 'pass_serial' }

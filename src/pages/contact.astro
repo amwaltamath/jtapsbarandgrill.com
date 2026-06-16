@@ -50,15 +50,68 @@ import Layout from '../layouts/Layout.astro';
             </p>
             <p class="hours-note">*Hours may vary on holidays and game days</p>
           </div>
+        </div>      </div>
+    </section>
+    <section class="contact-form-section">
+      <div class="container contact-form-layout">
+        <div class="contact-form-copy">
+          <p class="eyebrow">Get In Touch</p>
+          <h2>Sent us a message</h2>
+          <p>
+            Questions about events, reservations, or private parties? Send a note and we will get it directly.
+          </p>
+          <ul class="contact-points">
+            <li>Fast response for general inquiries and events</li>
+            <li>Use the form instead of sending a separate email</li>
+            <li>All fields are optional except the basics we need to reply</li>
+          </ul>
+        </div>
 
-          <div class="info-card highlight">
-            <h2>🍺 Happy Hour</h2>
-            <p>
-              <strong>Monday - Friday</strong><br>
-              3pm - 6pm
-            </p>
-            <p>Special pricing on select beers and appetizers!</p>
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-grid">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" required>
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+            </label>
+
+            <label>
+              <span>Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="(513) 555-0123">
+            </label>
+
+            <label>
+              <span>Subject</span>
+              <input type="text" name="subject" placeholder="How can we help?" required>
+            </label>
           </div>
+
+          <label class="message-field">
+            <span>Message</span>
+            <textarea name="message" rows="6" placeholder="Tell us about your event, question, or request." required></textarea>
+          </label>
+
+          <div class="form-honeypot" aria-hidden="true">
+            <label>
+              <span>Website</span>
+              <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <p class="form-status" id="contact-form-status" role="status" aria-live="polite"></p>
+
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+
+        <div id="contact-thank-you" class="thank-you-state" hidden tabindex="-1">
+          <span class="thank-you-icon" aria-hidden="true">✅</span>
+          <h3>Message sent!</h3>
+          <p>Thanks for reaching out. Pete will get back to you as soon as possible.</p>
+          <a href="/" class="form-submit thank-you-home">Back to Home</a>
         </div>
       </div>
     </section>
@@ -157,9 +210,180 @@ import Layout from '../layouts/Layout.astro';
     background: white;
   }
 
+  .contact-form-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #fff8f3 0%, #ffffff 100%);
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .contact-form-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .contact-form-copy {
+    padding: 1rem 0;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+
+  .contact-form-copy h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .contact-form-copy p {
+    line-height: 1.8;
+    color: #333;
+    max-width: 34rem;
+  }
+
+  .contact-points {
+    margin: 1.5rem 0 0;
+    padding-left: 1.2rem;
+    color: #444;
+    line-height: 1.8;
+  }
+
+  .contact-form {
+    background: white;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 0.95rem 1rem;
+    font: inherit;
+    font-size: 1rem; /* prevent iOS auto-zoom (must be >= 16px rendered) */
+    background: #fff;
+    color: #222;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(225, 54, 34, 0.12);
+  }
+
+  .message-field {
+    margin-top: 1rem;
+  }
+
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-status {
+    min-height: 1.5rem;
+    margin: 1rem 0 0;
+    font-weight: 600;
+  }
+
+  .form-submit {
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem 1.25rem;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-1px);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+  }
+
+  .thank-you-state {
+    grid-column: 2;
+    background: white;
+    border-radius: 18px;
+    padding: 3rem 2rem;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+  }
+
+  .thank-you-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .thank-you-state h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .thank-you-state p {
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .thank-you-home {
+    display: inline-flex;
+    text-decoration: none;
   }
 
   .info-grid {
@@ -342,13 +566,40 @@ import Layout from '../layouts/Layout.astro';
     background: rgba(255,255,255,0.1);
   }
 
+  .form-status.success {
+    color: #146c2e;
+  }
+
+  .form-status.error {
+    color: #b42318;
+  }
+
   @media (max-width: 768px) {
+    .contact-hero {
+      padding: 4rem 1.25rem 3rem;
+    }
+
     .contact-hero h1 {
       font-size: 2.5rem;
     }
 
+    .contact-info,
+    .contact-form-section,
+    .features-section,
+    .cta-section {
+      padding: 3rem 1.25rem;
+    }
+
+    .map-section {
+      padding: 2.5rem 1.25rem;
+    }
+
     .info-grid {
       grid-template-columns: 1fr;
+    }
+
+    .info-card {
+      padding: 1.5rem;
     }
 
     .features-section h2,
@@ -356,5 +607,130 @@ import Layout from '../layouts/Layout.astro';
     .cta-section h2 {
       font-size: 2rem;
     }
+
+    /* Stack the two-column form layout */
+    .contact-form-layout {
+      grid-template-columns: 1fr;
+    }
+
+    /* On mobile, show the copy block above the form but keep it compact */
+    .contact-form-copy {
+      padding: 0;
+    }
+
+    .contact-form-copy h2 {
+      font-size: 1.75rem;
+    }
+
+    .contact-points {
+      display: none; /* hide the bullet list to keep the form front and center */
+    }
+
+    /* Stack the 2-col name/email/phone/subject grid */
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form {
+      padding: 1.5rem 1.25rem;
+      border-radius: 14px;
+    }
+
+    /* Thank-you card: reset grid-column so it fills the single column */
+    .thank-you-state {
+      grid-column: 1;
+      padding: 2rem 1.25rem;
+    }
+
+    /* Make the submit button easier to tap */
+    .form-submit {
+      padding: 1.1rem 1.25rem;
+      font-size: 1rem;
+      min-height: 52px;
+    }
+
+    /* Wider touch target for map button */
+    .map-button {
+      display: block;
+      text-align: center;
+    }
+
+    /* Stack CTA buttons full-width */
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cta-button {
+      text-align: center;
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-hero h1 {
+      font-size: 2rem;
+    }
+
+    .contact-form-section {
+      padding: 2.5rem 1rem;
+    }
+
+    .contact-form {
+      padding: 1.25rem 1rem;
+    }
   }
 </style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('contact-form-status');
+  const thankYou = document.getElementById('contact-thank-you');
+
+  if (form && status) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      status.className = 'form-status';
+      status.textContent = '';
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Something went wrong. Please try again.');
+        }
+
+        // Show full thank-you state, hide the form
+        form.closest('.contact-form-layout')?.classList.add('form-sent');
+        if (thankYou) {
+          thankYou.hidden = false;
+          thankYou.focus();
+        }
+        form.hidden = true;
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+        status.classList.add('error');
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send Message';
+        }
+      }
+    });
+  }
+</script>
