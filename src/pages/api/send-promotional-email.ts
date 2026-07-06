@@ -95,7 +95,8 @@ export const POST: APIRoute = async ({ request }) => {
           html: emailHtml,
           text: message,
           headers: {
-            "List-Unsubscribe": `<mailto:${CAMPAIGN_REPLY_TO}?subject=unsubscribe>`
+            "List-Unsubscribe": `<mailto:${CAMPAIGN_REPLY_TO}?subject=unsubscribe>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
           }
         });
 
