@@ -6,6 +6,11 @@ import crypto from "crypto";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+const CAMPAIGN_FROM =
+  import.meta.env.CAMPAIGN_FROM_EMAIL ?? "JTAPS Bar & Grill <info@jtapsbarandgrill.com>";
+const CAMPAIGN_REPLY_TO =
+  import.meta.env.CAMPAIGN_REPLY_TO_EMAIL ?? "info@jtapsbarandgrill.com";
+
 interface Subscriber {
   email: string;
   name?: string;
@@ -83,10 +88,15 @@ export const POST: APIRoute = async ({ request }) => {
         });
 
         await resend.emails.send({
-          from: "JTAPS Bar & Grill <noreply@jtapsbarandgrill.com>",
+          from: CAMPAIGN_FROM,
           to: subscriber.email,
+          replyTo: CAMPAIGN_REPLY_TO,
           subject: subject,
-          html: emailHtml
+          html: emailHtml,
+          text: message,
+          headers: {
+            "List-Unsubscribe": `<mailto:${CAMPAIGN_REPLY_TO}?subject=unsubscribe>`
+          }
         });
 
         sent++;
