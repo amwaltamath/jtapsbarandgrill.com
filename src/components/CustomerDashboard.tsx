@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import CheckIn from './CheckIn';
 import LoyaltyCard from './LoyaltyCard';
+import PushNotifications from './PushNotifications';
 import '../styles/customer-dashboard.css';
 
 interface Game {
@@ -39,7 +40,7 @@ export default function CustomerDashboard() {
   const [specials, setSpecials] = useState<Special[]>([]);
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'checkin' | 'loyalty' | 'games' | 'specials'>('checkin');
+  const [activeTab, setActiveTab] = useState<'checkin' | 'loyalty' | 'games' | 'specials' | 'alerts'>('checkin');
 
   useEffect(() => {
     checkAuth();
@@ -202,6 +203,12 @@ export default function CustomerDashboard() {
         >
           🎉 Specials
         </button>
+        <button
+          className={`nav-tab ${activeTab === 'alerts' ? 'active' : ''}`}
+          onClick={() => setActiveTab('alerts')}
+        >
+          🔔 Alerts
+        </button>
       </div>
 
       <div className="dashboard-content">
@@ -293,6 +300,13 @@ export default function CustomerDashboard() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'alerts' && (
+          <div className="content-section">
+            <h2>Notification Settings</h2>
+            <PushNotifications email={profile?.email} />
           </div>
         )}
       </div>

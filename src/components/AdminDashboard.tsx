@@ -12,6 +12,7 @@ import PromoCodeManager from './admin/PromoCodeManager';
 import AdminUsersManager from './admin/AdminUsersManager';
 import EmailCampaignManager from './admin/EmailCampaignManager';
 import SMSCampaignManager from './admin/SMSCampaignManager';
+import PushCampaignManager from './admin/PushCampaignManager';
 import CheckInManager from './admin/CheckInManager';
 import BeerMenuManager from './admin/BeerMenuManager';
 import POSImportManager from './admin/POSImportManager';
@@ -47,6 +48,7 @@ const NAV_SECTIONS = [
     items: [
       { key: 'email-campaigns', icon: '📧', label: 'Email' },
       { key: 'sms-campaigns', icon: '📱', label: 'SMS' },
+      { key: 'push-campaigns', icon: '🔔', label: 'Push' },
     ]
   },
   {
@@ -523,6 +525,7 @@ export default function AdminDashboard() {
           {activeTab === 'users' && <AdminUsersManager />}
           {activeTab === 'email-campaigns' && <EmailCampaignManager />}
           {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
+          {activeTab === 'push-campaigns' && <PushCampaignManager />}
           {activeTab === 'checkins' && <CheckInManager />}
           {activeTab === 'beer-menu' && <BeerMenuManager />}
           {activeTab === 'pos-import' && <POSImportManager />}
