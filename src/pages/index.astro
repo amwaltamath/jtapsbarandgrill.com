@@ -40,6 +40,25 @@ import Visit from '../components/Visit.astro';
     </div>
   </section>
 
+  <!-- Burger Week Spotlight -->
+  <section class="featured-section burger-week-spotlight">
+    <div class="featured-inner reveal-on-scroll">
+      <div class="featured-image">
+        <img src="/images/jtaps-burger-week.png" alt="Cincinnati Burger Week — Big J Burger $9 at JTAPS Bar and Grill" loading="lazy" width="700" height="500" />
+        <span class="featured-badge">🍔 Burger Week</span>
+      </div>
+      <div class="featured-content">
+        <span class="featured-tag">JULY 13–19 ONLY</span>
+        <h2>Big J Burger — Just $9</h2>
+        <p>JTAPS is in Cincinnati Burger Week! Fresh-cut Angus with our homemade Greek seasoning, loaded with fresh toppings on a toasted bun. Pair it with a Samuel Adams or Sun Cruiser and catch the game on 50+ TVs.</p>
+        <div class="featured-actions">
+          <a href="/burger-week" class="featured-btn primary">Burger Week Details</a>
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="featured-btn secondary">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Featured Item: Wings -->
   <section class="featured-section">
     <div class="featured-inner reveal-on-scroll">
@@ -77,14 +96,14 @@ import Visit from '../components/Visit.astro';
           <span class="highlight-link">View Menu →</span>
         </div>
       </a>
-      <a href="/menu#burgers" class="highlight-card reveal-on-scroll">
+      <a href="/burger-week" class="highlight-card reveal-on-scroll">
         <div class="highlight-img-wrap">
-          <img src="/images/Cincinnati Burger.jpg" alt="Juicy half-pound Angus cheeseburger at JTAPS sports bar Cincinnati" loading="lazy" width="400" height="300" />
+          <img src="/images/jtaps-burger-week.png" alt="Big J Burger — Cincinnati Burger Week special at JTAPS" loading="lazy" width="400" height="300" />
         </div>
         <div class="highlight-info">
-          <h3>Juicy Burgers</h3>
-          <p>Half-pound Angus beef patties cooked to juicy perfection</p>
-          <span class="highlight-link">View Menu →</span>
+          <h3>Big J Burger — $9</h3>
+          <p>Cincinnati Burger Week special, July 13–19 only</p>
+          <span class="highlight-link">Burger Week →</span>
         </div>
       </a>
       <a href="/menu#sandwiches" class="highlight-card reveal-on-scroll">
@@ -177,6 +196,12 @@ import Visit from '../components/Visit.astro';
   .featured-section {
     padding: 5rem 2rem;
     background: var(--bg-warm);
+  }
+
+  .burger-week-spotlight {
+    background: #fff;
+    border-top: 4px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
   }
 
   .featured-inner {

@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/burger-week.css';
+
+const title = 'Cincinnati Burger Week at JTAPS | Big J Burger $9';
+const description = 'JTAPS is participating in Cincinnati Burger Week July 13–19, 2026. Get our Big J Burger for $9 — fresh-cut Angus with Greek seasoning. Dine in at 6441 Glenway Ave or order online!';
+const ogImage = '/images/jtaps-burger-week.png';
+---
+
+<Layout title={title} description={description} ogImage={ogImage} keywords="cincinnati burger week, burger week cincinnati, big j burger, jtaps burger, best burgers cincinnati, glenway ave restaurant">
+  <div class="burger-week-page">
+    <!-- Liquid blob background -->
+    <div class="bw-scene" aria-hidden="true">
+      <div class="bw-scene__blob bw-scene__blob--1"></div>
+      <div class="bw-scene__blob bw-scene__blob--2"></div>
+      <div class="bw-scene__blob bw-scene__blob--3"></div>
+    </div>
+
+    <!-- Full-screen Hero -->
+    <section class="bw-hero">
+      <div class="bw-hero-bg"></div>
+      <div class="bw-hero-content bw-glass bw-glass--liquid bw-hero-glass">
+        <span class="bw-badge bw-glass bw-glass--accent">🍔 Cincinnati Burger Week</span>
+        <p class="bw-dates">July 13 – 19, 2026</p>
+        <h1>The Big J Burger</h1>
+        <p class="bw-hero-sub">
+          Fresh-cut Angus with our homemade Greek seasoning — lettuce, tomato, red onion, mayo, and your choice of cheese on a toasted bun. Just <strong>$9</strong> all week.
+        </p>
+        <div class="bw-hero-cta">
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="bw-glass bw-btn bw-btn--primary">Order Online</a>
+          <a href="tel:5135749777" class="bw-glass bw-btn bw-btn--ghost">Call (513) 574-9777</a>
+        </div>
+      </div>
+      <div class="bw-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="bw-proof">
+      <div class="bw-proof-container">
+        <div class="bw-glass bw-glass-card bw-proof-item reveal-on-scroll">
+          <span class="bw-proof-number">$9</span>
+          <span class="bw-proof-label">Big J Burger</span>
+        </div>
+        <div class="bw-glass bw-glass-card bw-proof-item reveal-on-scroll">
+          <span class="bw-proof-number">7</span>
+          <span class="bw-proof-label">Days Only</span>
+        </div>
+        <div class="bw-glass bw-glass-card bw-proof-item reveal-on-scroll">
+          <span class="bw-proof-number">11–10</span>
+          <span class="bw-proof-label">Open Daily</span>
+        </div>
+        <div class="bw-glass bw-glass-card bw-proof-item reveal-on-scroll">
+          <span class="bw-proof-number">50+</span>
+          <span class="bw-proof-label">HD TVs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Burger Showcase -->
+    <section class="bw-showcase">
+      <div class="bw-showcase-container">
+        <div class="bw-glass bw-glass--bright bw-showcase-flyer reveal-on-scroll">
+          <img
+            src="/images/jtaps-burger-week.png"
+            alt="Official Cincinnati Burger Week flyer — Big J Burger $9 at JTAPS"
+            width="700"
+            height="906"
+            loading="lazy"
+          />
+        </div>
+        <div class="bw-glass bw-glass--liquid bw-showcase-text reveal-on-scroll">
+          <span class="bw-section-tag">BURGER WEEK SPECIAL</span>
+          <h2>Meet the Big J Burger</h2>
+          <p>
+            Our 2026 Cincinnati Burger Week offering is built on what JTAPS does best — bold flavor, fresh ingredients, and a neighborhood sports bar vibe you can't get anywhere else.
+          </p>
+          <ul class="bw-burger-specs">
+            <li><strong>Fresh-cut Angus beef</strong> seasoned with our homemade Greek blend</li>
+            <li><strong>Fresh-cut tomatoes</strong>, red onion, and crisp lettuce</li>
+            <li><strong>Your choice of cheese:</strong> American, Swiss, Provolone, or Pepper Jack</li>
+            <li><strong>Toasted bun</strong> with mayo — served with Saratoga chips</li>
+          </ul>
+          <div class="bw-price-tag">
+            <span class="bw-price-amount">$9</span>
+            <span class="bw-price-note">Dine-in during Burger Week, July 13–19</span>
+          </div>
+          <a href="/menu#burgers" class="bw-btn-text">See our full burger menu →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drink Pairings -->
+    <section class="bw-pairings">
+      <div class="bw-pairings-inner">
+        <h2 class="bw-section-title reveal-on-scroll">Perfect Pairings</h2>
+        <p class="bw-section-subtitle reveal-on-scroll">Grab a cold one with your Big J Burger — featured sponsors of Cincinnati Burger Week</p>
+        <div class="bw-pairings-grid">
+          <div class="bw-glass bw-glass-card bw-pairing-card reveal-on-scroll">
+            <span class="bw-pairing-icon">🍺</span>
+            <h3>Samuel Adams American Light</h3>
+            <p>Crisp, refreshing, and the perfect complement to a loaded burger after a long day.</p>
+          </div>
+          <div class="bw-glass bw-glass-card bw-pairing-card reveal-on-scroll">
+            <span class="bw-pairing-icon">🧊</span>
+            <h3>Sun Cruiser Classic Iced Tea + Vodka</h3>
+            <p>Light, easy-drinking, and made for patio weather — pair it with your Big J and Saratoga chips.</p>
+          </div>
+          <div class="bw-glass bw-glass-card bw-pairing-card reveal-on-scroll">
+            <span class="bw-pairing-icon">📺</span>
+            <h3>Game Day at JTAPS</h3>
+            <p>50+ HD TVs, outdoor seating, and the best sports bar atmosphere on Glenway Ave. Stay awhile.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How Burger Week Works -->
+    <section class="bw-how">
+      <div class="bw-how-inner">
+        <h2 class="bw-section-title reveal-on-scroll">How Cincinnati Burger Week Works</h2>
+        <p class="bw-section-subtitle reveal-on-scroll">Join the citywide celebration — eat burgers, check in, and compete for prizes</p>
+        <div class="bw-steps-grid">
+          <div class="bw-glass bw-glass-card bw-step-card reveal-on-scroll">
+            <span class="bw-step-num">1</span>
+            <h3>Get the App</h3>
+            <p>Download the official Cincinnati Burger Week app to map your week and track participating restaurants.</p>
+          </div>
+          <div class="bw-glass bw-glass-card bw-step-card reveal-on-scroll">
+            <span class="bw-step-num">2</span>
+            <h3>Come to JTAPS</h3>
+            <p>Order the Big J Burger for $9, dine in, and soak up the game-day atmosphere on Glenway Ave.</p>
+          </div>
+          <div class="bw-glass bw-glass-card bw-step-card reveal-on-scroll">
+            <span class="bw-step-num">3</span>
+            <h3>Check In &amp; Share</h3>
+            <p>Check in on the app to earn points. Share with <strong>#CincyBurgerWeek</strong> and tag <strong>@cincyburgerweek</strong>.</p>
+          </div>
+        </div>
+        <p class="bw-glass bw-glass--accent bw-how-prize reveal-on-scroll">
+          Check in at <strong>five participating restaurants</strong> during the week to enter a drawing for <strong>$500 in gift cards</strong>. The biggest burger lover in Cincinnati wins too!
+        </p>
+        <a href="https://www.cincinnatiburgerweek.com/" target="_blank" rel="noopener" class="bw-glass bw-btn bw-btn--ghost reveal-on-scroll">Visit cincinnatiburgerweek.com →</a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bw-cta">
+      <div class="bw-glass bw-glass--liquid bw-cta-content reveal-on-scroll">
+        <h2>Don't Miss the Big J Burger</h2>
+        <p>Burger Week ends July 19. Come hungry — we're open 11 AM to 10 PM with outdoor seating at 6441 Glenway Ave.</p>
+        <div class="bw-cta-actions">
+          <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="bw-glass bw-btn bw-btn--primary">Order Online Now</a>
+          <a href="tel:5135749777" class="bw-glass bw-btn bw-btn--ghost">Call (513) 574-9777</a>
+        </div>
+        <p class="bw-cta-address">📍 JTAPS Bar &amp; Grill — 6441 Glenway Ave, Cincinnati, OH 45211</p>
+      </div>
+    </section>
+  </div>
+</Layout>
