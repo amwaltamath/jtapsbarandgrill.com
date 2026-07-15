@@ -1,0 +1,228 @@
+---
+const foodItems = [
+  { src: '/images/Cincinnati Wings.jpg', alt: 'Famous Pete\'s Sauce wings at JTAPS Cincinnati', label: 'Wings' },
+  { src: '/images/Cincinnati Gyro.jpg', alt: 'Hand-carved Greek gyros at JTAPS Bar and Grill', label: 'Gyros' },
+  { src: '/images/Cincinnati Burger.jpg', alt: 'Juicy Angus cheeseburger at JTAPS sports bar', label: 'Burgers' },
+  { src: '/images/Cincinnati Sandwich.jpg', alt: 'Massive sandwiches at JTAPS Cincinnati', label: 'Sandwiches' },
+  { src: '/images/Cincinnati Salad.jpg', alt: 'Premium salads at JTAPS Bar and Grill', label: 'Salads' },
+  { src: '/images/Sides.jpg', alt: 'Saratoga chips and sides at JTAPS', label: 'Sides' },
+  { src: '/images/menuitems/gyrolamb.jpg', alt: 'Lamb gyro close-up at JTAPS', label: 'Lamb Gyro' },
+  { src: '/images/menuitems/loadedfries2.jpg', alt: 'Loaded fries at JTAPS Bar and Grill', label: 'Loaded Fries' },
+];
+
+const count = foodItems.length;
+---
+
+<section class="food-carousel-section" aria-label="JTAPS food gallery">
+  <div class="food-carousel-header reveal-on-scroll">
+    <span class="section-tag">FROM OUR KITCHEN</span>
+    <h2>Taste the JTAPS Menu</h2>
+    <p>Wings, gyros, burgers, and everything in between — spinning proof that game day tastes better here.</p>
+  </div>
+
+  <div class="food-carousel-scene" style={`--n: ${count}`}>
+    <div class="food-carousel-pivot">
+      <div class="food-carousel-ring">
+        {foodItems.map((item, i) => (
+          <figure class="food-carousel-card" style={`--i: ${i}`}>
+            <img
+              src={item.src}
+              alt={item.alt}
+              width="280"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>{item.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="food-carousel-cta reveal-on-scroll">
+    <a href="/menu" class="carousel-menu-btn">Explore Full Menu →</a>
+  </div>
+</section>
+
+<style>
+  .food-carousel-section {
+    width: 100%;
+    padding: 5rem 0 4rem;
+    background: linear-gradient(180deg, var(--bg-warm) 0%, #fff 100%);
+    overflow: hidden;
+  }
+
+  .food-carousel-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    padding: 0 1.5rem;
+  }
+
+  .section-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .food-carousel-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+  }
+
+  .food-carousel-header p {
+    font-size: 1.05rem;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /*
+   * CodePen carousel math with a locked pivot.
+   * Pivot centers via layout (no transform). Only .ring rotates.
+   */
+  .food-carousel-scene {
+    --w: 17.5em;
+    position: relative;
+    width: 100%;
+    height: 28em;
+    overflow: hidden;
+    perspective: 35em;
+    perspective-origin: 50% 50%;
+    margin-bottom: 2.5rem;
+    mask-image: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+    -webkit-mask-image: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+  }
+
+  .food-carousel-pivot {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
+    pointer-events: none;
+  }
+
+  .food-carousel-ring {
+    display: grid;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    animation: food-carousel-ry 32s linear infinite;
+    pointer-events: auto;
+  }
+
+  .food-carousel-scene:hover .food-carousel-ring {
+    animation-play-state: paused;
+  }
+
+  @keyframes food-carousel-ry {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+
+  .food-carousel-card {
+    --ba: calc(1turn / var(--n));
+    grid-area: 1 / 1;
+    width: var(--w);
+    margin: 0;
+    position: relative;
+    aspect-ratio: 7 / 10;
+    border-radius: 1.5em;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform-origin: center center;
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.25),
+      0 0 0 3px rgba(225, 54, 34, 0.15);
+    transform:
+      rotateY(calc(var(--i) * var(--ba)))
+      translateZ(calc(-1 * (.5 * var(--w) + .5em) / tan(.5 * var(--ba))));
+  }
+
+  .food-carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 1.5em;
+  }
+
+  .food-carousel-card figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.6rem 0.75rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .food-carousel-cta {
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .carousel-menu-btn {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-decoration: none;
+    border: 2px solid var(--secondary-color);
+    padding: 0.8rem 2.5rem;
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+  }
+
+  .carousel-menu-btn:hover {
+    background: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .food-carousel-ring {
+      animation-duration: 128s;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .food-carousel-section {
+      padding: 3.5rem 0 3rem;
+    }
+
+    .food-carousel-scene {
+      --w: 13em;
+      height: 22em;
+      perspective: 28em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .food-carousel-scene {
+      --w: 11em;
+      height: 18em;
+      perspective: 22em;
+    }
+
+    .food-carousel-card figcaption {
+      font-size: 0.9rem;
+    }
+  }
+</style>
