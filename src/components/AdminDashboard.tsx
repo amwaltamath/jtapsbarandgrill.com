@@ -16,6 +16,7 @@ import PushCampaignManager from './admin/PushCampaignManager';
 import CheckInManager from './admin/CheckInManager';
 import BeerMenuManager from './admin/BeerMenuManager';
 import POSImportManager from './admin/POSImportManager';
+import ReviewManager from './admin/ReviewManager';
 
 const NAV_SECTIONS = [
   {
@@ -38,6 +39,7 @@ const NAV_SECTIONS = [
     label: 'Customers',
     items: [
       { key: 'checkins', icon: '📍', label: 'Check-Ins' },
+      { key: 'reviews', icon: '⭐', label: 'Reviews' },
       { key: 'loyalty', icon: '💳', label: 'Loyalty' },
       { key: 'promos', icon: '🎟️', label: 'Promo Codes' },
       { key: 'users', icon: '👥', label: 'Users' },
@@ -527,6 +529,7 @@ export default function AdminDashboard() {
           {activeTab === 'sms-campaigns' && <SMSCampaignManager />}
           {activeTab === 'push-campaigns' && <PushCampaignManager />}
           {activeTab === 'checkins' && <CheckInManager />}
+          {activeTab === 'reviews' && <ReviewManager />}
           {activeTab === 'beer-menu' && <BeerMenuManager />}
           {activeTab === 'pos-import' && <POSImportManager />}
         </div>
