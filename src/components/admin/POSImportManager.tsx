@@ -122,10 +122,70 @@ export default function POSImportManager() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [fileName, setFileName] = useState('');
+  const [posConfigured, setPosConfigured] = useState<boolean | null>(null);
+  const [lookupPhone, setLookupPhone] = useState('');
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [lookupResult, setLookupResult] = useState<string>('');
 
   useEffect(() => {
     fetchImportLogs();
+    fetchPosStatus();
   }, []);
+
+  const fetchPosStatus = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+      const response = await fetch('/api/admin/pos-inquiry', {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      const result = await response.json();
+      setPosConfigured(Boolean(result.configured));
+    } catch {
+      setPosConfigured(false);
+    }
+  };
+
+  const handlePosLookup = async () => {
+    if (!lookupPhone.trim()) return;
+    setLookupLoading(true);
+    setError('');
+    setSuccess('');
+    setLookupResult('');
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+
+      const response = await fetch('/api/admin/pos-inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ phone: lookupPhone.trim() }),
+      });
+
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Lookup failed');
+
+      if (!result.inquiry?.found) {
+        setLookupResult(`Not found in POS: ${result.inquiry?.message || 'No account for that phone.'}`);
+      } else {
+        const points = result.inquiry.balance ?? result.inquiry.purchase ?? 0;
+        const card = result.inquiry.cardNumber ? ` Card ...${result.inquiry.cardNumber.slice(-6)}` : '';
+        setLookupResult(
+          `Found in POS — ${points} points.${card}` +
+          (result.sync?.synced ? ' Synced to JTAPS database.' : '')
+        );
+        setSuccess(result.sync?.message || 'POS lookup complete.');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'POS lookup failed');
+    } finally {
+      setLookupLoading(false);
+    }
+  };
 
   const fetchImportLogs = async () => {
     const { data } = await supabase
@@ -237,12 +297,50 @@ export default function POSImportManager() {
       <div className="section-header">
         <h2>POS Import</h2>
         <p style={{ color: '#999', marginTop: '4px' }}>
-          Upload your POS member export CSV to sync customers, points, and contact info.
+          Sync customer points from Shift4 / Focus POS live, or upload a CSV export.
         </p>
       </div>
 
       {error && <div className="error-message" style={{ whiteSpace: 'pre-wrap' }}>{error}</div>}
       {success && <div className="success-message">{success}</div>}
+
+      <div className="form-card" style={{ marginBottom: '24px' }}>
+        <h3>Live POS Lookup (INQUIRY)</h3>
+        <p style={{ color: '#aaa', fontSize: '14px', marginBottom: '16px' }}>
+          Look up a customer by mobile number in Focus POS and sync their points into JTAPS automatically.
+        </p>
+        <p style={{
+          color: posConfigured ? '#4ade80' : '#fbbf24',
+          fontSize: '13px',
+          marginBottom: '12px',
+        }}>
+          {posConfigured === null
+            ? 'Checking Focus POS configuration...'
+            : posConfigured
+              ? 'Focus POS API connected (env configured).'
+              : 'Focus POS API not configured — add FOCUS_POS_* env vars in Vercel.'}
+        </p>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <input
+            type="tel"
+            value={lookupPhone}
+            onChange={(e) => setLookupPhone(e.target.value)}
+            placeholder="Mobile number (10 digits)"
+            className="form-input"
+            style={{ maxWidth: '240px' }}
+          />
+          <button
+            className="btn btn-primary"
+            onClick={handlePosLookup}
+            disabled={lookupLoading || !lookupPhone.trim()}
+          >
+            {lookupLoading ? 'Looking up...' : 'Lookup & Sync'}
+          </button>
+        </div>
+        {lookupResult && (
+          <p style={{ color: '#ccc', marginTop: '12px', fontSize: '14px' }}>{lookupResult}</p>
+        )}
+      </div>
 
       {/* Upload Section */}
       <div className="form-card" style={{ marginBottom: '24px' }}>

@@ -65,6 +65,8 @@ export default function LoyaltyCard() {
   const [downloading, setDownloading] = useState<'apple' | 'google' | null>(null);
   const [showQR, setShowQR] = useState(false);
   const [flipped, setFlipped] = useState(false);
+  const [syncingPos, setSyncingPos] = useState(false);
+  const [posSyncMessage, setPosSyncMessage] = useState('');
 
   const fetchStatus = useCallback(async () => {
     try {
@@ -160,6 +162,40 @@ export default function LoyaltyCard() {
     }
   };
 
+  const handlePosSync = async () => {
+    setSyncingPos(true);
+    setPosSyncMessage('');
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+
+      const res = await fetch('/api/pos/sync', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      });
+
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error || 'POS sync failed');
+
+      if (body.sync?.synced) {
+        setPosSyncMessage(body.sync.message);
+        await fetchStatus();
+      } else if (body.inquiry?.found === false) {
+        setPosSyncMessage('No POS account found for your phone yet. Ask staff to enroll you in rewards.');
+      } else {
+        setPosSyncMessage(body.sync?.message || 'POS sync completed.');
+      }
+    } catch (err: any) {
+      setPosSyncMessage(err.message || 'Could not sync POS points.');
+    } finally {
+      setSyncingPos(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="loyalty-card-container">
@@ -207,6 +243,21 @@ export default function LoyaltyCard() {
         <p className="section-subtitle">
           Save to your phone's wallet for quick access every visit
         </p>
+
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <button
+            type="button"
+            onClick={handlePosSync}
+            disabled={syncingPos}
+            className="qr-toggle-btn"
+            style={{ marginBottom: posSyncMessage ? '0.5rem' : 0 }}
+          >
+            {syncingPos ? 'Syncing POS points...' : '🔄 Refresh POS Points'}
+          </button>
+          {posSyncMessage && (
+            <p style={{ color: '#666', fontSize: '0.9rem', margin: 0 }}>{posSyncMessage}</p>
+          )}
+        </div>
 
         {/* Card */}
         <div className={`loyalty-card-wrapper ${flipped ? 'flipped' : ''}`} onClick={() => setFlipped(!flipped)}>

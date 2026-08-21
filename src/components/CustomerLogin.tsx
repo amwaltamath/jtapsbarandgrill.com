@@ -118,6 +118,20 @@ export default function CustomerLogin() {
         if (profileError) {
           console.error('Profile creation error:', profileError);
         }
+
+        // Register or sync loyalty account with Focus POS when phone is provided
+        if (formData.phone.trim() && data.session?.access_token) {
+          try {
+            await fetch('/api/pos/register-member', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${data.session.access_token}`,
+              },
+            });
+          } catch (posError) {
+            console.warn('POS register-member skipped:', posError);
+          }
+        }
       }
 
       setSuccess('Account created! Logging you in...');

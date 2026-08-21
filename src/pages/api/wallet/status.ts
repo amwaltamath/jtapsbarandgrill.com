@@ -1,6 +1,32 @@
 import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../../lib/supabase';
-import { isAppleWalletConfigured, isGoogleWalletConfigured, computeTier } from '../../../lib/wallet';
+import { addMember, inquiryByPhone, isFocusPosConfigured } from '../../../lib/focusPos';
+import { applyInquiryToDatabase } from '../../../lib/posSync';
+import { computeTier, isAppleWalletConfigured, isGoogleWalletConfigured } from '../../../lib/wallet';
+
+async function syncPosPointsForUser(userId: string, email: string | undefined) {
+  if (!isFocusPosConfigured() || !supabaseAdmin) return;
+
+  const { data: profile } = await supabaseAdmin
+    .from('customer_profiles')
+    .select('name, email, phone')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  const phone = profile?.phone;
+  if (!phone) return;
+
+  try {
+    const inquiry = await inquiryByPhone(phone);
+    await applyInquiryToDatabase(supabaseAdmin, inquiry, {
+      email: profile?.email || email,
+      name: profile?.name,
+      phone,
+    });
+  } catch (error) {
+    console.warn('Background POS sync skipped:', error);
+  }
+}
 
 export const GET: APIRoute = async ({ request }) => {
   const authHeader = request.headers.get('Authorization');
@@ -76,6 +102,8 @@ export const GET: APIRoute = async ({ request }) => {
       last_checkin_date: null,
     };
   }
+
+  await syncPosPointsForUser(user.id, user.email);
 
   // Merge check-in points with POS loyalty points
   const checkinPoints = profile.checkin_points || 0;
