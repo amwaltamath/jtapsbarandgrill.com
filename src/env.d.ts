@@ -14,6 +14,7 @@ interface ImportMetaEnv {
   readonly FOCUS_POS_MEMO?: string;
   readonly FOCUS_POS_OPERATOR_ID?: string;
   readonly FOCUS_POS_REQUEST_FORMAT?: string;
+  readonly FOCUS_POS_XML_PARAM?: string;
 }
 
 interface ImportMeta {

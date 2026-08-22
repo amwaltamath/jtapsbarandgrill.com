@@ -11,6 +11,8 @@ export interface FocusPosConfig {
   memo: string;
   operatorId: string;
   requestFormat: 'form' | 'xml';
+  /** Form field name for TStream payload — `xmlData` (cloud) or `sendxmlData` (local Comm Engine) */
+  xmlParam: string;
 }
 
 export interface FocusInquiryResult {
@@ -49,6 +51,7 @@ export function getFocusPosConfig(): FocusPosConfig | null {
   }
 
   const format = import.meta.env.FOCUS_POS_REQUEST_FORMAT?.trim().toLowerCase();
+  const xmlParam = import.meta.env.FOCUS_POS_XML_PARAM?.trim() || 'xmlData';
   return {
     apiUrl,
     userId,
@@ -57,6 +60,7 @@ export function getFocusPosConfig(): FocusPosConfig | null {
     memo: import.meta.env.FOCUS_POS_MEMO?.trim() || '10.1.250717',
     operatorId: import.meta.env.FOCUS_POS_OPERATOR_ID?.trim() || 'JTAPS-Web',
     requestFormat: format === 'xml' ? 'xml' : 'form',
+    xmlParam,
   };
 }
 
@@ -253,7 +257,7 @@ export async function sendFocusPosRequest(xml: string, config: FocusPosConfig): 
       body: xml,
     });
   } else {
-    const body = new URLSearchParams({ sendxmlData: xml });
+    const body = new URLSearchParams({ [config.xmlParam]: xml });
     response = await fetch(config.apiUrl, {
       method: 'POST',
       headers: {
