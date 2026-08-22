@@ -21,8 +21,37 @@
  *   GOOGLE_SERVICE_ACCOUNT_KEY_BASE64 - Base64-encoded service account private key
  */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { PKPass } from 'passkit-generator';
 import { GoogleAuth } from 'google-auth-library';
+
+const PASS_ASSET_FILES = ['icon.png', 'icon@2x.png', 'logo.png', 'logo@2x.png'] as const;
+let passAssetBuffers: Record<(typeof PASS_ASSET_FILES)[number], Buffer> | null = null;
+
+/** Apple requires icon (and logo for store cards) inside every .pkpass bundle. */
+function getPassAssetBuffers(): Record<(typeof PASS_ASSET_FILES)[number], Buffer> {
+  if (passAssetBuffers) return passAssetBuffers;
+
+  const candidateDirs = [
+    path.join(process.cwd(), 'wallet-pass-model'),
+    path.join(path.dirname(fileURLToPath(import.meta.url)), '../../wallet-pass-model'),
+  ];
+
+  const modelDir = candidateDirs.find((dir) => fs.existsSync(path.join(dir, 'icon.png')));
+  if (!modelDir) {
+    throw new Error(
+      'Wallet pass images not found. Expected wallet-pass-model/icon.png in the deployment bundle.'
+    );
+  }
+
+  passAssetBuffers = Object.fromEntries(
+    PASS_ASSET_FILES.map((file) => [file, fs.readFileSync(path.join(modelDir, file))])
+  ) as Record<(typeof PASS_ASSET_FILES)[number], Buffer>;
+
+  return passAssetBuffers;
+}
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -130,7 +159,7 @@ export async function generateApplePass(
     : {};
 
   const pass = new PKPass(
-    {},
+    getPassAssetBuffers(),
     {
       signerCert: config.signerCert,
       signerKey: config.signerKey,

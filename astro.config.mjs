@@ -8,5 +8,12 @@ export default defineConfig({
   site: 'https://jtapsbarandgrill.com',
   integrations: [react(), sitemap()],
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel({
+    includeFiles: [
+      './wallet-pass-model/icon.png',
+      './wallet-pass-model/icon@2x.png',
+      './wallet-pass-model/logo.png',
+      './wallet-pass-model/logo@2x.png',
+    ],
+  }),
 });
