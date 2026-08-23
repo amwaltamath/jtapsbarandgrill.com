@@ -311,7 +311,7 @@ export default function LoyaltyCard() {
               <div className="card-qr-section">
                 <QRCodeSVG
                   value={`https://jtapsbarandgrill.com/dashboard?ref=${member.userId}`}
-                  size={160}
+                  size={120}
                   bgColor="white"
                   fgColor="#1a1a1a"
                   level="M"
