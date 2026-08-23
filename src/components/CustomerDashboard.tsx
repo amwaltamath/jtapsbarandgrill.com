@@ -40,7 +40,7 @@ export default function CustomerDashboard() {
   const [specials, setSpecials] = useState<Special[]>([]);
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'checkin' | 'loyalty' | 'games' | 'specials' | 'alerts'>('checkin');
+  const [activeTab, setActiveTab] = useState<'checkin' | 'loyalty' | 'games' | 'specials' | 'alerts'>('loyalty');
 
   useEffect(() => {
     checkAuth();
@@ -180,12 +180,6 @@ export default function CustomerDashboard() {
 
       <div className="dashboard-nav">
         <button
-          className={`nav-tab ${activeTab === 'checkin' ? 'active' : ''}`}
-          onClick={() => setActiveTab('checkin')}
-        >
-          📍 Check In
-        </button>
-        <button
           className={`nav-tab ${activeTab === 'loyalty' ? 'active' : ''}`}
           onClick={() => setActiveTab('loyalty')}
         >
@@ -208,6 +202,12 @@ export default function CustomerDashboard() {
           onClick={() => setActiveTab('alerts')}
         >
           🔔 Alerts
+        </button>
+        <button
+          className={`nav-tab ${activeTab === 'checkin' ? 'active' : ''}`}
+          onClick={() => setActiveTab('checkin')}
+        >
+          📍 Check In
         </button>
       </div>
 

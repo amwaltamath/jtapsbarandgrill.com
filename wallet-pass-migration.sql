@@ -18,6 +18,10 @@ CREATE TABLE IF NOT EXISTS wallet_passes (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Backfill columns if wallet_passes was created from an older migration
+ALTER TABLE wallet_passes
+  ADD COLUMN IF NOT EXISTS authentication_token TEXT;
+
 -- Index for fast lookups by user
 CREATE INDEX IF NOT EXISTS idx_wallet_passes_user_id ON wallet_passes(user_id);
 CREATE INDEX IF NOT EXISTS idx_wallet_passes_serial ON wallet_passes(pass_serial);
