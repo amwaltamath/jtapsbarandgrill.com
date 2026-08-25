@@ -40,6 +40,18 @@ import Visit from '../components/Visit.astro';
     </div>
   </section>
 
+  <!-- Cincinnati Wing Week -->
+  <section class="wing-week-spotlight reveal-on-scroll">
+    <div class="wing-week-spotlight__inner">
+      <div class="wing-week-spotlight__copy">
+        <span class="wing-week-spotlight__badge">🍗 Cincinnati Wing Week · Aug 24–30</span>
+        <h2>Any 7 Wings for $8</h2>
+        <p>Your choice of sauce all week — celery and dressing not included.</p>
+      </div>
+      <a href="/wing-week" class="wing-week-spotlight__cta">See Wing Week Specials →</a>
+    </div>
+  </section>
+
   <!-- Featured Item: Wings -->
   <section class="featured-section">
     <div class="featured-inner reveal-on-scroll">
@@ -172,6 +184,66 @@ import Visit from '../components/Visit.astro';
     font-size: 0.82rem;
     color: #aaa;
     letter-spacing: 0.5px;
+  }
+
+  /* ─── Wing Week Spotlight ─── */
+  .wing-week-spotlight {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1810 50%, var(--secondary-color) 100%);
+    padding: 2rem 1.5rem;
+  }
+
+  .wing-week-spotlight__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .wing-week-spotlight__badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffd699;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+  }
+
+  .wing-week-spotlight__copy h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: #fff;
+    margin: 0 0 0.35rem;
+    letter-spacing: 0.5px;
+  }
+
+  .wing-week-spotlight__copy p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    max-width: 560px;
+  }
+
+  .wing-week-spotlight__cta {
+    display: inline-block;
+    background: #fff;
+    color: var(--secondary-color);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .wing-week-spotlight__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   }
 
   /* ─── Featured Section ─── */

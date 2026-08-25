@@ -1,0 +1,746 @@
+/* ==========================================================================
+   Cincinnati Wing Week — Liquid Glass Design
+   ========================================================================== */
+
+.wing-week-page {
+  /* Brand */
+  --ww-red: #E13622;
+  --ww-red-deep: #9e2214;
+  --ww-red-glow: rgba(225, 54, 34, 0.45);
+  --ww-dark: #1a1a1a;
+  --ww-gold: #D4AF37;
+  --ww-amber: #ff8c42;
+  --ww-heading: 'Bebas Neue', 'Impact', sans-serif;
+
+  /* Glass tokens */
+  --ww-glass-surface: rgba(255, 255, 255, 0.1);
+  --ww-glass-surface-md: rgba(255, 255, 255, 0.16);
+  --ww-glass-surface-lg: rgba(255, 255, 255, 0.24);
+  --ww-glass-dark: rgba(0, 0, 0, 0.22);
+  --ww-glass-border: rgba(255, 255, 255, 0.28);
+  --ww-glass-border-subtle: rgba(255, 255, 255, 0.12);
+  --ww-glass-border-bright: rgba(255, 255, 255, 0.55);
+  --ww-blur-sm: blur(10px);
+  --ww-blur-md: blur(20px);
+  --ww-blur-lg: blur(36px);
+  --ww-blur-xl: blur(64px);
+  --ww-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  --ww-shadow-float: 0 24px 64px rgba(0, 0, 0, 0.45),
+    0 4px 16px rgba(0, 0, 0, 0.25);
+  --ww-reflection: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  --ww-ease-liquid: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ww-ease-glass: cubic-bezier(0.22, 0.68, 0, 1.2);
+
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  width: 100%;
+  color: #fff;
+  background: #0a0806;
+}
+
+.wing-week-page > *:not(.ww-scene) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Liquid blob scene ─── */
+.wing-week-page .ww-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wing-week-page .ww-scene__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: ww-blob-drift var(--ww-dur, 18s) ease-in-out infinite alternate;
+}
+
+.wing-week-page .ww-scene__blob--1 {
+  width: 680px;
+  height: 680px;
+  background: radial-gradient(circle, var(--ww-red) 0%, #6b1210 70%);
+  top: -180px;
+  left: -140px;
+  --ww-dur: 22s;
+}
+
+.wing-week-page .ww-scene__blob--2 {
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, var(--ww-gold) 0%, var(--ww-amber) 65%);
+  bottom: 10%;
+  right: -120px;
+  --ww-dur: 17s;
+  animation-delay: -8s;
+}
+
+.wing-week-page .ww-scene__blob--3 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #ff6b4a 0%, var(--ww-red-deep) 70%);
+  top: 42%;
+  left: 38%;
+  --ww-dur: 25s;
+  animation-delay: -13s;
+}
+
+@keyframes ww-blob-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.08); }
+  66% { transform: translate(-40px, 60px) scale(0.94); }
+  100% { transform: translate(30px, 30px) scale(1.04); }
+}
+
+/* ─── Glass utilities ─── */
+.wing-week-page .ww-glass {
+  backdrop-filter: var(--ww-blur-md);
+  -webkit-backdrop-filter: var(--ww-blur-md);
+  background: var(--ww-glass-surface);
+  border: 1px solid var(--ww-glass-border);
+  box-shadow: var(--ww-shadow-glass);
+  position: relative;
+  overflow: hidden;
+}
+
+.wing-week-page .ww-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ww-reflection);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.wing-week-page .ww-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.wing-week-page .ww-glass--liquid {
+  backdrop-filter: var(--ww-blur-xl);
+  -webkit-backdrop-filter: var(--ww-blur-xl);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.wing-week-page .ww-glass--bright {
+  backdrop-filter: var(--ww-blur-lg);
+  -webkit-backdrop-filter: var(--ww-blur-lg);
+  background: var(--ww-glass-surface-lg);
+  border-color: var(--ww-glass-border-bright);
+}
+
+.wing-week-page .ww-glass--accent {
+  background: rgba(225, 54, 34, 0.18);
+  border-color: rgba(225, 54, 34, 0.45);
+  box-shadow: var(--ww-shadow-glass), 0 0 40px var(--ww-red-glow);
+}
+
+.wing-week-page .ww-glass-card {
+  border-radius: 20px;
+  transition: transform 0.36s var(--ww-ease-glass),
+    box-shadow 0.36s var(--ww-ease-glass),
+    background 0.36s;
+}
+
+.wing-week-page .ww-glass-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.36s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wing-week-page .ww-glass-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--ww-shadow-float);
+  background: var(--ww-glass-surface-md);
+}
+
+.wing-week-page .ww-glass-card:hover::after {
+  opacity: 1;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .wing-week-page .ww-glass {
+    background: rgba(30, 18, 18, 0.92) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wing-week-page .ww-scene__blob {
+    animation: none !important;
+  }
+}
+
+/* ─── Hero ─── */
+.wing-week-page .ww-hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 2rem 5rem;
+}
+
+.wing-week-page .ww-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(0, 0, 0, 0.55) 0%, rgba(26, 10, 10, 0.4) 50%, rgba(225, 54, 34, 0.2) 100%),
+    url('/images/Cincinnati Wings.jpg') center / cover no-repeat;
+  z-index: 0;
+}
+
+.wing-week-page .ww-hero-glass {
+  max-width: 860px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  border-radius: 28px;
+  z-index: 1;
+}
+
+.wing-week-page .ww-badge {
+  display: inline-block;
+  padding: 0.55rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.wing-week-page .ww-dates {
+  font-family: var(--ww-heading);
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--ww-gold);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.wing-week-page .ww-hero h1 {
+  font-family: var(--ww-heading);
+  font-size: clamp(3.5rem, 10vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.wing-week-page .ww-hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0.92;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.wing-week-page .ww-hero-sub strong {
+  color: var(--ww-gold);
+  font-size: 1.15em;
+}
+
+.wing-week-page .ww-hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wing-week-page .ww-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: ww-bounce 2s ease infinite;
+  z-index: 2;
+}
+
+@keyframes ww-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ─── Glass buttons ─── */
+.wing-week-page .ww-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s var(--ww-ease-liquid),
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.wing-week-page .ww-btn:active {
+  transform: scale(0.96);
+}
+
+.wing-week-page .ww-btn--primary {
+  background: rgba(225, 54, 34, 0.55);
+  border-color: rgba(255, 120, 100, 0.6);
+  color: #fff;
+  box-shadow: var(--ww-shadow-glass), 0 0 32px var(--ww-red-glow);
+}
+
+.wing-week-page .ww-btn--primary:hover {
+  background: rgba(225, 54, 34, 0.72);
+  transform: translateY(-2px);
+  box-shadow: var(--ww-shadow-float), 0 0 48px var(--ww-red-glow);
+}
+
+.wing-week-page .ww-btn--ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.wing-week-page .ww-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.wing-week-page .ww-btn-text {
+  color: var(--ww-gold);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform 0.3s;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.wing-week-page .ww-btn-text:hover {
+  transform: translateX(4px);
+}
+
+/* ─── Proof stats ─── */
+.wing-week-page .ww-proof {
+  padding: 3rem 2rem;
+}
+
+.wing-week-page .ww-proof-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.wing-week-page .ww-proof-item {
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+}
+
+.wing-week-page .ww-proof-number {
+  display: block;
+  font-family: var(--ww-heading);
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  color: var(--ww-gold);
+  line-height: 1;
+}
+
+.wing-week-page .ww-proof-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.4rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ─── Showcase ─── */
+.wing-week-page .ww-showcase {
+  padding: 5rem 2rem;
+}
+
+.wing-week-page .ww-showcase-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.wing-week-page .ww-showcase-flyer {
+  padding: 1rem;
+  border-radius: 24px;
+}
+
+.wing-week-page .ww-showcase-flyer img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+.wing-week-page .ww-showcase-text {
+  padding: 2.5rem;
+  border-radius: 24px;
+}
+
+.wing-week-page .ww-section-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--ww-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.wing-week-page .ww-showcase-text h2 {
+  font-family: var(--ww-heading);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  line-height: 1.05;
+}
+
+.wing-week-page .ww-showcase-text > p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 1.5rem;
+}
+
+.wing-week-page .ww-wing-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+}
+
+.wing-week-page .ww-wing-specs li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 0.6rem 0 0.6rem 1.75rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wing-week-page .ww-wing-specs li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--ww-red);
+  font-weight: bold;
+}
+
+.wing-week-page .ww-wing-specs li strong {
+  color: #fff;
+}
+
+.wing-week-page .ww-price-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.wing-week-page .ww-price-amount {
+  font-family: var(--ww-heading);
+  font-size: 4rem;
+  color: var(--ww-red);
+  line-height: 1;
+  letter-spacing: 1px;
+  text-shadow: 0 0 30px var(--ww-red-glow);
+}
+
+.wing-week-page .ww-price-note {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+/* ─── Pairings ─── */
+.wing-week-page .ww-pairings {
+  padding: 5rem 2rem;
+}
+
+.wing-week-page .ww-pairings-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.wing-week-page .ww-section-title {
+  text-align: center;
+  font-family: var(--ww-heading);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.wing-week-page .ww-section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 3rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wing-week-page .ww-pairings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.wing-week-page .ww-pairing-card {
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+
+.wing-week-page .ww-pairing-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.wing-week-page .ww-pairing-card h3 {
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.wing-week-page .ww-pairing-card p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.7;
+}
+
+/* ─── How it works ─── */
+.wing-week-page .ww-how {
+  padding: 5rem 2rem;
+}
+
+.wing-week-page .ww-how-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wing-week-page .ww-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.wing-week-page .ww-step-card {
+  padding: 2rem;
+}
+
+.wing-week-page .ww-step-num {
+  font-family: var(--ww-heading);
+  font-size: 3rem;
+  color: rgba(225, 54, 34, 0.35);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.wing-week-page .ww-step-card h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.wing-week-page .ww-step-card p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.7;
+}
+
+.wing-week-page .ww-step-card strong {
+  color: var(--ww-gold);
+}
+
+.wing-week-page .ww-how-prize {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  padding: 1.25rem 2rem;
+  border-radius: 16px;
+}
+
+.wing-week-page .ww-how-prize strong {
+  color: var(--ww-gold);
+}
+
+/* ─── CTA ─── */
+.wing-week-page .ww-cta {
+  padding: 5rem 2rem 6rem;
+}
+
+.wing-week-page .ww-cta-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.wing-week-page .ww-cta-content h2 {
+  font-family: var(--ww-heading);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.wing-week-page .ww-cta-content > p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 2.5rem;
+}
+
+.wing-week-page .ww-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.wing-week-page .ww-cta-address {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .wing-week-page .ww-showcase-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .wing-week-page .ww-showcase-flyer {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .wing-week-page .ww-pairings-grid,
+  .wing-week-page .ww-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wing-week-page .ww-proof-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .wing-week-page .ww-hero {
+    padding: 6rem 1.25rem 4rem;
+  }
+
+  .wing-week-page .ww-hero-glass {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .wing-week-page .ww-hero-cta,
+  .wing-week-page .ww-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .wing-week-page .ww-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .wing-week-page .ww-showcase,
+  .wing-week-page .ww-pairings,
+  .wing-week-page .ww-how,
+  .wing-week-page .ww-cta {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .wing-week-page .ww-showcase-text,
+  .wing-week-page .ww-cta-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .wing-week-page .ww-proof-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .wing-week-page .ww-proof-number {
+    font-size: 2rem;
+  }
+
+  .wing-week-page .ww-price-amount {
+    font-size: 3rem;
+  }
+
+  .wing-week-page .ww-scroll-hint {
+    display: none;
+  }
+
+  .wing-week-page .ww-scene__blob--1 {
+    width: 420px;
+    height: 420px;
+  }
+
+  .wing-week-page .ww-scene__blob--2 {
+    width: 360px;
+    height: 360px;
+  }
+}
