@@ -1,0 +1,474 @@
+---
+const notifications = [
+  {
+    icon: '🏈',
+    title: 'JTAPS Bar & Grill',
+    message: 'Bengals vs. Steelers tonight — kickoff 8:20 PM. Reserve your table!',
+    time: 'now',
+    tint: '#E13622',
+  },
+  {
+    icon: '🎉',
+    title: 'JTAPS Specials',
+    message: 'Wing Wednesday is live — $0.50 wings all day. Dine in only.',
+    time: '2m ago',
+    tint: '#D4AF37',
+  },
+  {
+    icon: '⭐',
+    title: 'JTAPS Rewards',
+    message: 'You earned 10 check-in points! Tap to view your loyalty card.',
+    time: '5m ago',
+    tint: '#007aff',
+  },
+];
+---
+
+<section class="rewards-signup-promo" aria-labelledby="rewards-signup-title">
+  <div class="rewards-signup-promo__inner">
+    <div class="rewards-signup-promo__copy reveal-on-scroll">
+      <span class="section-tag">JTAPS REWARDS</span>
+      <h2 id="rewards-signup-title">Get Alerts for Games &amp; Specials</h2>
+      <p>
+        Create your free account and never miss the next big game or weekly deal.
+        Turn on notifications for upcoming games, exclusive specials, and loyalty rewards.
+      </p>
+
+      <div class="rewards-signup-promo__code">
+        <span class="rewards-signup-promo__code-label">Rewards company code</span>
+        <strong class="rewards-signup-promo__code-value">2786</strong>
+        <span class="rewards-signup-promo__code-hint">Use at signup to link your POS rewards</span>
+      </div>
+
+      <ul class="rewards-signup-promo__benefits">
+        <li>🏈 Game day alerts before kickoff</li>
+        <li>🎉 Weekly specials &amp; promos</li>
+        <li>💳 Digital loyalty card &amp; Apple Wallet</li>
+        <li>⭐ Earn points every visit</li>
+      </ul>
+
+      <div class="rewards-signup-promo__actions">
+        <a href="/login?signup=1" class="rewards-signup-promo__primary">Sign Up Free</a>
+        <a href="/login" class="rewards-signup-promo__secondary">Already a member? Log in</a>
+      </div>
+    </div>
+
+    <div class="rewards-signup-promo__phone-wrap reveal-on-scroll">
+      <div class="rewards-signup-promo__tilt">
+        <div class="rewards-signup-promo__phone">
+          <div class="rewards-signup-promo__island"></div>
+          <div class="rewards-signup-promo__screen">
+            <div class="rewards-signup-promo__status">
+              <span class="rewards-signup-promo__clock" data-promo-clock>12:40</span>
+              <span class="rewards-signup-promo__signal">5G ▮▮▮▮</span>
+            </div>
+            <div class="rewards-signup-promo__wallpaper">
+              <span class="rewards-signup-promo__wall-title">JTAPS</span>
+              <span class="rewards-signup-promo__wall-sub">Games · Specials · Rewards</span>
+            </div>
+            <div class="rewards-signup-promo__toasts" data-promo-toasts>
+              {notifications.map((n, i) => (
+                <div
+                  class="rewards-signup-promo__toast"
+                  style={`--tint: ${n.tint}; --delay: ${i * 2.8}s`}
+                  data-promo-toast
+                >
+                  <span class="rewards-signup-promo__toast-icon">{n.icon}</span>
+                  <div class="rewards-signup-promo__toast-body">
+                    <div class="rewards-signup-promo__toast-head">
+                      <span class="rewards-signup-promo__toast-title">{n.title}</span>
+                      <span class="rewards-signup-promo__toast-time">{n.time}</span>
+                    </div>
+                    <p class="rewards-signup-promo__toast-msg">{n.message}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="rewards-signup-promo__homebar"></div>
+          </div>
+        </div>
+      </div>
+      <p class="rewards-signup-promo__caption">Sample alerts members receive</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const clock = document.querySelector('[data-promo-clock]');
+  if (clock) {
+    const tick = () => {
+      clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    };
+    tick();
+    setInterval(tick, 15000);
+  }
+</script>
+
+<style>
+  .rewards-signup-promo {
+    padding: 5rem 2rem;
+    background: linear-gradient(160deg, #0f0f0f 0%, #1a1210 45%, #2a1510 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .rewards-signup-promo__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .rewards-signup-promo .section-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .rewards-signup-promo__copy h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    letter-spacing: 1px;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+
+  .rewards-signup-promo__copy > p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 1.5rem;
+    max-width: 520px;
+  }
+
+  .rewards-signup-promo__code {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 14px;
+    padding: 0.85rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .rewards-signup-promo__code-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+  }
+
+  .rewards-signup-promo__code-value {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    letter-spacing: 0.2em;
+    color: var(--secondary-color);
+    line-height: 1;
+  }
+
+  .rewards-signup-promo__code-hint {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .rewards-signup-promo__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .rewards-signup-promo__benefits li {
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .rewards-signup-promo__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+  }
+
+  .rewards-signup-promo__primary {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.9rem 1.75rem;
+    border-radius: 999px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(225, 54, 34, 0.35);
+  }
+
+  .rewards-signup-promo__primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(225, 54, 34, 0.45);
+  }
+
+  .rewards-signup-promo__secondary {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .rewards-signup-promo__secondary:hover {
+    color: #fff;
+  }
+
+  /* Phone mockup */
+  .rewards-signup-promo__phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rewards-signup-promo__tilt {
+    perspective: 1200px;
+    transform: rotateX(8deg) rotateY(-14deg);
+    filter: drop-shadow(-24px 32px 40px rgba(0, 0, 0, 0.55));
+    animation: promoPhoneFloat 8s ease-in-out infinite;
+  }
+
+  @keyframes promoPhoneFloat {
+    0%, 100% { transform: rotateX(8deg) rotateY(-14deg) translateY(0); }
+    50% { transform: rotateX(10deg) rotateY(-12deg) translateY(-8px); }
+  }
+
+  .rewards-signup-promo__phone {
+    position: relative;
+    width: 300px;
+    height: 620px;
+    border-radius: 44px;
+    padding: 10px;
+    background: linear-gradient(155deg, #4a4a52, #17171b 35%, #2c2c33 60%, #0e0e11);
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, 0.12) inset,
+      0 0 0 1px #000;
+  }
+
+  .rewards-signup-promo__island {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 28px;
+    margin-top: 12px;
+    border-radius: 18px;
+    background: #000;
+    z-index: 2;
+  }
+
+  .rewards-signup-promo__screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a0505 0%, #0a1628 55%, #061018 100%);
+  }
+
+  .rewards-signup-promo__status {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 22px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .rewards-signup-promo__signal {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+  }
+
+  .rewards-signup-promo__wallpaper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .rewards-signup-promo__wall-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    letter-spacing: 4px;
+    color: var(--secondary-color);
+    text-shadow: 0 4px 20px rgba(225, 54, 34, 0.5);
+  }
+
+  .rewards-signup-promo__wall-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 0.35rem;
+  }
+
+  .rewards-signup-promo__toasts {
+    position: absolute;
+    top: 52px;
+    left: 10px;
+    right: 10px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rewards-signup-promo__toast {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 11px 12px;
+    border-radius: 18px;
+    background: rgba(28, 28, 32, 0.78);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 0.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 14px 32px -12px rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transform: translateY(-120%) scale(0.88);
+    animation: promoToastCycle 8.4s var(--delay, 0s) ease-in-out infinite;
+  }
+
+  @keyframes promoToastCycle {
+    0%, 4% { opacity: 0; transform: translateY(-120%) scale(0.88); }
+    8%, 28% { opacity: 1; transform: translateY(0) scale(1); }
+    32%, 100% { opacity: 0; transform: translateY(-40px) scale(0.94); }
+  }
+
+  .rewards-signup-promo__toast:nth-child(1) { z-index: 3; }
+  .rewards-signup-promo__toast:nth-child(2) { z-index: 2; }
+  .rewards-signup-promo__toast:nth-child(3) { z-index: 1; }
+
+  .rewards-signup-promo__toast-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    background: linear-gradient(160deg, var(--tint), color-mix(in srgb, var(--tint) 45%, #000));
+  }
+
+  .rewards-signup-promo__toast-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .rewards-signup-promo__toast-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.62);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .rewards-signup-promo__toast-time {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.38);
+    white-space: nowrap;
+  }
+
+  .rewards-signup-promo__toast-msg {
+    margin: 3px 0 0;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .rewards-signup-promo__homebar {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.35);
+    z-index: 3;
+  }
+
+  .rewards-signup-promo__caption {
+    margin-top: 1.25rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .rewards-signup-promo__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .rewards-signup-promo__phone-wrap {
+      order: -1;
+    }
+
+    .rewards-signup-promo__tilt {
+      transform: rotateX(4deg) rotateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rewards-signup-promo {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .rewards-signup-promo__phone {
+      width: 260px;
+      height: 540px;
+    }
+
+    .rewards-signup-promo__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .rewards-signup-promo__primary {
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rewards-signup-promo__tilt,
+    .rewards-signup-promo__toast {
+      animation: none !important;
+    }
+
+    .rewards-signup-promo__toast {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rewards-signup-promo__toast:not(:first-child) {
+      display: none;
+    }
+  }
+</style>

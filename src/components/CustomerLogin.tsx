@@ -19,6 +19,11 @@ export default function CustomerLogin() {
   useEffect(() => {
     // Check if already logged in
     checkAuth();
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('signup') === '1') {
+      setIsLogin(false);
+    }
   }, []);
 
   const checkAuth = async () => {
