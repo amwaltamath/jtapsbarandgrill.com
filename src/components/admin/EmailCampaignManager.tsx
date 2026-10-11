@@ -30,15 +30,6 @@ export default function EmailCampaignManager() {
   const [testEmail, setTestEmail] = useState('');
   const [importedCount, setImportedCount] = useState(0);
   const [duplicateCount, setDuplicateCount] = useState(0);
-  const [pageSize, setPageSize] = useState(100);
-  const [pageIndex, setPageIndex] = useState(0);
-  const [progressLoading, setProgressLoading] = useState(false);
-  const [batchProgress, setBatchProgress] = useState<{
-    sent: number;
-    remaining: number;
-    total: number;
-    nextOffset: number;
-  } | null>(null);
   
   const [formData, setFormData] = useState({
     subject: '',
@@ -49,13 +40,6 @@ export default function EmailCampaignManager() {
     fetchSubscribers();
     fetchCampaigns();
   }, []);
-
-  useEffect(() => {
-    const totalPages = Math.max(1, Math.ceil(subscribers.length / pageSize));
-    if (pageIndex >= totalPages) {
-      setPageIndex(totalPages - 1);
-    }
-  }, [subscribers.length, pageSize, pageIndex]);
 
   const fetchSubscribers = async () => {
     // Supabase limits responses to 1000 rows by default, so we paginate
@@ -120,11 +104,6 @@ export default function EmailCampaignManager() {
     } else {
       setSelectedSubscribers([]);
     }
-  };
-
-  const selectRange = (startIndex: number, endIndex: number) => {
-    const rangeIds = subscribers.slice(startIndex, endIndex).map(s => s.id);
-    setSelectedSubscribers(rangeIds);
   };
 
   const handleSendTestEmail = async (e: React.FormEvent) => {
@@ -525,135 +504,6 @@ export default function EmailCampaignManager() {
     }
   };
 
-  const handleSendNextBatch = async () => {
-    setError('');
-    setSuccess('');
-    setProgressLoading(true);
-
-    if (!formData.subject.trim() || !formData.message.trim()) {
-      setError('Subject and message are required');
-      setProgressLoading(false);
-      return;
-    }
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setError('Not authenticated. Please login again.');
-        setProgressLoading(false);
-        return;
-      }
-
-      const response = await fetch('/api/send-promotional-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`
-        },
-        body: JSON.stringify({
-          subject: formData.subject,
-          message: formData.message,
-          useProgress: true,
-          batchSize: pageSize
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to send batch');
-      }
-
-      setBatchProgress({
-        sent: result.sent || 0,
-        remaining: result.remaining || 0,
-        total: result.total || 0,
-        nextOffset: result.nextOffset || 0
-      });
-
-      if ((result.remaining || 0) === 0) {
-        setSuccess('Batch sent. Campaign complete.');
-      } else {
-        setSuccess(`Batch sent. ${result.remaining} remaining.`);
-      }
-
-      fetchCampaigns();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send batch');
-    } finally {
-      setProgressLoading(false);
-    }
-  };
-
-  const handleProgressAction = async (action: 'status' | 'reset') => {
-    setError('');
-    setSuccess('');
-
-    if (!formData.subject.trim() || !formData.message.trim()) {
-      setError('Subject and message are required');
-      return;
-    }
-
-    if (action === 'reset') {
-      const confirmed = window.confirm('Reset progress for this campaign? This will restart the batch offset.');
-      if (!confirmed) {
-        return;
-      }
-    }
-
-    setProgressLoading(true);
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setError('Not authenticated. Please login again.');
-        setProgressLoading(false);
-        return;
-      }
-
-      const response = await fetch('/api/send-promotional-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`
-        },
-        body: JSON.stringify({
-          subject: formData.subject,
-          message: formData.message,
-          action
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to fetch progress');
-      }
-
-      setBatchProgress({
-        sent: result.sent || 0,
-        remaining: result.remaining || 0,
-        total: result.total || 0,
-        nextOffset: result.nextOffset || 0
-      });
-
-      if (action === 'reset') {
-        setSuccess('Progress reset. Ready to send from the beginning.');
-      } else {
-        setSuccess('Progress refreshed.');
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch progress');
-    } finally {
-      setProgressLoading(false);
-    }
-  };
-
-  const totalPages = Math.max(1, Math.ceil(subscribers.length / pageSize));
-  const pageStart = pageIndex * pageSize;
-  const pageEnd = Math.min(pageStart + pageSize, subscribers.length);
-  const pagedSubscribers = subscribers.slice(pageStart, pageEnd);
-
   return (
     <div className="campaign-manager">
       <h2>📧 Email Campaigns</h2>
@@ -784,101 +634,6 @@ contact@business.com,`}</code></pre>
               </label>
             </div>
 
-            <div className="form-group">
-              <label style={{ display: 'block', marginBottom: '0.5rem' }}>Send In Batches</label>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={handleSendNextBatch}
-                  disabled={progressLoading || !formData.subject.trim() || !formData.message.trim()}
-                >
-                  {progressLoading ? 'Sending Batch...' : `Send Next ${pageSize} (Auto)`}
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => {
-                    setPageIndex(0);
-                    selectRange(0, Math.min(pageSize, subscribers.length));
-                  }}
-                  disabled={subscribers.length === 0}
-                >
-                  Select First {pageSize}
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => {
-                    const nextIndex = Math.min(pageIndex + 1, totalPages - 1);
-                    setPageIndex(nextIndex);
-                    const start = nextIndex * pageSize;
-                    selectRange(start, Math.min(start + pageSize, subscribers.length));
-                  }}
-                  disabled={subscribers.length === 0 || pageIndex >= totalPages - 1}
-                >
-                  Select Next {pageSize}
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => {
-                    const prevIndex = Math.max(pageIndex - 1, 0);
-                    setPageIndex(prevIndex);
-                    const start = prevIndex * pageSize;
-                    selectRange(start, Math.min(start + pageSize, subscribers.length));
-                  }}
-                  disabled={subscribers.length === 0 || pageIndex === 0}
-                >
-                  Select Prev {pageSize}
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => selectRange(pageStart, pageEnd)}
-                  disabled={subscribers.length === 0}
-                >
-                  Select This Page
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => handleProgressAction('status')}
-                  disabled={progressLoading || !formData.subject.trim() || !formData.message.trim()}
-                >
-                  {progressLoading ? 'Working...' : 'Refresh Progress'}
-                </button>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => handleProgressAction('reset')}
-                  disabled={progressLoading || !formData.subject.trim() || !formData.message.trim()}
-                >
-                  Reset Progress
-                </button>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  Page Size
-                  <input
-                    type="number"
-                    min={1}
-                    max={500}
-                    value={pageSize}
-                    onChange={(e) => setPageSize(Math.max(1, Number(e.target.value) || 1))}
-                    className="form-input"
-                    style={{ width: '90px', padding: '6px 8px' }}
-                  />
-                </label>
-                <span style={{ color: '#666', fontSize: '0.9rem' }}>
-                  Showing {subscribers.length === 0 ? 0 : pageStart + 1}-{pageEnd} of {subscribers.length}
-                </span>
-                {batchProgress && (
-                  <span style={{ color: '#444', fontSize: '0.9rem' }}>
-                    Progress: {Math.max(batchProgress.total - batchProgress.remaining, 0)}/{batchProgress.total} sent
-                  </span>
-                )}
-              </div>
-            </div>
-
             <div className="subscribers-list">
               <h4>
                 Recipients ({selectedSubscribers.length} of {subscribers.length} selected)
@@ -889,10 +644,10 @@ contact@business.com,`}</code></pre>
                 </p>
               )}
               <div className="subscribers-container">
-                {pagedSubscribers.length === 0 ? (
+                {subscribers.length === 0 ? (
                   <p className="empty-state">No email subscribers yet</p>
                 ) : (
-                  pagedSubscribers.map(subscriber => (
+                  subscribers.map(subscriber => (
                     <label key={subscriber.id} className="subscriber-item">
                       <input
                         type="checkbox"
