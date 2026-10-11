@@ -96,10 +96,13 @@ export default function EmailCampaignManager() {
     const { data, error } = await supabase
       .from('email_campaigns')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .limit(100);
 
     if (!error && data) {
-      setCampaigns(data);
+      setCampaigns(
+        data.filter((campaign) => !campaign.subject?.toUpperCase().startsWith('[TEST]'))
+      );
     }
   };
 
@@ -463,6 +466,18 @@ export default function EmailCampaignManager() {
       return;
     }
 
+    const confirmed = window.confirm(
+      `Send this campaign to ${selectedSubscribers.length} of ${subscribers.length} subscribers?\n\n` +
+        (selectedSubscribers.length < subscribers.length
+          ? 'Warning: not everyone on the list is selected. Use Select All if you want the full list.\n\n'
+          : '') +
+        'Only checked emails on this send will receive it.'
+    );
+    if (!confirmed) {
+      setLoading(false);
+      return;
+    }
+
     try {
       // Get selected subscriber details
       const selectedData = subscribers.filter(s => selectedSubscribers.includes(s.id));
@@ -494,7 +509,11 @@ export default function EmailCampaignManager() {
         throw new Error(result.error || 'Failed to send campaign');
       }
 
-      setSuccess(`Campaign sent successfully! (${result.sent} sent, ${result.failed} failed)`);
+      const failNote =
+        result.failed > 0
+          ? ` Failed: ${result.failed}${result.failedEmails?.length ? ` (${result.failedEmails.join(', ')})` : ''}.`
+          : '';
+      setSuccess(`Campaign send finished. ${result.sent} accepted by Resend.${failNote}`);
       setFormData({ subject: '', message: '' });
       setSelectedSubscribers([]);
       setShowForm(false);
@@ -750,7 +769,7 @@ contact@business.com,`}</code></pre>
                 className="form-textarea"
                 rows={6}
               />
-              <small>{formData.message.length} characters</small>
+              <small>{formData.message.length} characters. Test emails are not saved to campaign history.</small>
             </div>
 
             <div className="form-group">
@@ -861,7 +880,14 @@ contact@business.com,`}</code></pre>
             </div>
 
             <div className="subscribers-list">
-              <h4>Recipients ({selectedSubscribers.length} selected)</h4>
+              <h4>
+                Recipients ({selectedSubscribers.length} of {subscribers.length} selected)
+              </h4>
+              {selectedSubscribers.length > 0 && selectedSubscribers.length < subscribers.length && (
+                <p className="section-description">
+                  Only the checked people will get this email. Click Select All if you want everyone on the list.
+                </p>
+              )}
               <div className="subscribers-container">
                 {pagedSubscribers.length === 0 ? (
                   <p className="empty-state">No email subscribers yet</p>

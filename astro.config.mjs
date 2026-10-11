@@ -9,6 +9,7 @@ export default defineConfig({
   integrations: [react(), sitemap()],
   output: 'server',
   adapter: vercel({
+    maxDuration: 60,
     includeFiles: [
       './wallet-pass-model/icon.png',
       './wallet-pass-model/icon@2x.png',
