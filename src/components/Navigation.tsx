@@ -95,6 +95,7 @@ export default function Navigation() {
           <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
             <li><a href="/" onClick={closeMenu}>Home</a></li>
             <li><a href="/menu" onClick={closeMenu}>Menu</a></li>
+            <li><a href="/specials" onClick={closeMenu}>Specials</a></li>
             <li><a href="/watch-the-game" onClick={closeMenu}>Watch the Game</a></li>
             <li><a href="/blog" onClick={closeMenu}>Blog</a></li>
             <li><a href="/contact" onClick={closeMenu}>Contact</a></li>

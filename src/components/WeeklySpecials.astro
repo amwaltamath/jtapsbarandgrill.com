@@ -1,0 +1,74 @@
+---
+import "../styles/weekly-specials.css";
+import {
+  happyHour,
+  weeklySpecials,
+  getCurrentWeekdayET,
+  isHappyHourDayET,
+} from "../data/weeklySpecials";
+
+interface Props {
+  showPageLink?: boolean;
+}
+
+const { showPageLink = true } = Astro.props;
+const today = getCurrentWeekdayET();
+const todaySpecial = weeklySpecials.find((s) => s.day === today);
+const showHappyHourToday = isHappyHourDayET(today);
+---
+
+<section class="weekly-specials" aria-labelledby="weekly-specials-title">
+  <div class="weekly-specials__inner">
+    <header class="weekly-specials__header reveal-on-scroll">
+      <span class="section-tag">DEALS ALL WEEK</span>
+      <h2 id="weekly-specials-title">Weekly Specials &amp; Happy Hour</h2>
+      <p>
+        A different reason to visit every day — wings, gyros, buckets on game day, karaoke, and bingo.
+        Dine in at 6441 Glenway Ave or call ahead for takeout.
+      </p>
+    </header>
+
+    <div class="weekly-specials__happy-hour reveal-on-scroll">
+      <strong>{happyHour.title}</strong>
+      <span>{happyHour.summary}</span>
+    </div>
+
+    {todaySpecial && (
+      <div class="weekly-specials__today reveal-on-scroll">
+        <span class="weekly-specials__today-label">Today — {today}</span>
+        <h3>
+          <span aria-hidden="true">{todaySpecial.emoji}</span>
+          {todaySpecial.headline}
+        </h3>
+        <p class="weekly-specials__today-offer">{todaySpecial.offer}</p>
+        {todaySpecial.extra && <p class="weekly-specials__today-extra">{todaySpecial.extra}</p>}
+        {showHappyHourToday && (
+          <p class="weekly-specials__today-extra">Plus happy hour until 7 PM.</p>
+        )}
+      </div>
+    )}
+
+    <div class="weekly-specials__grid">
+      {weeklySpecials.map((special) => (
+        <article
+          class={`weekly-specials__card reveal-on-scroll${special.day === today ? " weekly-specials__card--today" : ""}${special.highlight ? " weekly-specials__card--highlight" : ""}`}
+        >
+          <p class="weekly-specials__day">{special.day}</p>
+          <h4>
+            <span aria-hidden="true">{special.emoji}</span>
+            {special.headline}
+          </h4>
+          <p class="weekly-specials__offer">{special.offer}</p>
+          {special.extra && <p class="weekly-specials__extra">{special.extra}</p>}
+        </article>
+      ))}
+    </div>
+
+    {showPageLink && (
+      <div class="weekly-specials__actions reveal-on-scroll">
+        <a href="/specials" class="weekly-specials__btn weekly-specials__btn--primary">View all weekly specials</a>
+        <a href="tel:5135749777" class="weekly-specials__btn weekly-specials__btn--ghost">Call (513) 574-9777</a>
+      </div>
+    )}
+  </div>
+</section>

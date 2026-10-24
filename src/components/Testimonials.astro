@@ -1,5 +1,5 @@
 ---
-import { supabaseAdmin } from '../lib/supabase';
+import { getSupabaseAdmin } from '../lib/supabase';
 import { displayName, initialsForName, starsForRating } from '../lib/reviews';
 
 interface FeaturedReview {
@@ -19,6 +19,7 @@ const fallbackReviews: FeaturedReview[] = [
 
 let featuredReviews = fallbackReviews;
 
+const supabaseAdmin = getSupabaseAdmin();
 if (supabaseAdmin) {
   const { data } = await supabaseAdmin
     .from('internal_reviews')

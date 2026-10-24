@@ -38,22 +38,39 @@ function getSupabaseAdminClient() {
   return supabaseAdminInstance;
 }
 
+/** Use for null checks — `supabaseAdmin` is a Proxy and is always truthy. */
+export function getSupabaseAdmin(): SupabaseClient | null {
+  return getSupabaseAdminClient();
+}
+
+export function getSupabase(): SupabaseClient | null {
+  return getSupabaseClient();
+}
+
+function bindClientMethod<T extends SupabaseClient>(client: T, prop: keyof T) {
+  const value = client[prop];
+  if (typeof value === 'function') {
+    return (value as (...args: unknown[]) => unknown).bind(client);
+  }
+  return value;
+}
+
 export const supabase = new Proxy({} as SupabaseClient, {
-  get(target, prop) {
+  get(_target, prop) {
     const client = getSupabaseClient();
     if (!client) {
-      return null;
+      return undefined;
     }
-    return client[prop as keyof SupabaseClient];
-  }
+    return bindClientMethod(client, prop as keyof SupabaseClient);
+  },
 });
 
 export const supabaseAdmin = new Proxy({} as SupabaseClient, {
-  get(target, prop) {
+  get(_target, prop) {
     const client = getSupabaseAdminClient();
     if (!client) {
-      return null;
+      return undefined;
     }
-    return client[prop as keyof SupabaseClient];
-  }
+    return bindClientMethod(client, prop as keyof SupabaseClient);
+  },
 });

@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WeeklySpecials from "../components/WeeklySpecials.astro";
+import "../styles/weekly-specials.css";
+import { happyHour } from "../data/weeklySpecials";
+
+const title = "Weekly Specials & Happy Hour | JTAPS Bar & Grill Cincinnati";
+const description =
+  "JTAPS daily deals: 90¢ wing Monday, 80¢ boneless Tuesday, $7 gyro Wednesday, $3 drafts Thursday, $2 off apps Friday, $15 buckets on game weekends. Happy hour Mon–Fri 12–7 PM.";
+const ogImage = "/images/Cincinnati Wings.jpg";
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  keywords="jtaps happy hour, wing night cincinnati, karaoke tuesday, music bingo cincinnati, who dey day, sports bar specials glenway"
+>
+  <div class="specials-page">
+    <section class="specials-page__hero">
+      <h1>Weekly Specials</h1>
+      <p>
+        {happyHour.title} {happyHour.summary}. See what&apos;s on every day of the week below.
+      </p>
+    </section>
+
+    <div class="specials-page__body">
+      <WeeklySpecials showPageLink={false} />
+    </div>
+  </div>
+</Layout>

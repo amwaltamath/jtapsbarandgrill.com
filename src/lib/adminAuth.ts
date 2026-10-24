@@ -1,4 +1,4 @@
-import { supabaseAdmin } from './supabase';
+import { getSupabaseAdmin } from './supabase';
 
 export async function getUserFromRequest(request: Request) {
   const authHeader = request.headers.get('authorization') || '';
@@ -8,6 +8,7 @@ export async function getUserFromRequest(request: Request) {
     return { error: 'Missing authorization token', status: 401 as const };
   }
 
+  const supabaseAdmin = getSupabaseAdmin();
   if (!supabaseAdmin) {
     return { error: 'Supabase not configured', status: 500 as const };
   }
@@ -26,7 +27,12 @@ export async function requireAdmin(request: Request) {
     return authResult;
   }
 
-  const { data: adminRow, error: adminError } = await supabaseAdmin!
+  const supabaseAdmin = getSupabaseAdmin();
+  if (!supabaseAdmin) {
+    return { error: 'Supabase not configured', status: 500 as const };
+  }
+
+  const { data: adminRow, error: adminError } = await supabaseAdmin
     .from('admin_users')
     .select('id')
     .eq('user_id', authResult.user.id)

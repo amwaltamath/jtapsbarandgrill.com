@@ -12,6 +12,9 @@ import Layout from '../layouts/Layout.astro';
     <section class="menu-hero">
       <h1>Our Menu</h1>
       <p class="subtitle">CINCINNATI'S BEST WINGS, GYROS & MORE</p>
+      <p class="menu-specials-banner">
+        <a href="/specials">🎉 Happy hour Mon–Fri 12–7 · Daily deals every day of the week →</a>
+      </p>
     </section>
 
     <!-- Sticky Category Nav -->
@@ -306,6 +309,28 @@ import Layout from '../layouts/Layout.astro';
     color: var(--secondary-color);
     font-weight: bold;
     letter-spacing: 2px;
+  }
+
+  .menu-specials-banner {
+    margin-top: 1.25rem;
+    max-width: 520px;
+  }
+
+  .menu-specials-banner a {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    color: #fff;
+    padding: 0.65rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .menu-specials-banner a:hover {
+    background: rgba(225, 54, 34, 0.35);
+    border-color: var(--secondary-color);
   }
 
   .menu-section {
