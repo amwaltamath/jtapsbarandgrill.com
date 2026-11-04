@@ -6,12 +6,14 @@ import {
   getCurrentWeekdayET,
   isHappyHourDayET,
 } from "../data/weeklySpecials";
+import { featuredGame, isFeaturedGameActive } from "../data/featuredGame";
 
 interface Props {
   showPageLink?: boolean;
 }
 
 const { showPageLink = true } = Astro.props;
+const madridSunday = isFeaturedGameActive();
 const today = getCurrentWeekdayET();
 const todaySpecial = weeklySpecials.find((s) => s.day === today);
 const showHappyHourToday = isHappyHourDayET(today);
@@ -41,6 +43,11 @@ const showHappyHourToday = isHappyHourDayET(today);
           {todaySpecial.headline}
         </h3>
         <p class="weekly-specials__today-offer">{todaySpecial.offer}</p>
+        {today === "Sunday" && madridSunday && (
+          <p class="weekly-specials__today-extra">
+            {featuredGame.matchup} kicks off at {featuredGame.kickoff}. Doors {featuredGame.doors} — {featuredGame.offer}.
+          </p>
+        )}
         {todaySpecial.extra && <p class="weekly-specials__today-extra">{todaySpecial.extra}</p>}
         {showHappyHourToday && (
           <p class="weekly-specials__today-extra">Plus happy hour until 7 PM.</p>
@@ -59,7 +66,13 @@ const showHappyHourToday = isHappyHourDayET(today);
             {special.headline}
           </h4>
           <p class="weekly-specials__offer">{special.offer}</p>
-          {special.extra && <p class="weekly-specials__extra">{special.extra}</p>}
+          {special.day === "Sunday" && madridSunday ? (
+            <p class="weekly-specials__extra">
+              {featuredGame.when}: {featuredGame.matchup}, kickoff {featuredGame.kickoff}. Doors {featuredGame.doors} — {featuredGame.offer}.
+            </p>
+          ) : (
+            special.extra && <p class="weekly-specials__extra">{special.extra}</p>
+          )}
         </article>
       ))}
     </div>

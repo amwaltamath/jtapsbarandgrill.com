@@ -1,0 +1,103 @@
+---
+import { featuredGame, isFeaturedGameActive } from "../data/featuredGame";
+
+const show = isFeaturedGameActive();
+---
+
+{
+  show && (
+    <section class="featured-game" aria-labelledby="featured-game-title">
+      <div class="featured-game__inner">
+        <p class="featured-game__kicker">Who Dey watch party</p>
+        <h2 id="featured-game-title">{featuredGame.matchup}</h2>
+        <p class="featured-game__when">
+          {featuredGame.when} · Kickoff {featuredGame.kickoff}
+          <span> · {featuredGame.location}</span>
+        </p>
+        <p class="featured-game__offer">
+          Doors open at <strong>{featuredGame.doors}</strong>. {featuredGame.offer}.
+        </p>
+        <div class="featured-game__actions">
+          <a href="tel:5135749777">Call (513) 574-9777</a>
+          <a href="/watch-the-game">Watch at JTAPS</a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .featured-game {
+    background:
+      linear-gradient(120deg, rgba(225, 54, 34, 0.92), rgba(26, 10, 8, 0.94)),
+      url("/images/6441-Glenway-inside.jpg") center/cover;
+    color: #fff;
+    padding: 2.75rem 1.5rem;
+    border-bottom: 4px solid #d4af37;
+  }
+
+  .featured-game__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .featured-game__kicker {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+
+  .featured-game h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin-bottom: 0.6rem;
+  }
+
+  .featured-game__when {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-game__when span {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .featured-game__offer {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 36rem;
+    margin: 0 auto 1.25rem;
+  }
+
+  .featured-game__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .featured-game__actions a {
+    display: inline-block;
+    padding: 0.7rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .featured-game__actions a:first-child {
+    background: #fff;
+    color: #1a1a1a;
+    border-color: #fff;
+  }
+</style>
