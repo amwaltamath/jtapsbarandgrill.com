@@ -8,6 +8,18 @@ export const featuredGame = {
   location: "Madrid, Spain",
   doors: "9 AM",
   offer: "Mimosas, Bloody Marys, and a brunch menu",
+  brunchDrinks: [
+    {
+      name: "Mimosas",
+      emoji: "🥂",
+      detail: "Classic brunch mimosas — available from doors open at 9 AM.",
+    },
+    {
+      name: "Bloody Marys",
+      emoji: "🍅",
+      detail: "JTAPS Bloody Marys — available from doors open at 9 AM.",
+    },
+  ],
   brunchPath: "/bengals-brunch",
   brunchMenuImage: "/images/jtaps-brunch-menu.jpg",
   /** Bump when replacing the JPG so browsers fetch the new file. */

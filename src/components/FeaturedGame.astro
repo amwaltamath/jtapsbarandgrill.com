@@ -17,6 +17,9 @@ const show = isFeaturedGameActive();
         <p class="featured-game__offer">
           Doors open at <strong>{featuredGame.doors}</strong>. {featuredGame.offer}.
         </p>
+        <p class="featured-game__drinks">
+          🥂 Mimosas · 🍅 Bloody Marys · Brunch menu
+        </p>
         <div class="featured-game__actions">
           <a href={featuredGame.brunchPath} class="featured-game__actions--primary">View brunch menu</a>
           <a href="tel:5135749777">Call (513) 574-9777</a>
@@ -76,6 +79,13 @@ const show = isFeaturedGameActive();
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.92);
     max-width: 36rem;
+    margin: 0 auto 0.5rem;
+  }
+
+  .featured-game__drinks {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d4af37;
     margin: 0 auto 1.25rem;
   }
 

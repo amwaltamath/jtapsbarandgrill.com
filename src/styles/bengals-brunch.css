@@ -92,6 +92,69 @@
   filter: brightness(1.08);
 }
 
+.bengals-brunch-page .bb-drinks {
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, #1a1010 0%, #140e0e 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.bengals-brunch-page .bb-drinks__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.bengals-brunch-page .bb-drinks__header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.bengals-brunch-page .bb-drinks__header h2 {
+  font-family: var(--bb-heading);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  letter-spacing: 0.04em;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.bengals-brunch-page .bb-drinks__header p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.55;
+}
+
+.bengals-brunch-page .bb-drinks__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.bengals-brunch-page .bb-drinks__card {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  background: rgba(225, 54, 34, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 12px;
+}
+
+.bengals-brunch-page .bb-drinks__emoji {
+  font-size: 2.25rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.bengals-brunch-page .bb-drinks__card h3 {
+  font-family: var(--bb-heading);
+  font-size: 1.65rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.bengals-brunch-page .bb-drinks__card p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+  margin: 0;
+}
+
 .bengals-brunch-page .bb-menu-section {
   padding: 4rem 1.5rem 5rem;
   background: linear-gradient(180deg, #0f0a0a 0%, #1a1010 100%);

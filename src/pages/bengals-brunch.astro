@@ -40,12 +40,31 @@ if (!active) {
       </div>
     </section>
 
+    <section class="bb-drinks" aria-labelledby="bb-drinks-title">
+      <div class="bb-drinks__inner">
+        <header class="bb-drinks__header">
+          <span class="bb-section-tag">Sunday Brunch Bar</span>
+          <h2 id="bb-drinks-title">Mimosas &amp; Bloody Marys</h2>
+          <p>Sip something brunch-worthy while you wait for kickoff — both pouring when we open at {featuredGame.doors}.</p>
+        </header>
+        <div class="bb-drinks__grid">
+          {featuredGame.brunchDrinks.map((drink) => (
+            <article class="bb-drinks__card">
+              <span class="bb-drinks__emoji" aria-hidden="true">{drink.emoji}</span>
+              <h3>{drink.name}</h3>
+              <p>{drink.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="bb-menu-section" id="menu">
       <header class="bb-menu-header">
         <span class="bb-section-tag">Brunch Menu</span>
         <h2>What We&apos;re Serving</h2>
         <p>
-          Arrive when we open at 9 AM — grab a drink and food before the 9:30 AM kickoff. Full menu below.
+          Arrive when we open at 9 AM — order a mimosa or Bloody Mary, then check the brunch plates before the 9:30 AM kickoff.
         </p>
       </header>
 
