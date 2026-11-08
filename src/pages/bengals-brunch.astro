@@ -48,15 +48,41 @@ if (!active) {
         </p>
       </header>
 
+      <p class="bb-menu-tap-hint">Tap the menu to view full size</p>
       <figure class="bb-menu-frame reveal-on-scroll">
-        <img
-          src={menuImage}
-          alt="JTAPS brunch menu for Bengals vs Falcons game day — mimosas, Bloody Marys, and brunch items"
-          width="1200"
-          height="1600"
-          loading="eager"
-        />
+        <button
+          type="button"
+          class="bb-menu-zoom-trigger"
+          data-menu-zoom-open
+          aria-label="Open brunch menu full size"
+        >
+          <img
+            src={menuImage}
+            alt="JTAPS brunch menu for Bengals vs Falcons game day — mimosas, Bloody Marys, and brunch items"
+            width="1200"
+            height="1600"
+            loading="eager"
+          />
+          <span class="bb-menu-zoom-badge" aria-hidden="true">Tap to enlarge</span>
+        </button>
       </figure>
+
+      <div class="bb-menu-lightbox" data-menu-lightbox hidden>
+        <button
+          type="button"
+          class="bb-menu-lightbox__backdrop"
+          data-menu-zoom-close
+          aria-label="Close full size menu"
+        ></button>
+        <div class="bb-menu-lightbox__panel" role="dialog" aria-modal="true" aria-label="Brunch menu full size">
+          <button type="button" class="bb-menu-lightbox__close" data-menu-zoom-close aria-label="Close">
+            ✕
+          </button>
+          <div class="bb-menu-lightbox__scroll">
+            <img src={menuImage} alt="" width="1200" height="1600" />
+          </div>
+        </div>
+      </div>
 
       <div class="bb-details">
         <div class="bb-detail-card reveal-on-scroll">
@@ -88,3 +114,30 @@ if (!active) {
     </section>
   </div>
 </Layout>
+
+<script>
+  const lightbox = document.querySelector("[data-menu-lightbox]");
+  const openBtn = document.querySelector("[data-menu-zoom-open]");
+  const closeEls = document.querySelectorAll("[data-menu-zoom-close]");
+
+  function openLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openLightbox);
+  closeEls.forEach((el) => el.addEventListener("click", closeLightbox));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox && !lightbox.hidden) {
+      closeLightbox();
+    }
+  });
+</script>
