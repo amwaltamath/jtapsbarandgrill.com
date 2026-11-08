@@ -9,13 +9,16 @@ interface Props {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  /** When false, hides the Focus POS rewards signup popup (footer link unchanged). */
+  showRewardsModal?: boolean;
 }
 
 const { 
   title, 
   description = "JTAPS Bar and Grill - Cincinnati's best sports bar since 2006. Famous wings, hand-carved gyros, juicy burgers, and 50+ TVs for watching the game.",
   keywords = "sports bar cincinnati, best wings cincinnati, gyros cincinnati, watch the game cincinnati, burgers cincinnati, glenway ave restaurant",
-  ogImage = "/images/6441-Glenway.jpg"
+  ogImage = "/images/6441-Glenway.jpg",
+  showRewardsModal = true,
 } = Astro.props;
 ---
 
@@ -277,7 +280,7 @@ const {
         </div>
       </div>
     </footer>
-    <RewardsModal />
+    {showRewardsModal && <RewardsModal />}
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
