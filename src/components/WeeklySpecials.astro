@@ -46,6 +46,7 @@ const showHappyHourToday = isHappyHourDayET(today);
         {today === "Sunday" && madridSunday && (
           <p class="weekly-specials__today-extra">
             {featuredGame.matchup} kicks off at {featuredGame.kickoff}. Doors {featuredGame.doors} — {featuredGame.offer}.
+            <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
           </p>
         )}
         {todaySpecial.extra && <p class="weekly-specials__today-extra">{todaySpecial.extra}</p>}
@@ -69,6 +70,7 @@ const showHappyHourToday = isHappyHourDayET(today);
           {special.day === "Sunday" && madridSunday ? (
             <p class="weekly-specials__extra">
               {featuredGame.when}: {featuredGame.matchup}, kickoff {featuredGame.kickoff}. Doors {featuredGame.doors} — {featuredGame.offer}.
+              <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
             </p>
           ) : (
             special.extra && <p class="weekly-specials__extra">{special.extra}</p>

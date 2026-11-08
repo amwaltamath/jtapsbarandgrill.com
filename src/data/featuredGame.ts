@@ -8,6 +8,8 @@ export const featuredGame = {
   location: "Madrid, Spain",
   doors: "9 AM",
   offer: "Mimosas, Bloody Marys, and a brunch menu",
+  brunchPath: "/bengals-brunch",
+  brunchMenuImage: "/images/jtaps-brunch-menu.jpg",
   /** Midnight Monday ET, after the Sunday watch party. */
   hideAfter: "2026-11-09T05:00:00.000Z",
 };

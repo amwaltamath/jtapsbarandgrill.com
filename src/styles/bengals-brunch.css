@@ -1,0 +1,182 @@
+/* Bengals–Falcons Madrid game — brunch watch party */
+
+.bengals-brunch-page {
+  --bb-red: #e13622;
+  --bb-gold: #d4af37;
+  --bb-dark: #0f0a0a;
+  --bb-heading: "Bebas Neue", Impact, sans-serif;
+  background: var(--bb-dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.bengals-brunch-page .bb-hero {
+  position: relative;
+  min-height: min(72vh, 640px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 1.5rem 4rem;
+  background:
+    linear-gradient(160deg, rgba(15, 10, 10, 0.88), rgba(225, 54, 34, 0.35)),
+    url("/images/6441-Glenway-inside.jpg") center/cover;
+}
+
+.bengals-brunch-page .bb-hero-inner {
+  max-width: 720px;
+}
+
+.bengals-brunch-page .bb-badge {
+  display: inline-block;
+  background: var(--bb-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.bengals-brunch-page .bb-hero h1 {
+  font-family: var(--bb-heading);
+  font-size: clamp(2.75rem, 8vw, 4.25rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin-bottom: 0.5rem;
+}
+
+.bengals-brunch-page .bb-hero-sub {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 1.5rem;
+}
+
+.bengals-brunch-page .bb-hero-meta {
+  font-size: 1.05rem;
+  color: var(--bb-gold);
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+}
+
+.bengals-brunch-page .bb-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.bengals-brunch-page .bb-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.bengals-brunch-page .bb-btn--primary {
+  background: var(--bb-red);
+  color: #fff;
+}
+
+.bengals-brunch-page .bb-btn--ghost {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.bengals-brunch-page .bb-btn:hover {
+  filter: brightness(1.08);
+}
+
+.bengals-brunch-page .bb-menu-section {
+  padding: 4rem 1.5rem 5rem;
+  background: linear-gradient(180deg, #0f0a0a 0%, #1a1010 100%);
+}
+
+.bengals-brunch-page .bb-menu-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+
+.bengals-brunch-page .bb-section-tag {
+  color: var(--bb-gold);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bengals-brunch-page .bb-menu-header h2 {
+  font-family: var(--bb-heading);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: 0.04em;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.bengals-brunch-page .bb-menu-header p {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.bengals-brunch-page .bb-menu-frame {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.bengals-brunch-page .bb-menu-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.bengals-brunch-page .bb-details {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.bengals-brunch-page .bb-detail-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.bengals-brunch-page .bb-detail-card strong {
+  display: block;
+  font-family: var(--bb-heading);
+  font-size: 1.5rem;
+  color: var(--bb-gold);
+  margin-bottom: 0.35rem;
+}
+
+.bengals-brunch-page .bb-footer-cta {
+  text-align: center;
+  padding: 3rem 1.5rem 5rem;
+  background: var(--bb-red);
+}
+
+.bengals-brunch-page .bb-footer-cta h2 {
+  font-family: var(--bb-heading);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+.bengals-brunch-page .bb-footer-cta p {
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}

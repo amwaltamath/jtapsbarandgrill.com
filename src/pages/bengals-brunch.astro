@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/bengals-brunch.css";
+import { featuredGame, isFeaturedGameActive } from "../data/featuredGame";
+
+const menuImage = "/images/jtaps-brunch-menu.jpg";
+const title = "Bengals vs Falcons Brunch | JTAPS Game Day Watch Party";
+const description =
+  "JTAPS opens at 9 AM Sunday for Bengals vs Falcons in Madrid. Mimosas, Bloody Marys, brunch menu, and 50+ TVs. 6441 Glenway Ave — call (513) 574-9777.";
+const active = isFeaturedGameActive();
+
+if (!active) {
+  return Astro.redirect("/watch-the-game", 302);
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={menuImage}
+  keywords="bengals falcons watch party cincinnati, madrid nfl game brunch, jtaps brunch menu, who dey cincinnati sports bar"
+>
+  <div class="bengals-brunch-page">
+    <section class="bb-hero">
+      <div class="bb-hero-inner">
+        <span class="bb-badge">Who Dey · Madrid Game</span>
+        <h1>Game Day Brunch</h1>
+        <p class="bb-hero-meta">
+          {featuredGame.when} · Doors {featuredGame.doors} · Kickoff {featuredGame.kickoff}
+        </p>
+        <p class="bb-hero-sub">
+          The {featuredGame.matchup} from {featuredGame.location} — watch every play at JTAPS with
+          <strong>mimosas</strong>, <strong>Bloody Marys</strong>, and our special <strong>brunch menu</strong>.
+        </p>
+        <div class="bb-cta-row">
+          <a href="tel:5135749777" class="bb-btn bb-btn--primary">Call (513) 574-9777</a>
+          <a href="/watch-the-game" class="bb-btn bb-btn--ghost">Why Watch Here</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bb-menu-section" id="menu">
+      <header class="bb-menu-header">
+        <span class="bb-section-tag">Brunch Menu</span>
+        <h2>What We&apos;re Serving</h2>
+        <p>
+          Arrive when we open at 9 AM — grab a drink and food before the 9:30 AM kickoff. Full menu below.
+        </p>
+      </header>
+
+      <figure class="bb-menu-frame reveal-on-scroll">
+        <img
+          src={menuImage}
+          alt="JTAPS brunch menu for Bengals vs Falcons game day — mimosas, Bloody Marys, and brunch items"
+          width="1200"
+          height="1600"
+          loading="eager"
+        />
+      </figure>
+
+      <div class="bb-details">
+        <div class="bb-detail-card reveal-on-scroll">
+          <strong>{featuredGame.doors}</strong>
+          Doors open
+        </div>
+        <div class="bb-detail-card reveal-on-scroll">
+          <strong>{featuredGame.kickoff}</strong>
+          Kickoff
+        </div>
+        <div class="bb-detail-card reveal-on-scroll">
+          <strong>50+</strong>
+          HD TVs
+        </div>
+        <div class="bb-detail-card reveal-on-scroll">
+          <strong>$15</strong>
+          Beer buckets — Who Dey Day
+        </div>
+      </div>
+    </section>
+
+    <section class="bb-footer-cta">
+      <h2>6441 Glenway Ave · Cincinnati</h2>
+      <p>Family-owned sports bar · famous wings · the best seat for Who Dey Sunday.</p>
+      <div class="bb-cta-row">
+        <a href="tel:5135749777" class="bb-btn bb-btn--ghost">Reserve by Phone</a>
+        <a href="/specials" class="bb-btn bb-btn--ghost">Weekly Specials</a>
+      </div>
+    </section>
+  </div>
+</Layout>
