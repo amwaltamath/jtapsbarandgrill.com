@@ -10,6 +10,8 @@ export const featuredGame = {
   offer: "Mimosas, Bloody Marys, and a brunch menu",
   brunchPath: "/bengals-brunch",
   brunchMenuImage: "/images/jtaps-brunch-menu.jpg",
+  /** Bump when replacing the JPG so browsers fetch the new file. */
+  brunchMenuImageVersion: 2,
   /** Midnight Monday ET, after the Sunday watch party. */
   hideAfter: "2026-11-09T05:00:00.000Z",
 };

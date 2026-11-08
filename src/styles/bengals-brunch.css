@@ -172,20 +172,25 @@
   pointer-events: none;
 }
 
-.bengals-brunch-page .bb-menu-lightbox {
+/* Lightbox is moved to document.body — do not nest under .bengals-brunch-page in CSS */
+.bb-menu-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  display: flex;
+  z-index: 10050;
+  display: none;
   align-items: stretch;
   justify-content: center;
 }
 
-.bengals-brunch-page .bb-menu-lightbox[hidden] {
-  display: none;
+.bb-menu-lightbox.is-open {
+  display: flex;
 }
 
-.bengals-brunch-page .bb-menu-lightbox__backdrop {
+body.bb-menu-lightbox-open {
+  overflow: hidden;
+}
+
+.bb-menu-lightbox__backdrop {
   position: absolute;
   inset: 0;
   border: none;
@@ -193,7 +198,7 @@
   cursor: pointer;
 }
 
-.bengals-brunch-page .bb-menu-lightbox__panel {
+.bb-menu-lightbox__panel {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -208,7 +213,7 @@
   pointer-events: none;
 }
 
-.bengals-brunch-page .bb-menu-lightbox__close {
+.bb-menu-lightbox__close {
   pointer-events: auto;
   align-self: flex-end;
   flex-shrink: 0;
@@ -223,7 +228,7 @@
   cursor: pointer;
 }
 
-.bengals-brunch-page .bb-menu-lightbox__scroll {
+.bb-menu-lightbox__scroll {
   pointer-events: auto;
   flex: 1;
   min-height: 0;
@@ -235,12 +240,19 @@
   border-radius: 8px;
 }
 
-.bengals-brunch-page .bb-menu-lightbox__scroll img {
-  width: 100%;
-  max-width: min(900px, 100%);
-  height: auto;
+.bb-menu-lightbox__scroll img {
   display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+  min-width: 100%;
   border-radius: 4px;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.bb-menu-zoom-trigger {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 @media (min-width: 768px) {
@@ -248,8 +260,18 @@
     display: none;
   }
 
-  .bengals-brunch-page .bb-menu-lightbox__scroll img {
-    max-width: min(720px, 92vw);
+  .bb-menu-lightbox__scroll img {
+    min-width: min(900px, 92vw);
+    max-width: min(1200px, 96vw);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .bb-menu-lightbox__scroll img {
+    /* Full pixel width so guests can scroll/pinch to read menu text */
+    min-width: 100vw;
+    width: max(100vw, 600px);
   }
 }
 

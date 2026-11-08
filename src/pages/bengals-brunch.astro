@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/bengals-brunch.css";
 import { featuredGame, isFeaturedGameActive } from "../data/featuredGame";
 
-const menuImage = "/images/jtaps-brunch-menu.jpg";
+const menuImage = `${featuredGame.brunchMenuImage}?v=${featuredGame.brunchMenuImageVersion}`;
 const title = "Bengals vs Falcons Brunch | JTAPS Game Day Watch Party";
 const description =
   "JTAPS opens at 9 AM Sunday for Bengals vs Falcons in Madrid. Mimosas, Bloody Marys, brunch menu, and 50+ TVs. 6441 Glenway Ave — call (513) 574-9777.";
@@ -50,7 +50,7 @@ if (!active) {
       </header>
 
       <p class="bb-menu-tap-hint">Tap the menu to view full size</p>
-      <figure class="bb-menu-frame reveal-on-scroll">
+      <figure class="bb-menu-frame">
         <button
           type="button"
           class="bb-menu-zoom-trigger"
@@ -68,7 +68,7 @@ if (!active) {
         </button>
       </figure>
 
-      <div class="bb-menu-lightbox" data-menu-lightbox hidden>
+      <div class="bb-menu-lightbox" data-menu-lightbox aria-hidden="true">
         <button
           type="button"
           class="bb-menu-lightbox__backdrop"
@@ -116,29 +116,49 @@ if (!active) {
   </div>
 </Layout>
 
-<script>
-  const lightbox = document.querySelector("[data-menu-lightbox]");
-  const openBtn = document.querySelector("[data-menu-zoom-open]");
-  const closeEls = document.querySelectorAll("[data-menu-zoom-close]");
+<script is:inline>
+  (function () {
+    function initMenuLightbox() {
+      const lightbox = document.querySelector("[data-menu-lightbox]");
+      const openBtn = document.querySelector("[data-menu-zoom-open]");
+      if (!lightbox || !openBtn) return;
 
-  function openLightbox() {
-    if (!lightbox) return;
-    lightbox.hidden = false;
-    document.body.style.overflow = "hidden";
-  }
+      if (lightbox.parentElement !== document.body) {
+        document.body.appendChild(lightbox);
+      }
 
-  function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.hidden = true;
-    document.body.style.overflow = "";
-  }
+      const closeEls = lightbox.querySelectorAll("[data-menu-zoom-close]");
 
-  openBtn?.addEventListener("click", openLightbox);
-  closeEls.forEach((el) => el.addEventListener("click", closeLightbox));
+      function openLightbox() {
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("bb-menu-lightbox-open");
+      }
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox && !lightbox.hidden) {
-      closeLightbox();
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("bb-menu-lightbox-open");
+      }
+
+      openBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox();
+      });
+
+      closeEls.forEach((el) => el.addEventListener("click", closeLightbox));
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
+        }
+      });
     }
-  });
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initMenuLightbox);
+    } else {
+      initMenuLightbox();
+    }
+  })();
 </script>
