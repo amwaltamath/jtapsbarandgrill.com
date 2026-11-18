@@ -13,7 +13,8 @@ interface Props {
 }
 
 const { showPageLink = true } = Astro.props;
-const madridSunday = isFeaturedGameActive();
+const featuredPromo = isFeaturedGameActive();
+const promoDay = featuredGame.promoWeekday;
 const today = getCurrentWeekdayET();
 const todaySpecial = weeklySpecials.find((s) => s.day === today);
 const showHappyHourToday = isHappyHourDayET(today);
@@ -43,10 +44,12 @@ const showHappyHourToday = isHappyHourDayET(today);
           {todaySpecial.headline}
         </h3>
         <p class="weekly-specials__today-offer">{todaySpecial.offer}</p>
-        {today === "Sunday" && madridSunday && (
+        {today === promoDay && featuredPromo && (
           <p class="weekly-specials__today-extra">
-            {featuredGame.matchup} kicks off at {featuredGame.kickoff}. Doors {featuredGame.doors} — mimosas, Bloody Marys &amp; brunch.
-            <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
+            {featuredGame.kicker}: {featuredGame.matchup} · kickoff {featuredGame.kickoff}. {featuredGame.offer}
+            {featuredGame.kind === "brunch" && (
+              <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
+            )}
           </p>
         )}
         {todaySpecial.extra && <p class="weekly-specials__today-extra">{todaySpecial.extra}</p>}
@@ -67,10 +70,9 @@ const showHappyHourToday = isHappyHourDayET(today);
             {special.headline}
           </h4>
           <p class="weekly-specials__offer">{special.offer}</p>
-          {special.day === "Sunday" && madridSunday ? (
+          {special.day === promoDay && featuredPromo ? (
             <p class="weekly-specials__extra">
-              {featuredGame.when}: {featuredGame.matchup}, kickoff {featuredGame.kickoff}. Doors {featuredGame.doors} — mimosas, Bloody Marys &amp; brunch.
-              <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
+              {featuredGame.when}: {featuredGame.matchup}, kickoff {featuredGame.kickoff}. {featuredGame.highlightLine}
             </p>
           ) : (
             special.extra && <p class="weekly-specials__extra">{special.extra}</p>
