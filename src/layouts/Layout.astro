@@ -1,5 +1,6 @@
 ---
 import Navigation from '../components/Navigation';
+import { ORDER_ONLINE_URL } from '../lib/orderLink';
 import RewardsModal from '../components/RewardsModal.astro';
 import '../styles/global.css';
 import '../styles/rewards-modal.css';
@@ -259,7 +260,7 @@ const {
 
           <div class="footer-cta">
             <h4>Order Now</h4>
-            <a href="https://togoorder.com/web/3136#/" target="_blank" rel="noopener" class="footer-order-btn">Order Online</a>
+            <a href={ORDER_ONLINE_URL} target="_blank" rel="noopener" class="footer-order-btn">Order Online</a>
             <a href="https://loyalty.focuspos.com/addmember/?C=2786" target="_blank" rel="noopener" class="footer-rewards-btn">Join Rewards</a>
           </div>
         </div>

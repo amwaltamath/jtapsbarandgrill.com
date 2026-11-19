@@ -1,5 +1,5 @@
 ---
-// Hero section component
+import { ORDER_ONLINE_URL } from "../lib/orderLink";
 ---
 
 <section class="hero">
@@ -17,7 +17,7 @@
       <a href="/specials">Weekly specials &amp; happy hour Mon–Fri 12–7 →</a>
     </p>
     <div class="cta-group">
-      <a href="https://togoorder.com/web/3136#/" target="_blank" class="cta-button">ORDER NOW</a>
+      <a href={ORDER_ONLINE_URL} target="_blank" rel="noopener" class="cta-button">ORDER NOW</a>
       <a
         href="https://loyalty.focuspos.com/addmember/?C=2786"
         target="_blank"

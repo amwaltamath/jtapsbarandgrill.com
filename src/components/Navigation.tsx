@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import { ORDER_ONLINE_URL } from '../lib/orderLink';
 import '../styles/navigation.css';
 
 export default function Navigation() {
@@ -110,7 +111,7 @@ export default function Navigation() {
             </li>
             <li>
               <a
-                href="https://togoorder.com/web/3136#/"
+                href={ORDER_ONLINE_URL}
                 target="_blank"
                 rel="noopener"
                 onClick={closeMenu}
