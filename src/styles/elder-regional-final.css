@@ -1,0 +1,201 @@
+/* Elder vs. Princeton — OHSAA regional final watch party */
+
+.elder-final-page {
+  --ef-purple: #3d1f6e;
+  --ef-purple-bright: #5c3d99;
+  --ef-gold: #d4af37;
+  --ef-dark: #0c0a12;
+  --ef-heading: "Bebas Neue", Impact, sans-serif;
+  background: var(--ef-dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.elder-final-page .ef-hero {
+  position: relative;
+  min-height: min(70vh, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 1.5rem 4rem;
+  background:
+    linear-gradient(165deg, rgba(12, 10, 18, 0.92), rgba(61, 31, 110, 0.55)),
+    url("/images/6441-Glenway-inside.jpg") center/cover;
+}
+
+.elder-final-page .ef-hero-inner {
+  max-width: 760px;
+}
+
+.elder-final-page .ef-badge {
+  display: inline-block;
+  background: var(--ef-purple-bright);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.elder-final-page .ef-hero h1 {
+  font-family: var(--ef-heading);
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  letter-spacing: 0.04em;
+  line-height: 0.98;
+  margin-bottom: 0.5rem;
+}
+
+.elder-final-page .ef-hero-matchup {
+  font-family: var(--ef-heading);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  color: var(--ef-gold);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.elder-final-page .ef-hero-meta {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.25rem;
+}
+
+.elder-final-page .ef-hero-sub {
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 1.5rem;
+}
+
+.elder-final-page .ef-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.elder-final-page .ef-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.elder-final-page .ef-btn--primary {
+  background: var(--ef-gold);
+  color: #1a1a1a;
+}
+
+.elder-final-page .ef-btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.elder-final-page .ef-section {
+  padding: 3.5rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.elder-final-page .ef-section-tag {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ef-gold);
+  margin-bottom: 0.5rem;
+}
+
+.elder-final-page .ef-section h2 {
+  font-family: var(--ef-heading);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-bottom: 0.75rem;
+}
+
+.elder-final-page .ef-section p {
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.elder-final-page .ef-dedication {
+  background: linear-gradient(180deg, rgba(61, 31, 110, 0.35), transparent);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  text-align: center;
+}
+
+.elder-final-page .ef-dedication p strong {
+  color: var(--ef-gold);
+}
+
+.elder-final-page .ef-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.elder-final-page .ef-detail-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+
+.elder-final-page .ef-detail-card strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--ef-gold);
+  margin-bottom: 0.35rem;
+}
+
+.elder-final-page .ef-watch {
+  text-align: center;
+}
+
+.elder-final-page .ef-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem auto 0;
+  max-width: 28rem;
+  text-align: left;
+}
+
+.elder-final-page .ef-list li {
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+  line-height: 1.45;
+}
+
+.elder-final-page .ef-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--ef-gold);
+  font-weight: 700;
+}
+
+.elder-final-page .ef-footer-cta {
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.elder-final-page .ef-footer-cta h2 {
+  font-family: var(--ef-heading);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 0.5rem;
+}
+
+.elder-final-page .ef-footer-cta .ef-cta-row {
+  margin-top: 1.25rem;
+}

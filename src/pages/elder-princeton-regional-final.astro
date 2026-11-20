@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/elder-regional-final.css";
+import { featuredGame, isFeaturedHsFinalActive } from "../data/featuredGame";
+import { ORDER_ONLINE_URL } from "../lib/orderLink";
+
+const title = "Elder vs. Princeton Regional Final | Watch at JTAPS";
+const description =
+  "OHSAA Division I Region 4 football final: Elder Panthers vs. Princeton Vikings, Friday Nov 20 at 7 PM at Paycor Stadium. Watch at JTAPS on 50+ TVs — 6441 Glenway Ave.";
+if (!isFeaturedHsFinalActive()) {
+  return Astro.redirect("/watch-the-game", 302);
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage="/images/6441-Glenway-inside.jpg"
+  keywords="elder panthers football, princeton vikings football, ohsaa regional final paycor stadium, watch high school football cincinnati, jtaps sports bar glenway"
+>
+  <div class="elder-final-page">
+    <section class="ef-hero">
+      <div class="ef-hero-inner">
+        <span class="ef-badge">West Side Proud · Panthers Football</span>
+        <h1>Dedicated to Elder Tonight</h1>
+        <p class="ef-hero-matchup">{featuredGame.matchup}</p>
+        <p class="ef-hero-meta">
+          {featuredGame.when} · Kickoff {featuredGame.kickoff} · {featuredGame.location}
+        </p>
+        <p class="ef-hero-sub">
+          The road to state runs through Paycor tonight. Whether you&apos;re heading downtown or staying on Glenway,
+          JTAPS is pulling for the <strong>Elder Panthers</strong> in the regional championship — and we&apos;ve got
+          every play on 50+ HD TVs if you&apos;re watching with us.
+        </p>
+        <div class="ef-cta-row">
+          <a href="tel:5135749777" class="ef-btn ef-btn--primary">Call (513) 574-9777</a>
+          <a href="/specials" class="ef-btn ef-btn--ghost">Friday specials</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ef-section ef-dedication" aria-labelledby="ef-dedication-title">
+      <span class="ef-section-tag">OHSAA Division I · Region 4</span>
+      <h2 id="ef-dedication-title">Regional Final at Paycor</h2>
+      <p>
+        <strong>Elder</strong> and <strong>Princeton</strong> meet for the Region 4 title and a spot in the state
+        semifinals. Kickoff is <strong>7:00 PM</strong> at <strong>Paycor Stadium</strong> — one of the biggest
+        high school football nights in Cincinnati.
+      </p>
+      <div class="ef-details">
+        <div class="ef-detail-card">
+          <strong>7:00 PM</strong>
+          Kickoff
+        </div>
+        <div class="ef-detail-card">
+          <strong>Paycor</strong>
+          Stadium
+        </div>
+        <div class="ef-detail-card">
+          <strong>Region 4</strong>
+          Division I final
+        </div>
+        <div class="ef-detail-card">
+          <strong>50+</strong>
+          TVs at JTAPS
+        </div>
+      </div>
+    </section>
+
+    <section class="ef-section ef-watch" aria-labelledby="ef-watch-title">
+      <span class="ef-section-tag">6441 Glenway Ave</span>
+      <h2 id="ef-watch-title">Watch With Us on Glenway</h2>
+      <p>
+        Doors open at {featuredGame.doors}. It&apos;s <strong>Appetizer Friday</strong> — $2 off appetizers during happy
+        hour (12–7 PM) — plus wings, gyros, and cold beer while both teams battle for a trip to the Final Four.
+      </p>
+      <ul class="ef-list">
+        <li>50+ HD TVs — don&apos;t miss a fourth-down stop or a Panthers touchdown</li>
+        <li>Family-friendly sports bar on the West Side, minutes from Elder country</li>
+        <li>Order takeout if you&apos;re hosting your own watch party</li>
+      </ul>
+      <div class="ef-cta-row" style="margin-top: 2rem;">
+        <a href="/watch-the-game" class="ef-btn ef-btn--ghost">Why watch at JTAPS</a>
+        <a href={ORDER_ONLINE_URL} target="_blank" rel="noopener" class="ef-btn ef-btn--primary">Order online</a>
+      </div>
+    </section>
+
+    <section class="ef-footer-cta">
+      <h2>Go Panthers · Who&apos;s With Us Tonight?</h2>
+      <p>JTAPS Bar &amp; Grill · 6441 Glenway Ave, Cincinnati, OH 45211</p>
+      <div class="ef-cta-row">
+        <a href="tel:5135749777" class="ef-btn ef-btn--ghost">(513) 574-9777</a>
+        <a href="/menu" class="ef-btn ef-btn--ghost">View menu</a>
+      </div>
+    </section>
+  </div>
+</Layout>

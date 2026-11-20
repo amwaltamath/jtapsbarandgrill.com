@@ -50,6 +50,9 @@ const showHappyHourToday = isHappyHourDayET(today);
             {featuredGame.kind === "brunch" && (
               <a href={featuredGame.brunchPath} style="color: #d4af37; font-weight: 700;"> Brunch menu →</a>
             )}
+            {featuredGame.kind === "hs-final" && featuredGame.dedicationPath && (
+              <a href={featuredGame.dedicationPath} style="color: #d4af37; font-weight: 700;"> Regional final →</a>
+            )}
           </p>
         )}
         {todaySpecial.extra && <p class="weekly-specials__today-extra">{todaySpecial.extra}</p>}
@@ -73,6 +76,11 @@ const showHappyHourToday = isHappyHourDayET(today);
           {special.day === promoDay && featuredPromo ? (
             <p class="weekly-specials__extra">
               {featuredGame.when}: {featuredGame.matchup}, kickoff {featuredGame.kickoff}. {featuredGame.highlightLine}
+              {featuredGame.kind === "hs-final" && featuredGame.dedicationPath && (
+                <>{" "}
+                  <a href={featuredGame.dedicationPath} style="color: #d4af37; font-weight: 700;">Details →</a>
+                </>
+              )}
             </p>
           ) : (
             special.extra && <p class="weekly-specials__extra">{special.extra}</p>
