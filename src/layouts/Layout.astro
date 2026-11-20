@@ -12,6 +12,8 @@ interface Props {
   ogImage?: string;
   /** When false, hides the Focus POS rewards signup popup (footer link unchanged). */
   showRewardsModal?: boolean;
+  showNewsletter?: boolean;
+  showFooter?: boolean;
 }
 
 const { 
@@ -20,6 +22,8 @@ const {
   keywords = "sports bar cincinnati, best wings cincinnati, gyros cincinnati, watch the game cincinnati, burgers cincinnati, glenway ave restaurant",
   ogImage = "/images/6441-Glenway.jpg",
   showRewardsModal = true,
+  showNewsletter = true,
+  showFooter = true,
 } = Astro.props;
 ---
 
@@ -185,28 +189,30 @@ const {
       <slot />
     </main>
 
-    <!-- Newsletter Signup -->
-    <section class="newsletter-section">
-      <div class="newsletter-inner">
-        <h3>Stay in the Loop</h3>
-        <p>Get exclusive deals, event updates, and news from JTAPS — straight to your inbox.</p>
-        <form class="newsletter-form" id="newsletterForm">
-          <div class="newsletter-input-group">
-            <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
-            <button type="submit">Subscribe</button>
-          </div>
-          <div class="newsletter-checkbox">
-            <input type="checkbox" id="smsOptIn" name="smsOptIn" />
-            <label for="smsOptIn">
-              I'd like to receive SMS promotions and agree to the <a href="/terms-conditions" target="_blank" rel="noopener">SMS Terms & Conditions</a>
-            </label>
-          </div>
-        </form>
-        <p class="newsletter-msg" id="newsletterMsg"></p>
-        <p class="newsletter-fine">No spam, ever. Unsubscribe anytime.</p>
-      </div>
-    </section>
+    {showNewsletter && (
+      <section class="newsletter-section">
+        <div class="newsletter-inner">
+          <h3>Stay in the Loop</h3>
+          <p>Get exclusive deals, event updates, and news from JTAPS — straight to your inbox.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="newsletter-input-group">
+              <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+              <button type="submit">Subscribe</button>
+            </div>
+            <div class="newsletter-checkbox">
+              <input type="checkbox" id="smsOptIn" name="smsOptIn" />
+              <label for="smsOptIn">
+                I'd like to receive SMS promotions and agree to the <a href="/terms-conditions" target="_blank" rel="noopener">SMS Terms & Conditions</a>
+              </label>
+            </div>
+          </form>
+          <p class="newsletter-msg" id="newsletterMsg"></p>
+          <p class="newsletter-fine">No spam, ever. Unsubscribe anytime.</p>
+        </div>
+      </section>
+    )}
     
+    {showFooter && (
     <footer>
       <div class="footer-content">
         <div class="footer-grid">
@@ -281,6 +287,7 @@ const {
         </div>
       </div>
     </footer>
+    )}
     {showRewardsModal && <RewardsModal />}
 
     <!-- Back to Top Button -->
