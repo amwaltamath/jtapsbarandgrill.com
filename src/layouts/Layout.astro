@@ -2,8 +2,15 @@
 import Navigation from '../components/Navigation';
 import { ORDER_ONLINE_URL } from '../lib/orderLink';
 import RewardsModal from '../components/RewardsModal.astro';
+import { SITE_ORIGIN, DEFAULT_OG_IMAGE_PATH, absoluteUrl, canonicalUrl } from '../lib/site.mjs';
+import imageVariants from '../data/image-variants.json';
 import '../styles/global.css';
 import '../styles/rewards-modal.css';
+
+interface ImageMeta {
+  width?: number;
+  height?: number;
+}
 
 interface Props {
   title: string;
@@ -14,17 +21,79 @@ interface Props {
   showRewardsModal?: boolean;
   showNewsletter?: boolean;
   showFooter?: boolean;
+  /** Private or utility pages that should stay out of Google's index. */
+  noindex?: boolean;
 }
 
 const { 
   title, 
   description = "JTAPS Bar and Grill - Cincinnati's best sports bar since 2006. Famous wings, hand-carved gyros, juicy burgers, and 50+ TVs for watching the game.",
   keywords = "sports bar cincinnati, best wings cincinnati, gyros cincinnati, watch the game cincinnati, burgers cincinnati, glenway ave restaurant",
-  ogImage = "/images/6441-Glenway.jpg",
+  ogImage = DEFAULT_OG_IMAGE_PATH,
   showRewardsModal = true,
   showNewsletter = true,
   showFooter = true,
+  noindex = false,
 } = Astro.props;
+
+const pageUrl = canonicalUrl(Astro.url.pathname);
+const ogImageUrl = absoluteUrl(ogImage);
+const ogMeta = (imageVariants as Record<string, ImageMeta>)[ogImage.split('?')[0]];
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'JTAPS Bar and Grill',
+  image: [
+    `${SITE_ORIGIN}/images/6441-Glenway.jpg`,
+    `${SITE_ORIGIN}/images/Cincinnati%20Wings.jpg`,
+    `${SITE_ORIGIN}/images/Cincinnati%20Gyro.jpg`,
+  ],
+    '@id': SITE_ORIGIN,
+  url: SITE_ORIGIN,
+  telephone: '(513) 574-9777',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '6441 Glenway Ave',
+    addressLocality: 'Cincinnati',
+    addressRegion: 'OH',
+    postalCode: '45211',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 39.1271,
+    longitude: -84.6178,
+  },
+  servesCuisine: ['American', 'Greek', 'Bar Food', 'Wings', 'Gyros'],
+  hasMenu: `${SITE_ORIGIN}/menu`,
+  acceptsReservations: 'False',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      opens: '11:00',
+      closes: '00:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Friday', 'Saturday'],
+      opens: '11:00',
+      closes: '01:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '11:00',
+      closes: '23:00',
+    },
+  ],
+  sameAs: [
+    'https://www.facebook.com/JTAPS',
+    'https://www.instagram.com/jtapsbarandgrill',
+    'https://www.google.com/maps/place/JTAPS+Bar+and+Grill',
+  ],
+};
 ---
 
 <!doctype html>
@@ -34,7 +103,8 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <link rel="canonical" href={Astro.url} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={pageUrl} />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#E13622" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,124 +113,24 @@ const {
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={pageUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
+    {ogMeta?.width && <meta property="og:image:width" content={String(ogMeta.width)} />}
+    {ogMeta?.height && <meta property="og:image:height" content={String(ogMeta.height)} />}
+    <meta property="og:image:alt" content="JTAPS Bar and Grill in Cincinnati" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={pageUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image" content={ogImageUrl} />
     
-    <!-- Local Business Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "JTAPS Bar and Grill",
-        "image": [
-          "https://jtapsbarandgrill.com/images/6441-Glenway.jpg",
-          "https://jtapsbarandgrill.com/images/Cincinnati Wings.jpg",
-          "https://jtapsbarandgrill.com/images/Cincinnati Gyro.jpg"
-        ],
-        "@id": "https://jtapsbarandgrill.com",
-        "url": "https://jtapsbarandgrill.com",
-        "telephone": "(513) 574-9777",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "6441 Glenway Ave",
-          "addressLocality": "Cincinnati",
-          "addressRegion": "OH",
-          "postalCode": "45211",
-          "addressCountry": "US"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 39.1271,
-          "longitude": -84.6178
-        },
-        "servesCuisine": ["American", "Greek", "Bar Food", "Wings", "Gyros"],
-        "hasMenu": "https://jtapsbarandgrill.com/menu",
-        "acceptsReservations": "False",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-            "opens": "11:00",
-            "closes": "00:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Friday", "Saturday"],
-            "opens": "11:00",
-            "closes": "01:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Sunday",
-            "opens": "11:00",
-            "closes": "23:00"
-          }
-        ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.7",
-          "bestRating": "5",
-          "ratingCount": "850",
-          "reviewCount": "420"
-        },
-        "review": [
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5",
-              "bestRating": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "Marcus T."
-            },
-            "reviewBody": "Best wings in Cincinnati, hands down. Pete's Sauce is absolutely legendary. Been coming here for years and they never disappoint."
-          },
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5",
-              "bestRating": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "Jennifer L."
-            },
-            "reviewBody": "The perfect spot to watch the game with friends. 50+ TVs, amazing food, cold beer, and the vibe is unmatched."
-          },
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5",
-              "bestRating": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "Tony D."
-            },
-            "reviewBody": "Hand-carved gyros that taste like street food from Greece. The quality is incredible. Worth the trip to Glenway Ave every single time."
-          }
-        ],
-        "sameAs": [
-          "https://www.facebook.com/JTAPS",
-          "https://www.instagram.com/jtapsbarandgrill",
-          "https://www.google.com/maps/place/JTAPS+Bar+and+Grill"
-        ]
-      }
-    </script>
+    <!-- Local Business Schema. On-site testimonials stay in the page HTML and are not marked up as Review. -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
+    <slot name="head" />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -182,7 +152,7 @@ const {
   </head>
   <body>
     <header>
-      <Navigation client:only="react" />
+      <Navigation client:load />
     </header>
     
     <main>

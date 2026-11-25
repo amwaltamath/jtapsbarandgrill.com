@@ -1,0 +1,1838 @@
+{
+  "/images/6441-Glenway-front.jpg": {
+    "width": 1400,
+    "height": 933,
+    "srcset": [
+      {
+        "src": "/images/6441-Glenway-front-480w.webp",
+        "w": 480,
+        "bytes": 37544
+      },
+      {
+        "src": "/images/6441-Glenway-front-768w.webp",
+        "w": 768,
+        "bytes": 93060
+      },
+      {
+        "src": "/images/6441-Glenway-front-1200w.webp",
+        "w": 1200,
+        "bytes": 222626
+      },
+      {
+        "src": "/images/6441-Glenway-front.webp",
+        "w": 1400,
+        "bytes": 237600
+      }
+    ],
+    "beforeBytes": 2060575,
+    "beforeWidth": 2048,
+    "beforeHeight": 1365,
+    "jpegBytes": 231781,
+    "webpBytes": 237600,
+    "jpegQuality": 73,
+    "webpQuality": 68
+  },
+  "/images/6441-Glenway-inside.jpg": {
+    "width": 1632,
+    "height": 1088,
+    "srcset": [
+      {
+        "src": "/images/6441-Glenway-inside-480w.webp",
+        "w": 480,
+        "bytes": 40832
+      },
+      {
+        "src": "/images/6441-Glenway-inside-768w.webp",
+        "w": 768,
+        "bytes": 92728
+      },
+      {
+        "src": "/images/6441-Glenway-inside-1200w.webp",
+        "w": 1200,
+        "bytes": 196140
+      },
+      {
+        "src": "/images/6441-Glenway-inside.webp",
+        "w": 1632,
+        "bytes": 266582
+      }
+    ],
+    "beforeBytes": 2197681,
+    "beforeWidth": 2048,
+    "beforeHeight": 1365,
+    "jpegBytes": 283219,
+    "webpBytes": 266582,
+    "jpegQuality": 73,
+    "webpQuality": 74
+  },
+  "/images/6441-Glenway-visit.jpg": {
+    "width": 1400,
+    "height": 933,
+    "srcset": [
+      {
+        "src": "/images/6441-Glenway-visit-480w.webp",
+        "w": 480,
+        "bytes": 36064
+      },
+      {
+        "src": "/images/6441-Glenway-visit-768w.webp",
+        "w": 768,
+        "bytes": 92882
+      },
+      {
+        "src": "/images/6441-Glenway-visit-1200w.webp",
+        "w": 1200,
+        "bytes": 229174
+      },
+      {
+        "src": "/images/6441-Glenway-visit.webp",
+        "w": 1400,
+        "bytes": 245110
+      }
+    ],
+    "beforeBytes": 2050736,
+    "beforeWidth": 2048,
+    "beforeHeight": 1365,
+    "jpegBytes": 228500,
+    "webpBytes": 245110,
+    "jpegQuality": 73,
+    "webpQuality": 68
+  },
+  "/images/6441-Glenway.jpg": {
+    "width": 1632,
+    "height": 1088,
+    "srcset": [
+      {
+        "src": "/images/6441-Glenway-480w.webp",
+        "w": 480,
+        "bytes": 28074
+      },
+      {
+        "src": "/images/6441-Glenway-768w.webp",
+        "w": 768,
+        "bytes": 71730
+      },
+      {
+        "src": "/images/6441-Glenway-1200w.webp",
+        "w": 1200,
+        "bytes": 181954
+      },
+      {
+        "src": "/images/6441-Glenway.webp",
+        "w": 1632,
+        "bytes": 256666
+      }
+    ],
+    "beforeBytes": 2324373,
+    "beforeWidth": 2048,
+    "beforeHeight": 1365,
+    "jpegBytes": 244664,
+    "webpBytes": 256666,
+    "jpegQuality": 73,
+    "webpQuality": 68
+  },
+  "/images/Cincinnati Burger.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/Cincinnati%20Burger-480w.webp",
+        "w": 480,
+        "bytes": 9208
+      },
+      {
+        "src": "/images/Cincinnati%20Burger-768w.webp",
+        "w": 768,
+        "bytes": 18442
+      },
+      {
+        "src": "/images/Cincinnati%20Burger-1200w.webp",
+        "w": 1200,
+        "bytes": 35082
+      },
+      {
+        "src": "/images/Cincinnati%20Burger.webp",
+        "w": 1920,
+        "bytes": 73886
+      }
+    ],
+    "beforeBytes": 4099287,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 106950,
+    "webpBytes": 73886,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/Cincinnati Gyro.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/Cincinnati%20Gyro-480w.webp",
+        "w": 480,
+        "bytes": 7936
+      },
+      {
+        "src": "/images/Cincinnati%20Gyro-768w.webp",
+        "w": 768,
+        "bytes": 16400
+      },
+      {
+        "src": "/images/Cincinnati%20Gyro-1200w.webp",
+        "w": 1200,
+        "bytes": 32854
+      },
+      {
+        "src": "/images/Cincinnati%20Gyro.webp",
+        "w": 1920,
+        "bytes": 72902
+      }
+    ],
+    "beforeBytes": 3711388,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 94325,
+    "webpBytes": 72902,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/Cincinnati Salad.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/Cincinnati%20Salad-480w.webp",
+        "w": 480,
+        "bytes": 18718
+      },
+      {
+        "src": "/images/Cincinnati%20Salad-768w.webp",
+        "w": 768,
+        "bytes": 37702
+      },
+      {
+        "src": "/images/Cincinnati%20Salad-1200w.webp",
+        "w": 1200,
+        "bytes": 72776
+      },
+      {
+        "src": "/images/Cincinnati%20Salad.webp",
+        "w": 1920,
+        "bytes": 153586
+      }
+    ],
+    "beforeBytes": 5656154,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 198983,
+    "webpBytes": 153586,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/Cincinnati Sandwich.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/Cincinnati%20Sandwich-480w.webp",
+        "w": 480,
+        "bytes": 11782
+      },
+      {
+        "src": "/images/Cincinnati%20Sandwich-768w.webp",
+        "w": 768,
+        "bytes": 24398
+      },
+      {
+        "src": "/images/Cincinnati%20Sandwich-1200w.webp",
+        "w": 1200,
+        "bytes": 47110
+      },
+      {
+        "src": "/images/Cincinnati%20Sandwich.webp",
+        "w": 1920,
+        "bytes": 98086
+      }
+    ],
+    "beforeBytes": 4457872,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 134044,
+    "webpBytes": 98086,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/Cincinnati Wings.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/Cincinnati%20Wings-480w.webp",
+        "w": 480,
+        "bytes": 10618
+      },
+      {
+        "src": "/images/Cincinnati%20Wings-768w.webp",
+        "w": 768,
+        "bytes": 23168
+      },
+      {
+        "src": "/images/Cincinnati%20Wings-1200w.webp",
+        "w": 1200,
+        "bytes": 47744
+      },
+      {
+        "src": "/images/Cincinnati%20Wings.webp",
+        "w": 1920,
+        "bytes": 106260
+      }
+    ],
+    "beforeBytes": 4695444,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 131967,
+    "webpBytes": 106260,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/Sides.jpg": {
+    "width": 1632,
+    "height": 1088,
+    "srcset": [
+      {
+        "src": "/images/Sides-480w.webp",
+        "w": 480,
+        "bytes": 44362
+      },
+      {
+        "src": "/images/Sides-768w.webp",
+        "w": 768,
+        "bytes": 92418
+      },
+      {
+        "src": "/images/Sides-1200w.webp",
+        "w": 1200,
+        "bytes": 173230
+      },
+      {
+        "src": "/images/Sides.webp",
+        "w": 1632,
+        "bytes": 245478
+      }
+    ],
+    "beforeBytes": 9613998,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 255528,
+    "webpBytes": 245478,
+    "jpegQuality": 73,
+    "webpQuality": 77
+  },
+  "/images/Winterland.jpg": {
+    "width": 1400,
+    "height": 1867,
+    "srcset": [
+      {
+        "src": "/images/Winterland-480w.webp",
+        "w": 480,
+        "bytes": 61086
+      },
+      {
+        "src": "/images/Winterland-768w.webp",
+        "w": 768,
+        "bytes": 136030
+      },
+      {
+        "src": "/images/Winterland-1200w.webp",
+        "w": 1200,
+        "bytes": 267800
+      },
+      {
+        "src": "/images/Winterland.webp",
+        "w": 1400,
+        "bytes": 296996
+      }
+    ],
+    "beforeBytes": 2585827,
+    "beforeWidth": 3024,
+    "beforeHeight": 4032,
+    "jpegBytes": 287370,
+    "webpBytes": 296996,
+    "jpegQuality": 73,
+    "webpQuality": 77
+  },
+  "/images/jtaps-brunch-menu.jpg": {
+    "width": 784,
+    "height": 1168,
+    "srcset": [
+      {
+        "src": "/images/jtaps-brunch-menu-480w.webp",
+        "w": 480,
+        "bytes": 72442
+      },
+      {
+        "src": "/images/jtaps-brunch-menu.webp",
+        "w": 784,
+        "bytes": 164430
+      }
+    ],
+    "beforeBytes": 405092,
+    "beforeWidth": 784,
+    "beforeHeight": 1168,
+    "jpegBytes": 185325,
+    "webpBytes": 164430,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/jtaps-burger-week.jpg": {
+    "width": 1206,
+    "height": 1822,
+    "srcset": [
+      {
+        "src": "/images/jtaps-burger-week-480w.webp",
+        "w": 480,
+        "bytes": 79564
+      },
+      {
+        "src": "/images/jtaps-burger-week-768w.webp",
+        "w": 768,
+        "bytes": 140716
+      },
+      {
+        "src": "/images/jtaps-burger-week.webp",
+        "w": 1206,
+        "bytes": 260856
+      }
+    ],
+    "beforeBytes": 2485659,
+    "beforeWidth": 1206,
+    "beforeHeight": 1822,
+    "jpegBytes": 280301,
+    "webpBytes": 260856,
+    "jpegQuality": 85,
+    "webpQuality": 90
+  },
+  "/images/jtaps-wing-week.jpg": {
+    "width": 1080,
+    "height": 1350,
+    "srcset": [
+      {
+        "src": "/images/jtaps-wing-week-480w.webp",
+        "w": 480,
+        "bytes": 41512
+      },
+      {
+        "src": "/images/jtaps-wing-week-768w.webp",
+        "w": 768,
+        "bytes": 77602
+      },
+      {
+        "src": "/images/jtaps-wing-week.webp",
+        "w": 1080,
+        "bytes": 132374
+      }
+    ],
+    "beforeBytes": 1904654,
+    "beforeWidth": 1080,
+    "beforeHeight": 1350,
+    "jpegBytes": 158751,
+    "webpBytes": 132374,
+    "jpegQuality": 88,
+    "webpQuality": 90
+  },
+  "/images/menuitems/burger.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/burger-480w.webp",
+        "w": 480,
+        "bytes": 9208
+      },
+      {
+        "src": "/images/menuitems/burger-768w.webp",
+        "w": 768,
+        "bytes": 18442
+      },
+      {
+        "src": "/images/menuitems/burger-1200w.webp",
+        "w": 1200,
+        "bytes": 35082
+      },
+      {
+        "src": "/images/menuitems/burger.webp",
+        "w": 1920,
+        "bytes": 73886
+      }
+    ],
+    "beforeBytes": 4099287,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 106950,
+    "webpBytes": 73886,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/cheesesticks.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/cheesesticks-480w.webp",
+        "w": 480,
+        "bytes": 7506
+      },
+      {
+        "src": "/images/menuitems/cheesesticks-768w.webp",
+        "w": 768,
+        "bytes": 16612
+      },
+      {
+        "src": "/images/menuitems/cheesesticks-1200w.webp",
+        "w": 1200,
+        "bytes": 36074
+      },
+      {
+        "src": "/images/menuitems/cheesesticks.webp",
+        "w": 1920,
+        "bytes": 87264
+      }
+    ],
+    "beforeBytes": 4112187,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 103326,
+    "webpBytes": 87264,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/cheesesticks2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/cheesesticks2-480w.webp",
+        "w": 480,
+        "bytes": 6330
+      },
+      {
+        "src": "/images/menuitems/cheesesticks2-768w.webp",
+        "w": 768,
+        "bytes": 14036
+      },
+      {
+        "src": "/images/menuitems/cheesesticks2-1200w.webp",
+        "w": 1200,
+        "bytes": 30506
+      },
+      {
+        "src": "/images/menuitems/cheesesticks2.webp",
+        "w": 1920,
+        "bytes": 75226
+      }
+    ],
+    "beforeBytes": 4077222,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 89631,
+    "webpBytes": 75226,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/cheesesticks3.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/cheesesticks3-480w.webp",
+        "w": 480,
+        "bytes": 5720
+      },
+      {
+        "src": "/images/menuitems/cheesesticks3-768w.webp",
+        "w": 768,
+        "bytes": 12074
+      },
+      {
+        "src": "/images/menuitems/cheesesticks3-1200w.webp",
+        "w": 1200,
+        "bytes": 24204
+      },
+      {
+        "src": "/images/menuitems/cheesesticks3.webp",
+        "w": 1920,
+        "bytes": 53356
+      }
+    ],
+    "beforeBytes": 2964516,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 70341,
+    "webpBytes": 53356,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/crispychickensandwich.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/crispychickensandwich-480w.webp",
+        "w": 480,
+        "bytes": 8744
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich-768w.webp",
+        "w": 768,
+        "bytes": 17642
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich-1200w.webp",
+        "w": 1200,
+        "bytes": 33662
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich.webp",
+        "w": 1920,
+        "bytes": 69998
+      }
+    ],
+    "beforeBytes": 3914025,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 98925,
+    "webpBytes": 69998,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/crispychickensandwich2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/crispychickensandwich2-480w.webp",
+        "w": 480,
+        "bytes": 11322
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich2-768w.webp",
+        "w": 768,
+        "bytes": 22030
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich2-1200w.webp",
+        "w": 1200,
+        "bytes": 40104
+      },
+      {
+        "src": "/images/menuitems/crispychickensandwich2.webp",
+        "w": 1920,
+        "bytes": 77950
+      }
+    ],
+    "beforeBytes": 4303466,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 118349,
+    "webpBytes": 77950,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/doubledecker.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/doubledecker-480w.webp",
+        "w": 480,
+        "bytes": 11692
+      },
+      {
+        "src": "/images/menuitems/doubledecker-768w.webp",
+        "w": 768,
+        "bytes": 25236
+      },
+      {
+        "src": "/images/menuitems/doubledecker-1200w.webp",
+        "w": 1200,
+        "bytes": 49572
+      },
+      {
+        "src": "/images/menuitems/doubledecker.webp",
+        "w": 1920,
+        "bytes": 106934
+      }
+    ],
+    "beforeBytes": 4814296,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 144573,
+    "webpBytes": 106934,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/doubledecker2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/doubledecker2-480w.webp",
+        "w": 480,
+        "bytes": 11782
+      },
+      {
+        "src": "/images/menuitems/doubledecker2-768w.webp",
+        "w": 768,
+        "bytes": 24398
+      },
+      {
+        "src": "/images/menuitems/doubledecker2-1200w.webp",
+        "w": 1200,
+        "bytes": 47110
+      },
+      {
+        "src": "/images/menuitems/doubledecker2.webp",
+        "w": 1920,
+        "bytes": 98086
+      }
+    ],
+    "beforeBytes": 4457872,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 134044,
+    "webpBytes": 98086,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/fishandchips.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/fishandchips-480w.webp",
+        "w": 480,
+        "bytes": 10320
+      },
+      {
+        "src": "/images/menuitems/fishandchips-768w.webp",
+        "w": 768,
+        "bytes": 20914
+      },
+      {
+        "src": "/images/menuitems/fishandchips-1200w.webp",
+        "w": 1200,
+        "bytes": 40652
+      },
+      {
+        "src": "/images/menuitems/fishandchips.webp",
+        "w": 1920,
+        "bytes": 86602
+      }
+    ],
+    "beforeBytes": 4050715,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 115238,
+    "webpBytes": 86602,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/fishandchips2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/fishandchips2-480w.webp",
+        "w": 480,
+        "bytes": 12082
+      },
+      {
+        "src": "/images/menuitems/fishandchips2-768w.webp",
+        "w": 768,
+        "bytes": 24858
+      },
+      {
+        "src": "/images/menuitems/fishandchips2-1200w.webp",
+        "w": 1200,
+        "bytes": 50330
+      },
+      {
+        "src": "/images/menuitems/fishandchips2.webp",
+        "w": 1920,
+        "bytes": 117294
+      }
+    ],
+    "beforeBytes": 5672600,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 146182,
+    "webpBytes": 117294,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/greekdip.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/greekdip-480w.webp",
+        "w": 480,
+        "bytes": 11234
+      },
+      {
+        "src": "/images/menuitems/greekdip-768w.webp",
+        "w": 768,
+        "bytes": 22800
+      },
+      {
+        "src": "/images/menuitems/greekdip-1200w.webp",
+        "w": 1200,
+        "bytes": 45436
+      },
+      {
+        "src": "/images/menuitems/greekdip.webp",
+        "w": 1920,
+        "bytes": 102642
+      }
+    ],
+    "beforeBytes": 5293695,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 138415,
+    "webpBytes": 102642,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/greekdip2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/greekdip2-480w.webp",
+        "w": 480,
+        "bytes": 12624
+      },
+      {
+        "src": "/images/menuitems/greekdip2-768w.webp",
+        "w": 768,
+        "bytes": 24946
+      },
+      {
+        "src": "/images/menuitems/greekdip2-1200w.webp",
+        "w": 1200,
+        "bytes": 46870
+      },
+      {
+        "src": "/images/menuitems/greekdip2.webp",
+        "w": 1920,
+        "bytes": 96670
+      }
+    ],
+    "beforeBytes": 4767718,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 139448,
+    "webpBytes": 96670,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/greeksalad.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/greeksalad-480w.webp",
+        "w": 480,
+        "bytes": 10262
+      },
+      {
+        "src": "/images/menuitems/greeksalad-768w.webp",
+        "w": 768,
+        "bytes": 21490
+      },
+      {
+        "src": "/images/menuitems/greeksalad-1200w.webp",
+        "w": 1200,
+        "bytes": 42900
+      },
+      {
+        "src": "/images/menuitems/greeksalad.webp",
+        "w": 1920,
+        "bytes": 94154
+      }
+    ],
+    "beforeBytes": 4246996,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 115093,
+    "webpBytes": 94154,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/greeksalad2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/greeksalad2-480w.webp",
+        "w": 480,
+        "bytes": 10672
+      },
+      {
+        "src": "/images/menuitems/greeksalad2-768w.webp",
+        "w": 768,
+        "bytes": 21622
+      },
+      {
+        "src": "/images/menuitems/greeksalad2-1200w.webp",
+        "w": 1200,
+        "bytes": 41096
+      },
+      {
+        "src": "/images/menuitems/greeksalad2.webp",
+        "w": 1920,
+        "bytes": 83788
+      }
+    ],
+    "beforeBytes": 3619552,
+    "beforeWidth": 6500,
+    "beforeHeight": 4333,
+    "jpegBytes": 116297,
+    "webpBytes": 83788,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/greeksalad3.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/greeksalad3-480w.webp",
+        "w": 480,
+        "bytes": 10852
+      },
+      {
+        "src": "/images/menuitems/greeksalad3-768w.webp",
+        "w": 768,
+        "bytes": 22222
+      },
+      {
+        "src": "/images/menuitems/greeksalad3-1200w.webp",
+        "w": 1200,
+        "bytes": 43084
+      },
+      {
+        "src": "/images/menuitems/greeksalad3.webp",
+        "w": 1920,
+        "bytes": 88394
+      }
+    ],
+    "beforeBytes": 4036741,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 121266,
+    "webpBytes": 88394,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gryomelt.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gryomelt-480w.webp",
+        "w": 480,
+        "bytes": 14238
+      },
+      {
+        "src": "/images/menuitems/gryomelt-768w.webp",
+        "w": 768,
+        "bytes": 30240
+      },
+      {
+        "src": "/images/menuitems/gryomelt-1200w.webp",
+        "w": 1200,
+        "bytes": 61096
+      },
+      {
+        "src": "/images/menuitems/gryomelt.webp",
+        "w": 1920,
+        "bytes": 132882
+      }
+    ],
+    "beforeBytes": 5673595,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 175482,
+    "webpBytes": 132882,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gryosaladlamb2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gryosaladlamb2-480w.webp",
+        "w": 480,
+        "bytes": 10694
+      },
+      {
+        "src": "/images/menuitems/gryosaladlamb2-768w.webp",
+        "w": 768,
+        "bytes": 21332
+      },
+      {
+        "src": "/images/menuitems/gryosaladlamb2-1200w.webp",
+        "w": 1200,
+        "bytes": 40524
+      },
+      {
+        "src": "/images/menuitems/gryosaladlamb2.webp",
+        "w": 1920,
+        "bytes": 82934
+      }
+    ],
+    "beforeBytes": 3366913,
+    "beforeWidth": 6616,
+    "beforeHeight": 4411,
+    "jpegBytes": 111165,
+    "webpBytes": 82934,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrochicken.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrochicken-480w.webp",
+        "w": 480,
+        "bytes": 8050
+      },
+      {
+        "src": "/images/menuitems/gyrochicken-768w.webp",
+        "w": 768,
+        "bytes": 17286
+      },
+      {
+        "src": "/images/menuitems/gyrochicken-1200w.webp",
+        "w": 1200,
+        "bytes": 34950
+      },
+      {
+        "src": "/images/menuitems/gyrochicken.webp",
+        "w": 1920,
+        "bytes": 78710
+      }
+    ],
+    "beforeBytes": 3907194,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 97047,
+    "webpBytes": 78710,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrochicken2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrochicken2-480w.webp",
+        "w": 480,
+        "bytes": 7312
+      },
+      {
+        "src": "/images/menuitems/gyrochicken2-768w.webp",
+        "w": 768,
+        "bytes": 15446
+      },
+      {
+        "src": "/images/menuitems/gyrochicken2-1200w.webp",
+        "w": 1200,
+        "bytes": 31096
+      },
+      {
+        "src": "/images/menuitems/gyrochicken2.webp",
+        "w": 1920,
+        "bytes": 68968
+      }
+    ],
+    "beforeBytes": 3770658,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 87591,
+    "webpBytes": 68968,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrolamb.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrolamb-480w.webp",
+        "w": 480,
+        "bytes": 7936
+      },
+      {
+        "src": "/images/menuitems/gyrolamb-768w.webp",
+        "w": 768,
+        "bytes": 16400
+      },
+      {
+        "src": "/images/menuitems/gyrolamb-1200w.webp",
+        "w": 1200,
+        "bytes": 32854
+      },
+      {
+        "src": "/images/menuitems/gyrolamb.webp",
+        "w": 1920,
+        "bytes": 72902
+      }
+    ],
+    "beforeBytes": 3711388,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 94325,
+    "webpBytes": 72902,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyromelt.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyromelt-480w.webp",
+        "w": 480,
+        "bytes": 10084
+      },
+      {
+        "src": "/images/menuitems/gyromelt-768w.webp",
+        "w": 768,
+        "bytes": 21032
+      },
+      {
+        "src": "/images/menuitems/gyromelt-1200w.webp",
+        "w": 1200,
+        "bytes": 41008
+      },
+      {
+        "src": "/images/menuitems/gyromelt.webp",
+        "w": 1920,
+        "bytes": 85356
+      }
+    ],
+    "beforeBytes": 4104023,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 116975,
+    "webpBytes": 85356,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrosalad.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrosalad-480w.webp",
+        "w": 480,
+        "bytes": 14928
+      },
+      {
+        "src": "/images/menuitems/gyrosalad-768w.webp",
+        "w": 768,
+        "bytes": 30122
+      },
+      {
+        "src": "/images/menuitems/gyrosalad-1200w.webp",
+        "w": 1200,
+        "bytes": 56582
+      },
+      {
+        "src": "/images/menuitems/gyrosalad.webp",
+        "w": 1920,
+        "bytes": 113228
+      }
+    ],
+    "beforeBytes": 5195059,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 155038,
+    "webpBytes": 113228,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrosaladchicken2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrosaladchicken2-480w.webp",
+        "w": 480,
+        "bytes": 10576
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken2-768w.webp",
+        "w": 768,
+        "bytes": 22408
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken2-1200w.webp",
+        "w": 1200,
+        "bytes": 43726
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken2.webp",
+        "w": 1920,
+        "bytes": 90296
+      }
+    ],
+    "beforeBytes": 4371868,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 119999,
+    "webpBytes": 90296,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrosaladchicken3.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrosaladchicken3-480w.webp",
+        "w": 480,
+        "bytes": 12422
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken3-768w.webp",
+        "w": 768,
+        "bytes": 23716
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken3-1200w.webp",
+        "w": 1200,
+        "bytes": 42646
+      },
+      {
+        "src": "/images/menuitems/gyrosaladchicken3.webp",
+        "w": 1920,
+        "bytes": 80092
+      }
+    ],
+    "beforeBytes": 4009760,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 118781,
+    "webpBytes": 80092,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrosaladlamb.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrosaladlamb-480w.webp",
+        "w": 480,
+        "bytes": 12266
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb-768w.webp",
+        "w": 768,
+        "bytes": 25886
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb-1200w.webp",
+        "w": 1200,
+        "bytes": 51784
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb.webp",
+        "w": 1920,
+        "bytes": 113140
+      }
+    ],
+    "beforeBytes": 4852490,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 139536,
+    "webpBytes": 113140,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/gyrosaladlamb3.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/gyrosaladlamb3-480w.webp",
+        "w": 480,
+        "bytes": 18718
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb3-768w.webp",
+        "w": 768,
+        "bytes": 37702
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb3-1200w.webp",
+        "w": 1200,
+        "bytes": 72776
+      },
+      {
+        "src": "/images/menuitems/gyrosaladlamb3.webp",
+        "w": 1920,
+        "bytes": 153586
+      }
+    ],
+    "beforeBytes": 5656154,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 198983,
+    "webpBytes": 153586,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/loadedfries.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/loadedfries-480w.webp",
+        "w": 480,
+        "bytes": 11476
+      },
+      {
+        "src": "/images/menuitems/loadedfries-768w.webp",
+        "w": 768,
+        "bytes": 24548
+      },
+      {
+        "src": "/images/menuitems/loadedfries-1200w.webp",
+        "w": 1200,
+        "bytes": 48464
+      },
+      {
+        "src": "/images/menuitems/loadedfries.webp",
+        "w": 1920,
+        "bytes": 103370
+      }
+    ],
+    "beforeBytes": 4747165,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 129362,
+    "webpBytes": 103370,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/loadedfries2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/loadedfries2-480w.webp",
+        "w": 480,
+        "bytes": 11494
+      },
+      {
+        "src": "/images/menuitems/loadedfries2-768w.webp",
+        "w": 768,
+        "bytes": 25090
+      },
+      {
+        "src": "/images/menuitems/loadedfries2-1200w.webp",
+        "w": 1200,
+        "bytes": 51480
+      },
+      {
+        "src": "/images/menuitems/loadedfries2.webp",
+        "w": 1920,
+        "bytes": 115214
+      }
+    ],
+    "beforeBytes": 5282655,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 136868,
+    "webpBytes": 115214,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/onionrings.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/onionrings-480w.webp",
+        "w": 480,
+        "bytes": 7794
+      },
+      {
+        "src": "/images/menuitems/onionrings-768w.webp",
+        "w": 768,
+        "bytes": 16976
+      },
+      {
+        "src": "/images/menuitems/onionrings-1200w.webp",
+        "w": 1200,
+        "bytes": 34680
+      },
+      {
+        "src": "/images/menuitems/onionrings.webp",
+        "w": 1920,
+        "bytes": 79148
+      }
+    ],
+    "beforeBytes": 4417788,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 104671,
+    "webpBytes": 79148,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/onionrings2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/onionrings2-480w.webp",
+        "w": 480,
+        "bytes": 7138
+      },
+      {
+        "src": "/images/menuitems/onionrings2-768w.webp",
+        "w": 768,
+        "bytes": 15084
+      },
+      {
+        "src": "/images/menuitems/onionrings2-1200w.webp",
+        "w": 1200,
+        "bytes": 30842
+      },
+      {
+        "src": "/images/menuitems/onionrings2.webp",
+        "w": 1920,
+        "bytes": 70414
+      }
+    ],
+    "beforeBytes": 4308520,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 96424,
+    "webpBytes": 70414,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/potatoskins.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/potatoskins-480w.webp",
+        "w": 480,
+        "bytes": 10350
+      },
+      {
+        "src": "/images/menuitems/potatoskins-768w.webp",
+        "w": 768,
+        "bytes": 22640
+      },
+      {
+        "src": "/images/menuitems/potatoskins-1200w.webp",
+        "w": 1200,
+        "bytes": 46460
+      },
+      {
+        "src": "/images/menuitems/potatoskins.webp",
+        "w": 1920,
+        "bytes": 104652
+      }
+    ],
+    "beforeBytes": 4904845,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 124544,
+    "webpBytes": 104652,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/potatoskins2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/potatoskins2-480w.webp",
+        "w": 480,
+        "bytes": 13390
+      },
+      {
+        "src": "/images/menuitems/potatoskins2-768w.webp",
+        "w": 768,
+        "bytes": 29920
+      },
+      {
+        "src": "/images/menuitems/potatoskins2-1200w.webp",
+        "w": 1200,
+        "bytes": 64148
+      },
+      {
+        "src": "/images/menuitems/potatoskins2.webp",
+        "w": 1920,
+        "bytes": 156174
+      }
+    ],
+    "beforeBytes": 6890534,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 175324,
+    "webpBytes": 156174,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/saratogachips.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/saratogachips-480w.webp",
+        "w": 480,
+        "bytes": 10142
+      },
+      {
+        "src": "/images/menuitems/saratogachips-768w.webp",
+        "w": 768,
+        "bytes": 22082
+      },
+      {
+        "src": "/images/menuitems/saratogachips-1200w.webp",
+        "w": 1200,
+        "bytes": 45418
+      },
+      {
+        "src": "/images/menuitems/saratogachips.webp",
+        "w": 1920,
+        "bytes": 103404
+      }
+    ],
+    "beforeBytes": 5145248,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 128907,
+    "webpBytes": 103404,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/saratogachips2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/saratogachips2-480w.webp",
+        "w": 480,
+        "bytes": 11980
+      },
+      {
+        "src": "/images/menuitems/saratogachips2-768w.webp",
+        "w": 768,
+        "bytes": 26362
+      },
+      {
+        "src": "/images/menuitems/saratogachips2-1200w.webp",
+        "w": 1200,
+        "bytes": 57176
+      },
+      {
+        "src": "/images/menuitems/saratogachips2.webp",
+        "w": 1920,
+        "bytes": 139118
+      }
+    ],
+    "beforeBytes": 6383179,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 163000,
+    "webpBytes": 139118,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/steakfries.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/steakfries-480w.webp",
+        "w": 480,
+        "bytes": 10366
+      },
+      {
+        "src": "/images/menuitems/steakfries-768w.webp",
+        "w": 768,
+        "bytes": 22596
+      },
+      {
+        "src": "/images/menuitems/steakfries-1200w.webp",
+        "w": 1200,
+        "bytes": 47006
+      },
+      {
+        "src": "/images/menuitems/steakfries.webp",
+        "w": 1920,
+        "bytes": 105592
+      }
+    ],
+    "beforeBytes": 4624101,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 134636,
+    "webpBytes": 105592,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/steakfries2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/steakfries2-480w.webp",
+        "w": 480,
+        "bytes": 10692
+      },
+      {
+        "src": "/images/menuitems/steakfries2-768w.webp",
+        "w": 768,
+        "bytes": 23988
+      },
+      {
+        "src": "/images/menuitems/steakfries2-1200w.webp",
+        "w": 1200,
+        "bytes": 51570
+      },
+      {
+        "src": "/images/menuitems/steakfries2.webp",
+        "w": 1920,
+        "bytes": 124834
+      }
+    ],
+    "beforeBytes": 5550224,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 149665,
+    "webpBytes": 124834,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings-480w.webp",
+        "w": 480,
+        "bytes": 9866
+      },
+      {
+        "src": "/images/menuitems/wings-768w.webp",
+        "w": 768,
+        "bytes": 21354
+      },
+      {
+        "src": "/images/menuitems/wings-1200w.webp",
+        "w": 1200,
+        "bytes": 43578
+      },
+      {
+        "src": "/images/menuitems/wings.webp",
+        "w": 1920,
+        "bytes": 98434
+      }
+    ],
+    "beforeBytes": 4376369,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 127092,
+    "webpBytes": 98434,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings2.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings2-480w.webp",
+        "w": 480,
+        "bytes": 9228
+      },
+      {
+        "src": "/images/menuitems/wings2-768w.webp",
+        "w": 768,
+        "bytes": 19418
+      },
+      {
+        "src": "/images/menuitems/wings2-1200w.webp",
+        "w": 1200,
+        "bytes": 38246
+      },
+      {
+        "src": "/images/menuitems/wings2.webp",
+        "w": 1920,
+        "bytes": 82944
+      }
+    ],
+    "beforeBytes": 3437776,
+    "beforeWidth": 6366,
+    "beforeHeight": 4244,
+    "jpegBytes": 109141,
+    "webpBytes": 82944,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings3.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings3-480w.webp",
+        "w": 480,
+        "bytes": 9382
+      },
+      {
+        "src": "/images/menuitems/wings3-768w.webp",
+        "w": 768,
+        "bytes": 19436
+      },
+      {
+        "src": "/images/menuitems/wings3-1200w.webp",
+        "w": 1200,
+        "bytes": 39398
+      },
+      {
+        "src": "/images/menuitems/wings3.webp",
+        "w": 1920,
+        "bytes": 86274
+      }
+    ],
+    "beforeBytes": 3831923,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 109890,
+    "webpBytes": 86274,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings4.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings4-480w.webp",
+        "w": 480,
+        "bytes": 10338
+      },
+      {
+        "src": "/images/menuitems/wings4-768w.webp",
+        "w": 768,
+        "bytes": 22534
+      },
+      {
+        "src": "/images/menuitems/wings4-1200w.webp",
+        "w": 1200,
+        "bytes": 47246
+      },
+      {
+        "src": "/images/menuitems/wings4.webp",
+        "w": 1920,
+        "bytes": 107872
+      }
+    ],
+    "beforeBytes": 4720655,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 131959,
+    "webpBytes": 107872,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings5.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings5-480w.webp",
+        "w": 480,
+        "bytes": 10618
+      },
+      {
+        "src": "/images/menuitems/wings5-768w.webp",
+        "w": 768,
+        "bytes": 23168
+      },
+      {
+        "src": "/images/menuitems/wings5-1200w.webp",
+        "w": 1200,
+        "bytes": 47744
+      },
+      {
+        "src": "/images/menuitems/wings5.webp",
+        "w": 1920,
+        "bytes": 106260
+      }
+    ],
+    "beforeBytes": 4695444,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 131967,
+    "webpBytes": 106260,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/menuitems/wings6.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "srcset": [
+      {
+        "src": "/images/menuitems/wings6-480w.webp",
+        "w": 480,
+        "bytes": 11006
+      },
+      {
+        "src": "/images/menuitems/wings6-768w.webp",
+        "w": 768,
+        "bytes": 24780
+      },
+      {
+        "src": "/images/menuitems/wings6-1200w.webp",
+        "w": 1200,
+        "bytes": 52682
+      },
+      {
+        "src": "/images/menuitems/wings6.webp",
+        "w": 1920,
+        "bytes": 123114
+      }
+    ],
+    "beforeBytes": 5411125,
+    "beforeWidth": 6720,
+    "beforeHeight": 4480,
+    "jpegBytes": 145554,
+    "webpBytes": 123114,
+    "jpegQuality": 82,
+    "webpQuality": 80
+  },
+  "/images/og-image.jpg": {
+    "width": 1200,
+    "height": 630,
+    "srcset": [],
+    "beforeBytes": 2324373,
+    "jpegBytes": 145710,
+    "webpBytes": 145710
+  }
+}

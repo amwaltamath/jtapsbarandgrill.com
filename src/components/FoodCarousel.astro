@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from './OptimizedImage.astro';
+
 const foodItems = [
   { src: '/images/Cincinnati Wings.jpg', alt: 'Famous Pete\'s Sauce wings at JTAPS Cincinnati', label: 'Wings' },
   { src: '/images/Cincinnati Gyro.jpg', alt: 'Hand-carved Greek gyros at JTAPS Bar and Grill', label: 'Gyros' },
@@ -25,13 +27,14 @@ const count = foodItems.length;
       <div class="food-carousel-ring">
         {foodItems.map((item, i) => (
           <figure class="food-carousel-card" style={`--i: ${i}`}>
-            <img
+            <OptimizedImage
               src={item.src}
               alt={item.alt}
-              width="280"
-              height="400"
+              width={280}
+              height={400}
               loading="lazy"
               decoding="async"
+              sizes="280px"
             />
             <figcaption>{item.label}</figcaption>
           </figure>

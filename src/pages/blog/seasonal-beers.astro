@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 ---
 
 <Layout 
@@ -13,9 +14,9 @@ import Layout from '../../layouts/Layout.astro';
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jtapsbarandgrill.com/blog" },
-        { "@type": "ListItem", "position": 3, "name": "Seasonal Beers", "item": "https://jtapsbarandgrill.com/blog/seasonal-beers" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.jtapsbarandgrill.com/blog" },
+        { "@type": "ListItem", "position": 3, "name": "Seasonal Beers", "item": "https://www.jtapsbarandgrill.com/blog/seasonal-beers" }
       ]
     }
   </script>
@@ -33,7 +34,7 @@ import Layout from '../../layouts/Layout.astro';
     </header>
 
     <div class="post-content">
-      <img src="/images/6441-Glenway.jpg" alt="JTAPS Seasonal Beer Selection" class="featured-image" />
+      <OptimizedImage src="/images/6441-Glenway.jpg" alt="JTAPS Seasonal Beer Selection" class="featured-image" sizes="(max-width: 800px) 100vw, 800px" />
 
       <section>
         <h2>More Than Just Cold Beer: A Craft Beer Experience</h2>

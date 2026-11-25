@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+Astro.response.status = 404;
+---
+
+<Layout
+  title="Page Not Found | JTAPS Bar and Grill"
+  description="That page isn't on the JTAPS site. Head back to the homepage or open the menu."
+  noindex={true}
+  showRewardsModal={false}
+  showNewsletter={false}
+>
+  <section class="not-found">
+    <p class="not-found-kicker">404</p>
+    <h1>This page isn't on the menu</h1>
+    <p>
+      The link may be out of date, or the page may have moved. The kitchen is still open — head home or browse what we're cooking.
+    </p>
+    <div class="not-found-actions">
+      <a class="not-found-btn not-found-btn-primary" href="/">Back to Home</a>
+      <a class="not-found-btn" href="/menu">View the Menu</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 5.5rem 1.5rem 4.5rem;
+    background:
+      linear-gradient(rgba(17, 17, 17, 0.72), rgba(17, 17, 17, 0.82)),
+      url('/images/6441-Glenway-1200w.webp') center/cover;
+    color: #fff;
+  }
+
+  .not-found-kicker {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    letter-spacing: 0.08em;
+    line-height: 0.85;
+    color: #E13622;
+  }
+
+  .not-found h1 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    letter-spacing: 0.04em;
+    max-width: 16ch;
+  }
+
+  .not-found p {
+    max-width: 38rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .not-found-btn {
+    display: inline-block;
+    min-height: 48px;
+    padding: 0.85rem 1.4rem;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .not-found-btn-primary {
+    background: #E13622;
+    border-color: #E13622;
+  }
+
+  .not-found-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 1400px) {
+    .not-found {
+      background-image:
+        linear-gradient(rgba(17, 17, 17, 0.72), rgba(17, 17, 17, 0.82)),
+        url('/images/6441-Glenway.webp');
+    }
+  }
+</style>

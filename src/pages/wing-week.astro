@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import '../styles/wing-week.css';
 
 const title = 'Cincinnati Wing Week at JTAPS | 7 Wings for $8';
 const description = 'JTAPS is participating in Cincinnati Wing Week August 24–30, 2026. Any 7 wings for $8 — your choice of sauce. Celery and dressing not included. Dine in at 6441 Glenway Ave or order online!';
-const ogImage = '/images/jtaps-wing-week.png';
+const ogImage = '/images/jtaps-wing-week.jpg';
 ---
 
 <Layout title={title} description={description} ogImage={ogImage} keywords="cincinnati wing week, wing week cincinnati, best wings cincinnati, jtaps wings, pete's sauce, cincy wing week, glenway ave wings">
@@ -60,12 +61,13 @@ const ogImage = '/images/jtaps-wing-week.png';
     <section class="ww-showcase">
       <div class="ww-showcase-container">
         <div class="ww-glass ww-glass--bright ww-showcase-flyer reveal-on-scroll">
-          <img
-            src="/images/jtaps-wing-week.png"
+          <OptimizedImage
+            src="/images/jtaps-wing-week.jpg"
             alt="Official Cincinnati Wing Week flyer — 7 wings for $8 at JTAPS Bar and Grill"
-            width="1080"
-            height="1350"
+            width={1080}
+            height={1350}
             loading="lazy"
+            sizes="(max-width: 800px) 90vw, 480px"
           />
         </div>
         <div class="ww-glass ww-glass--liquid ww-showcase-text reveal-on-scroll">

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 ---
 
 <Layout 
@@ -14,8 +15,8 @@ import Layout from '../layouts/Layout.astro';
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtapsbarandgrill.com" },
-        { "@type": "ListItem", "position": 2, "name": "Best Wings Cincinnati", "item": "https://jtapsbarandgrill.com/best-wings-cincinnati" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.jtapsbarandgrill.com" },
+        { "@type": "ListItem", "position": 2, "name": "Best Wings Cincinnati", "item": "https://www.jtapsbarandgrill.com/best-wings-cincinnati" }
       ]
     }
   </script>
@@ -132,7 +133,7 @@ import Layout from '../layouts/Layout.astro';
     <section class="wings-showcase reveal-on-scroll">
       <div class="showcase-container">
         <div class="showcase-image">
-          <img src="/images/Cincinnati Wings.jpg" alt="Best wings in Cincinnati — Pete's Famous Sauce wings at JTAPS Bar and Grill" width="700" height="500" loading="lazy" />
+          <OptimizedImage src="/images/Cincinnati Wings.jpg" alt="Best wings in Cincinnati — Pete's Famous Sauce wings at JTAPS Bar and Grill" width={700} height={500} loading="lazy" sizes="(max-width: 800px) 100vw, 700px" />
         </div>
         <div class="showcase-text">
           <h2>The Legend: Pete's Famous Sauce</h2>
@@ -283,7 +284,7 @@ import Layout from '../layouts/Layout.astro';
 
   /* Hero */
   .wings-hero {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/Cincinnati Wings.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/Cincinnati%20Wings-1200w.webp') center/cover;
     min-height: 75vh;
     display: flex;
     align-items: center;
@@ -737,6 +738,12 @@ import Layout from '../layouts/Layout.astro';
 
     .proof-container {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .wings-hero {
+      background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/Cincinnati%20Wings.webp');
     }
   }
 </style>

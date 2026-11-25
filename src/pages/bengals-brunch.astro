@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import OptimizedImage from "../components/OptimizedImage.astro";
 import "../styles/bengals-brunch.css";
 import { featuredGame, isFeaturedBrunchActive } from "../data/featuredGame";
 
@@ -74,12 +75,13 @@ if (!isFeaturedBrunchActive()) {
           data-menu-zoom-open
           aria-label="Open brunch menu full size"
         >
-          <img
+          <OptimizedImage
             src={menuImage}
             alt="JTAPS brunch menu for Bengals vs Falcons game day — mimosas, Bloody Marys, and brunch items"
-            width="1200"
-            height="1600"
+            width={1200}
+            height={1600}
             loading="eager"
+            sizes="(max-width: 800px) 100vw, 720px"
           />
           <span class="bb-menu-zoom-badge" aria-hidden="true">Tap to enlarge</span>
         </button>
@@ -97,7 +99,7 @@ if (!isFeaturedBrunchActive()) {
             ✕
           </button>
           <div class="bb-menu-lightbox__scroll">
-            <img src={menuImage} alt="" width="1200" height="1600" />
+            <OptimizedImage src={menuImage} alt="" width={1200} height={1600} sizes="100vw" />
           </div>
         </div>
       </div>

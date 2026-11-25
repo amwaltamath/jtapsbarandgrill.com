@@ -211,8 +211,16 @@
   inset: 0;
   background:
     linear-gradient(160deg, rgba(0, 0, 0, 0.55) 0%, rgba(26, 10, 10, 0.4) 50%, rgba(225, 54, 34, 0.2) 100%),
-    url('/images/Cincinnati Wings.jpg') center / cover no-repeat;
+    url('/images/Cincinnati%20Wings-1200w.webp') center / cover no-repeat;
   z-index: 0;
+}
+
+@media (min-width: 1400px) {
+  .wing-week-page .ww-hero-bg {
+    background-image:
+      linear-gradient(160deg, rgba(0, 0, 0, 0.55) 0%, rgba(26, 10, 10, 0.4) 50%, rgba(225, 54, 34, 0.2) 100%),
+      url('/images/Cincinnati%20Wings.webp');
+  }
 }
 
 .wing-week-page .ww-hero-glass {
