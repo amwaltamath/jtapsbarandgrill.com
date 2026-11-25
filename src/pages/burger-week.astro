@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import '../styles/burger-week.css';
 
 const title = 'Cincinnati Burger Week at JTAPS | Big J Burger $9';
 const description = 'JTAPS is participating in Cincinnati Burger Week July 13–19, 2026. Get our Big J Burger for $9 — fresh-cut Angus with Greek seasoning. Dine in at 6441 Glenway Ave or order online!';
-const ogImage = '/images/jtaps-burger-week.png';
+const ogImage = '/images/jtaps-burger-week.jpg';
 ---
 
 <Layout title={title} description={description} ogImage={ogImage} keywords="cincinnati burger week, burger week cincinnati, big j burger, jtaps burger, best burgers cincinnati, glenway ave restaurant">
@@ -63,12 +64,13 @@ const ogImage = '/images/jtaps-burger-week.png';
     <section class="bw-showcase">
       <div class="bw-showcase-container">
         <div class="bw-glass bw-glass--bright bw-showcase-flyer reveal-on-scroll">
-          <img
-            src="/images/jtaps-burger-week.png"
+          <OptimizedImage
+            src="/images/jtaps-burger-week.jpg"
             alt="Official Cincinnati Burger Week flyer — Big J Burger $9 at JTAPS"
-            width="700"
-            height="906"
+            width={700}
+            height={906}
             loading="lazy"
+            sizes="(max-width: 800px) 90vw, 480px"
           />
         </div>
         <div class="bw-glass bw-glass--liquid bw-showcase-text reveal-on-scroll">

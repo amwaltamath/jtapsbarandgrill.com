@@ -1,11 +1,12 @@
 ---
 // About section
+import OptimizedImage from './OptimizedImage.astro';
 ---
 
 <section class="about">
   <div class="about-inner">
     <div class="about-image reveal-on-scroll">
-      <img src="/images/6441-Glenway.jpg" alt="JTAPS Bar and Grill exterior on Glenway Avenue in Cincinnati" loading="lazy" width="600" height="450" />
+      <OptimizedImage src="/images/6441-Glenway.jpg" alt="JTAPS Bar and Grill exterior on Glenway Avenue in Cincinnati" loading="lazy" width={600} height={450} sizes="(max-width: 800px) 100vw, 520px" />
       <div class="about-image-accent"></div>
     </div>
     <div class="about-content reveal-on-scroll">

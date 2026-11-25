@@ -474,6 +474,11 @@ footer {
   text-decoration: underline;
 }
 
+/* Let responsive <picture> wrappers inherit the layout of the img they contain. */
+picture.optimized-image {
+  display: contents;
+}
+
 @media (max-width: 480px) {
   .newsletter-input-group {
     flex-direction: column;

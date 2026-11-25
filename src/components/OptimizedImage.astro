@@ -1,0 +1,67 @@
+---
+import imageVariants from '../data/image-variants.json';
+
+interface VariantFile {
+  src: string;
+  w: number;
+}
+
+interface ImageVariant {
+  width: number;
+  height: number;
+  srcset?: VariantFile[];
+}
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  sizes?: string;
+  decoding?: 'async' | 'sync' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  class: className,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px',
+  decoding = 'async',
+} = Astro.props;
+
+const pathOnly = src.split('?')[0];
+const entry = (imageVariants as Record<string, ImageVariant>)[pathOnly];
+const srcset = entry?.srcset?.length
+  ? entry.srcset.map((item) => `${item.src} ${item.w}w`).join(', ')
+  : '';
+---
+
+{srcset ? (
+  <picture class="optimized-image">
+    <source type="image/webp" srcset={srcset} sizes={sizes} />
+    <img
+      src={src}
+      alt={alt}
+      width={width ?? entry?.width}
+      height={height ?? entry?.height}
+      loading={loading}
+      decoding={decoding}
+      class={className}
+    />
+  </picture>
+) : (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    class={className}
+  />
+)}

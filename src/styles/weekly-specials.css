@@ -208,7 +208,7 @@
   text-align: center;
   padding: 4rem 1.5rem 2rem;
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
-    url("/images/6441-Glenway-inside.jpg") center/cover;
+    url("/images/6441-Glenway-inside-1200w.webp") center/cover;
 }
 
 .specials-page__hero h1 {
@@ -233,5 +233,12 @@
 @media (max-width: 600px) {
   .weekly-specials {
     padding: 3rem 1rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .specials-page__hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
+      url("/images/6441-Glenway-inside.webp");
   }
 }

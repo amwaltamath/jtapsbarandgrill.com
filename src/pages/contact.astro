@@ -188,7 +188,7 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .contact-hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/restaurant-exterior.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/6441-Glenway-front-1200w.webp') center/cover;
     color: var(--text-light);
     text-align: center;
     padding: 6rem 2rem 4rem;
@@ -678,6 +678,12 @@ import Layout from '../layouts/Layout.astro';
 
     .contact-form {
       padding: 1.25rem 1rem;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .contact-hero {
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/6441-Glenway-front.webp');
     }
   }
 </style>
