@@ -1,5 +1,5 @@
-/** Canonical production origin. Apex redirects here; do not switch this to the apex. */
-export const SITE_ORIGIN = 'https://www.jtapsbarandgrill.com';
+/** Canonical production origin. www 308-redirects here. */
+export const SITE_ORIGIN = 'https://jtapsbarandgrill.com';
 
 export const DEFAULT_OG_IMAGE_PATH = '/images/og-image.jpg';
 
