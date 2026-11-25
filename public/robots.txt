@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.jtapsbarandgrill.com/sitemap-index.xml
+Sitemap: https://jtapsbarandgrill.com/sitemap-index.xml
